@@ -16,7 +16,6 @@ math: true
 
 给定三个长度为$n$数组$a,b,c$，要你从三个数组中选取元素构造出长度也为$n$的数组，内部相邻元素互不相等（包括下标$1$和$n$）
 
-When \\(n\\), there are two solutions to \\(ax^2 + bx + c = 0\\) and they are
 
 ## 分析
 
