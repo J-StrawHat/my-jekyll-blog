@@ -54,7 +54,7 @@ body {
   background: var(--body-bg);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+  font-family: 'Source Sans Pro', 'PingFang SC', 'Microsoft Yahei', sans-serif;
 }
 
 /*--- sidebar layout ---*/
@@ -114,12 +114,12 @@ $sidebar-display: "sidebar-display";
     height: $tab-height;
     &:hover {
       .nav-link {
-        color: #f8f9facf;
+        color: #1B86F9;
       }
     }
     &.active {
       .nav-link {
-        color: #fcfcfc;
+        color: #1B86F9;
       }
     }
   }
@@ -180,7 +180,7 @@ $sidebar-display: "sidebar-display";
     }
 
     a:hover, #mode-toggle-wrapper > i:hover {
-      color: #fff;
+      color: #1B86F9;
     }
 
     #mode-toggle-wrapper {
@@ -635,7 +635,8 @@ h5 {
 }
 
 blockquote {
-  border-left: 5px solid var(--blockquote-border-color);
+  border-radius: 4px;
+  border-left: 4px solid var(--blockquote-border-color);
   padding-left: 1rem;
   color: var(--blockquote-text-color);
   .post-content & {

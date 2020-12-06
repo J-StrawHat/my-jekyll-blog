@@ -14,8 +14,8 @@
   --main-border-color: #f3f3f3;
   --btn-border-color: #e9ecef;
   --text-color: #333333;
-  --blockquote-border-color: #eee;
-  --blockquote-text-color: #9a9a9a;
+  --blockquote-border-color: #1B86F9;
+  --blockquote-text-color: #27282B;
   --link-color: #2a408e;
   --link-underline-color: #dee2e6;
   --text-muted-color: gray;
@@ -28,10 +28,16 @@
 
   /* Sidebar */
   --sidebar-bg: radial-gradient(
+    /*
     circle,
     rgba(42, 30, 107, 1) 0%,
-    rgba(35, 37, 46, 1) 100%);
-  --nav-cursor-color: #fcfcfc;
+    rgba(35, 37, 46, 1) 100%
+    */
+      #fcfcfc
+    );
+  --nav-cursor-color: #1B86F9;
+
+  --sidebar-text-color: #27282B;
 
   /* Topbar */
   --topbar-wrapper-bg: white;
@@ -55,7 +61,7 @@
   --btn-share-hover-color: var(--link-color);
   --card-border-color: #f1f1f1;
   --card-box-shadow: rgba(234, 234, 234, 0.7686274509803922);
-  --label-color: #808080;
+  --label-color: #27282B;
   --relate-post-date: rgba(30, 55, 70, 0.4);
   --tag-bg: rgba(0, 0, 0, 0.075);
   --tag-border: #dee2e6;

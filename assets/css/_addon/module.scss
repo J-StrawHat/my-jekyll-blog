@@ -26,7 +26,7 @@
 }
 
 %link-color {
-  color: var(--link-color);
+  color: var(--sidebar-text-color);
 }
 
 %link-underline {
@@ -60,7 +60,7 @@
   text-decoration: none;
 }
 
-@mixin sidebar-links($color: rgba(255, 255, 255, 0.5)) {
+@mixin sidebar-links($color: var(--sidebar-text-color)) {
   color: $color;
   transition: color 0.35s ease-in-out;
   user-select: none;

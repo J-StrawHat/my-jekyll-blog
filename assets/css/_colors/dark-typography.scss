@@ -18,24 +18,26 @@
   --footer-bg-color: var(--main-wrapper-bg);
 
   /* common color */
-  --text-color: rgb(175, 176, 177);
+  --text-color: #F5F6F7;
   --text-muted-color: rgb(107, 116, 124);
   --link-color: rgb(138, 180, 248);
   --link-underline-color: rgb(82, 108, 150);
   --main-border-color: rgb(44, 45, 45);
   --button-bg: rgb(39, 40, 43);
-  --blockquote-border-color: rgb(66, 66, 66);
-  --blockquote-text-color: rgb(117, 117, 117);
+  --blockquote-border-color: #1B86F9;
+  --blockquote-text-color: #F5F6F7;
   --btn-border-color: rgb(63, 65, 68);
   --btn-backtotop-color: var(--text-color);
   --btn-backtotop-border-color: var(--btn-border-color);
   --btn-box-shadow: var(--main-wrapper-bg);
   --card-header-bg: rgb(51, 50, 50);
-  --label-color: rgb(108, 117, 125);
+  --label-color: #F5F6F7;
 
   /* Sidebar */
-  --nav-cursor-color: rgb(183, 182, 182);
+  --nav-cursor-color: #1B86F9;
   --sidebar-bg: radial-gradient(circle, #242424 0%, #1d1f27 100%);
+  
+  --sidebar-text-color: #F5F6F7
 
   /* Top Bar */
   --topbar-text-color: var(--text-color);
