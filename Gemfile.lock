@@ -13,11 +13,7 @@ GEM
     eventmachine (1.2.7)
     ffi (1.13.1)
     forwardable-extended (2.6.0)
-<<<<<<< HEAD
-    html-proofer (3.16.0)
-=======
     html-proofer (3.17.4)
->>>>>>> 7a64a918ab846992a06918743cbaffd5c3a01426
       addressable (~> 2.3)
       mercenary (~> 0.3)
       nokogumbo (~> 2.0)
