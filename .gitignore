@@ -3,4 +3,5 @@
 !.github
 
 # jekyll cache
+_site
 vendor

@@ -67,9 +67,9 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
     @include btn-post-nav;
     color: var(--link-color);
     &:hover {
-      background: #2a408e;
+      background:  #1B86F9;
       color: #fff;
-      border-color: #2a408e;
+      border-color:  #1B86F9;
     }
     &.disabled {
       @include btn-post-nav;
@@ -98,6 +98,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
       color: var(--text-muted-color);
       font-size: 0.65rem;
       text-transform: uppercase;
+      font-weight: bold;
     }
     &:first-child {
       border-top-right-radius: 0;
