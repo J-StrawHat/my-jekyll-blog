@@ -1,5 +1,5 @@
 ---
-title: Grakn Forces 2020 ABCDE题解
+title: MarkDown使用之LaTeX表示数学公式
 author: JoyDee
 categories: [其他知识/技术分享, LaTeX]
 tags: [LaTeX]
