@@ -7,9 +7,9 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 
-title: JoyDee's Blogs                          # the main title
+title: JoyDee Blog                          # the main title
 
-tagline: A text-focused Jekyll theme.  # it will display as the sub-title
+tagline: The dream is still alive.  # it will display as the sub-title
 
 description:                         # used by seo meta and the atom feed
   A minimal, portfolio, sidebar,
@@ -21,7 +21,7 @@ url: 'https://J-StrawHat.github.io'
 
 author: JoyDee                  # change to your full name
 
-avatar: /assets/img/sample/avatar.jpg   # support internet resources
+avatar: https://gitee.com/j__strawhat/MyImages/raw/master/avatar.jpg   # support internet resources
 
 github:
   username: J-StrawHat             # change to your github username
