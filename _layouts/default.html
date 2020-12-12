@@ -40,6 +40,10 @@ layout: compress
 
     </div> <!-- #main-wrapper -->
 
+    {% if page.mermaid %}
+      {% include mermaid.html %}
+    {% endif %}
+
     <div id="mask"></div>
 
     <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
@@ -47,10 +51,6 @@ layout: compress
     </a>
 
     {% include search-loader.html %}
-
-    {% if site.google_analytics.id and jekyll.environment == 'production' %}
-      {% include google-analytics.html %}
-    {% endif %}
 
   </body>
 
