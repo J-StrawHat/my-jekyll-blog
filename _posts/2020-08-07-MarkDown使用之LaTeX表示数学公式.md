@@ -111,7 +111,7 @@ y=\begin{cases}
       \end{cases}
 $$
 
-> 				$tips:$使用`{cases}`作为始末
+> tips: 使用`{cases}`作为始末
 
 ## 矩阵
 
