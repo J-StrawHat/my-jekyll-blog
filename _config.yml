@@ -62,18 +62,18 @@ google_analytics:
     proxy_endpoint: ''
     cache: false  # pv data local cache, good for the users from GFW area.
 
-baidu_analytics: 16083065
+# baidu_analytics: 16083065
 
 
 
-valine_comment:
-  enable: true
+# valine_comment:
+#  enable: true
 # app_id
-  leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
+#  leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
 # app_key
-  leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
+#  leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
 # placeholde
-  placeholder: “Share your ideas"
+#  placeholder: “Share your ideas"
 
 
 disqus:
