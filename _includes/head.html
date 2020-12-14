@@ -38,6 +38,11 @@
       <link rel="preconnect" href="{{ site.google_analytics.pv.proxy_url }}" crossorigin="use-credentials">
       <link rel="dns-prefetch" href="{{ site.google_analytics.pv.proxy_url }}">
     {% endif %}
+
+    {% if site.baidu_analytics %}
+    {% include google-analytics.html %}
+    {% endif %}
+
   {% endif %}
 
   <!-- jsDelivr CDN -->
