@@ -11,14 +11,14 @@
   --highlight-bg-color: #272C33;
   --highlighter-rouge-color: #de6b18;
   --highlight-lineno-color: #6c6c6d;
-  --highlight-lineno-border-color: #3c4042;
-  --inline-code-bg: var(--highlight-bg-color);
+  --highlight-lineno-border-color: #303435;
+  --inline-code-bg: #272822;
 
   .highlight {
     .gp { color: #818c96; }
   }
 
-  pre { color: #818c96; } /* override Bootstrap */
+  pre { color: #bfbfbf; } /* override Bootstrap */
   kbd { background-color: black; }
 
   /* syntax highlight colors from https://raw.githubusercontent.com/jwarby/pygments-css/master/monokai.css */
