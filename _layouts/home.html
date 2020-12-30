@@ -49,12 +49,13 @@ layout: page
 {% for post in posts %}
 
   <div class="post-preview">
-    <a href="{{ post.url | relative_url }}">
-      <h1>
+
+    <h1>
+      <a href="{{ post.url | relative_url }}">
         <img src="https://gitee.com/j__strawhat/MyImages/raw/master/img/tp.png" width="25px"/>
         {{ post.title }}
-      </h1>
-    </a>
+      </a>
+    </h1>
 
     <div class="post-content">
       <p>
