@@ -677,6 +677,11 @@ kbd {
   margin: 0 0.3rem;
 }
 
+b, strong {
+  font-weight: bolder;
+  color: #2d8cf0;
+}
+
 sup {
   z-index: 1;
   &:target {
