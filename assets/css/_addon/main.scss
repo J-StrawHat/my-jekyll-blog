@@ -662,6 +662,8 @@ h5 {
 
 blockquote {
   border-radius: 4px;
+  padding-top: 1rem;
+  padding-bottom: .1rem;
   border-left: 4px solid var(--blockquote-border-color);
   padding-left: 1rem;
   background: var(--blockquote-bg-color);
@@ -737,7 +739,7 @@ sup {
 }
 
 a {
-  
+  transition: all .3s ease;
   @at-root p>#{&} {
     @extend %link-color;
   }
