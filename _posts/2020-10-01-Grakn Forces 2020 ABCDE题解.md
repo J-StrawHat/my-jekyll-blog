@@ -21,7 +21,7 @@ math: true
 
 注意是一个圈中相邻元素互不相等。
 
-```c++
+```cpp
 #include <algorithm>
 #include <cstdio>
 #include <cstring>
