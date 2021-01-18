@@ -24,15 +24,15 @@ author: JoyDee                  # change to your full name
 github:
   username: J-StrawHat             # change to your github username
 
-twitter:
-  username: twitter_username            # change to your twitter username
+music:
+  username: 86403312            # change to your twitter username
 
 social:
   name: JoyDee                  # it will shows as the copyright owner in Footer
   email: 422148166@qq.com            # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
+    - https://music.163.com/#/user/home?id=86403312     # change to your twitter homepage
     - https://github.com/J-StrawHat      # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
