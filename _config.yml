@@ -16,12 +16,10 @@ description:                         # used by seo meta and the atom feed
   bootstrap Jekyll theme with responsive web design
   and focuses on text presentation.
 
-# fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ''
+# fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
+url: 'https://J-StrawHat.github.io'
 
 author: JoyDee                  # change to your full name
-
-avatar: https://gitee.com/j__strawhat/MyImages/raw/master/avatar.jpg   # support internet resources
 
 github:
   username: J-StrawHat             # change to your github username
@@ -104,7 +102,7 @@ theme_mode:   # [light|dark]
 img_cdn: ''
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg
+avatar: https://gitee.com/j__strawhat/MyImages/raw/master/avatar.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
@@ -141,7 +139,6 @@ defaults:
       layout: post
       comments: true    # Enable comments in posts.
       toc: true         # Display TOC column in posts.
-      toc_levels: 1……4  #????
       breadcrumb:
         -
           label: Posts
