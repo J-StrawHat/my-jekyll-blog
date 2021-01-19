@@ -1,10 +1,8 @@
 ---
-title: 导航目录
-author: JoyDee
-categories: [Blogging, Demo]
-math: true
+title: Links
+icon: fas fa-link
+order: 5
 ---
-
 
 
 由于经常要用到不同的电脑，在此整理下qwq
