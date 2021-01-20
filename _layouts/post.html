@@ -36,6 +36,7 @@ layout: default
           <span class="author">
             {{ page.author | default: site.author }}
           </span>
+          
         </div>
 
         <div>
@@ -49,6 +50,8 @@ layout: default
 
           <!-- read time -->
           {% include read-time.html content=content %}
+
+          <span id="busuanzi_value_site_uv"> </span> views
 
           <!-- page views -->
           {% if site.google_analytics.pv.enabled %}

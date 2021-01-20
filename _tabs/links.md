@@ -1,5 +1,6 @@
 ---
 title: Links
+layout: post
 icon: fas fa-link
 order: 5
 toc: true
