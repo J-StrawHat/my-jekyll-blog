@@ -677,6 +677,11 @@ blockquote {
 
 kbd {
   margin: 0 0.3rem;
+  padding: 3px 5px;
+  color: #444d56;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
 }
 
 b, strong {
@@ -763,8 +768,8 @@ img:not(.emoji) {
 
 .post {
   h1 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.3rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.6rem;
   }
   p {
     margin-top: 0.4rem;
@@ -1073,7 +1078,7 @@ div.mb-3, .my-3 {
     min-height: calc(100vh - #{$topbar-height}
       - #{$footer-height} - #{$post-extend-min-height}) !important;
     h1 {
-      margin-top: 2.2rem;
+      margin-top: 0.7rem;
       font-size: 1.55rem;
     }
   }
