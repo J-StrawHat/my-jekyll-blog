@@ -1,0 +1,146 @@
+#E. Two Round Dances #圆排列
+
+## [题目链接](https://codeforces.com/contest/1433/problem/E)
+
+## 题意
+
+$n$（保证偶数）个人，要表演一个节目，这个节目包含两种圆形舞蹈，而每种圆形舞蹈恰好需要$\frac{n}{2}$个人，每个人只能跳一种圆形舞。
+
+一个节目中两支舞蹈中的人编号组成一条圆环。故两个节目，对应两个圆环排列。两个不相同的节目，等价于，两个圆排列是不同的，现要你求出他们能做出多少种不同的节目。
+
+## 分析
+
+>**圆排列**：从$n$个不同元素选取$r$个元素，不分首尾地围成一个圆圈的排列。
+>
+>其排列方案数为：$\frac{A^r_n}{r}$。特别地，当$n=r$时，$\frac{A^n_n}{n}$可以进一步得到$(n-1)!$
+
+从$n$个人抽取$\frac{n}{2}$个人，有$C^{\frac{n}{2}}_n$分法，相应地另一组$\frac{n}{2}$也定下来。接下来考虑内部的排列，第一组的$\frac{n}{2}$个人进行圆排列有$(\frac{n}{2}-1)!$个方案，第二组也有$(\frac{n}{2}-1)!$个方案，由乘法原理得到最终答案：$C^{\frac{n}{2}}_n \times (\frac{n}{2}-1)! \times(\frac{n}{2}-1)! \times \frac{1}{2}$. 最终答案之所以乘这个$\frac{1}{2}$是因为第一组的排列与第二组的排列可交换的。下面的代码是对上式进行了化简。
+
+```c++
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <iostream>
+#include <stack>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+typedef long long ll;
+typedef long double ld;
+const int MAXN = 75;
+ll n;
+int main(){
+    scanf("%lld", &n);
+    ll ans = 1;
+    for(int i = 1; i <= n; i++) ans *= (ll)i;
+    ans *= (ll)2;
+    ans /= (ll)(n * n);
+    printf("%lld\n", ans);
+    return 0;
+}
+```
+
+# G. Reducing Delivery Cost #最短路径 #暴力
+
+## [题目链接](https://codeforces.com/contest/1433/problem/G)
+
+## 题意
+
+$n$个点$m$条双向路，第$i$条路花费为$w_i$。现在有$k$个快递员，他们各自有不同的出发地$a_i$与目的地$b_i$。你现在可以从原$m$条双向路中选择**至多一条**的路，将该条路的花费置为$0$。现要你求出$k$个快递员的最小花费总和。其中$2 \le n \le 1000, n - 1 \le m \le min(1000, \frac{n(n-1)}{2})$
+
+## 分析
+
+由于题目需要我们询问多组的不同起点至终点的最短距离，同时考虑到数据的规模才$1e3$，于是我们暴力地枚举每个顶点，计算从这个顶点出发到另外点的最短距离——通过$dijkstra$算法。
+
+但是题目还没完，它还附加了条件，可以选择一条边权值至零。因为只能操作一条边，且边数量不大，直接枚举所有要删除的边，然后删去这个边后更新每个快递员的最短距离。
+
+注意，在更新的过程中，一定要两个方向同时更新！
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/20201029165503.png"/>
+
+```c++
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <stack>
+#include <queue>
+#include <iostream>
+using namespace std;
+typedef long long ll;
+typedef long long ld;
+const int MAXN = 1e3 + 5;
+int n, m, k, tot, H[MAXN], dis[MAXN][MAXN];
+struct Edge { 
+	int from, to, nextNbr, w;
+}E[MAXN << 1];
+void addEdge(int u, int v, int w) {
+	tot++;
+	E[tot].from = u;
+	E[tot].to = v;
+	E[tot].nextNbr = H[u];
+	E[tot].w = w;
+	H[u] = tot;
+}
+typedef struct qnode { //存放在优先队列中
+	int u, dis;
+	bool operator <(const struct qnode& oth) const {
+		return dis > oth.dis;
+	}
+} qnode;
+struct Route { //记录每个快递员的路径起点与终点
+	int st, ed;
+}Route[MAXN];
+void dijstra(int st) { //求出以st为起点，到达其他点的最短路径
+	for (int i = 1; i <= n; i++) dis[st][i] = 0x3f3f3f3f;
+	dis[st][st] = 0;
+	priority_queue<qnode> myque;
+	myque.push({ st, 0 });
+	while (!myque.empty()) {
+		int u = myque.top().u, curdis = myque.top().dis;
+		myque.pop();
+		if  (curdis != dis[st][u]) continue;
+		for (int i = H[u]; i >= 0; i = E[i].nextNbr) {
+			int v = E[i].to, w = E[i].w;
+			if (u == v) continue;
+			if (dis[st][u] + w < dis[st][v]) {
+				dis[st][v] = dis[st][u] + w;
+				myque.push({ v, dis[st][v] });
+			}
+		}
+	}
+}
+int main() {
+	scanf("%d%d%d", &n, &m, &k);
+	for (int i = 1; i <= n; i++) H[i] = -1;
+	for (int i = 1, u, v, w; i <= m; i++) {
+		scanf("%d%d%d", &u, &v, &w);
+		addEdge(u, v, w);
+		addEdge(v, u, w);
+	}
+	int ans = 0x3f3f3f3f;
+	for (int i = 1; i <= n; i++) dijstra(i);
+	for (int i = 1; i <= k; i++) scanf("%d%d", &Route[i].st, &Route[i].ed);
+	for (int i = 1; i <= tot; i+=2) { //【先】枚举需要去除的边，因为只能去除一条边
+		int u = E[i].from, v = E[i].to;
+		int sum = 0;
+		for (int j = 1; j <= k; j++) { //【后】枚举去掉该边后，更新每个快递员的最短路径
+			int st = Route[j].st, ed = Route[j].ed;
+			sum += min(dis[st][ed], 
+				   min(dis[st][u] + dis[v][ed], dis[st][v] + dis[u][ed])); 
+		} //注意！！！一定要从两个方向取最小值
+		ans = min(ans, sum);
+	}
+	printf("%d\n", ans);
+	return 0;
+}
+```
+

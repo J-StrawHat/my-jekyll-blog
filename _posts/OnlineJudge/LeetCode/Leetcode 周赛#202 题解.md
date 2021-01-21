@@ -1,0 +1,98 @@
+# Leetcode 周赛#202 题解
+
+本周的周赛题目质量不是很高，因此只给出最后两题题解（~~懒~~）。
+
+# 1552 两球之间的磁力 #二分答案
+
+## [题目链接](https://leetcode-cn.com/problems/magnetic-force-between-two-balls/)
+
+## 题意
+
+有`n`个空篮子，第`i`个篮子位置为`position[i]`，现希望将`m`个球放到这些空篮子，使得任意两球间**最小**磁力**最大**。（其中，磁力简化为两点位置之差）
+
+## 分析
+
+该题是二分答案的裸题，详细见代码
+
+```c++
+class Solution {
+public:
+    bool Judge(vector<int>& a, int x, int m){
+        int cnt = 1，lastpos = a[0];
+        for (int i = 1; i < (int)a.size(); i++){
+            if(a[i] - lastpos >= x){ //两点间距是否大于答案x
+                cnt++;
+                lastpos = a[i];
+            }
+            if(cnt == m) return true;
+        }
+        return false;
+    }
+    int maxDistance(vector<int>& position, int m) { //该二分算法，是考虑[1, n+1)
+        sort(position.begin(), position.end()); //记得先排序！！！
+        int lo = 0x3f3f3f3f;
+        int hi = position[position.size() - 1] - position[0] + 1; //确定两个篮子最大间距，为二分的上界，注意要+1!!!
+        for (int i = 1; i < (int)position.size(); i++){
+            int delt = position[i] - position[i - 1]; //确定两个篮子的最小间距，为二分的下界
+            lo = min(delt, lo);
+        }
+        while(lo < hi){
+            int mid = (lo + hi) >> 1;
+            if(Judge(position, mid, m)) //估计答案
+                lo = mid + 1; //答案可以再高一些
+            else
+                hi = mid; //说明该答案下的间距无法将所有球放完
+        }
+        return lo-1;
+    }
+};
+```
+
+# 1553 吃掉N个橘子的最少天数 #记忆化搜索
+
+## [题目链接](https://leetcode-cn.com/problems/minimum-number-of-days-to-eat-n-oranges/)
+
+## 题意
+
+给定`n(<= 2e9)`个橘子，每一天你只能从以下三种方案中选择一种：
+
++ 吃掉一个橘子
++ 若剩余橘子数`n`能被2整除，那么你可以吃掉`n/2`个橘子
++ 若剩余橘子数`n`能被3整除，那么你可以吃掉`2*(n/3)`个橘子
+
+现要求吃掉这`n`个橘子的最少天数。
+
+## 分析
+
+容易知道，当n>3时，吃掉`n/2`个橘子，剩余橘子数即为`n/2`；吃掉`2*(n/3)`个橘子，剩余橘子树即为`n/3`。
+
+那我们先预处理，将n$\leq$3的情况记录下来。接下来考虑转移方程。
+
+起初我考虑有三个转移方向：`n-1`，`n/2`，`n/3`，并用数组记忆化。在如此庞大的数据范围，不但数组无法承受，而且会分出更多的子问题。
+
+为了应对空间问题，可以考虑用`map`来记忆化。
+
+为了应对时间问题，我们分析到，对于当前剩余橘子数`n`，
+
++ 方案二分析：$n\ Mod\ 3 = 0, 1, 2$，余数为0，显然吃掉n/3个橘子即可；余数为1时，说明我们需要用n/3天的时间将3的倍数个橘子吃完，最后剩下一个橘子，需要1天；同理，余数为2时，说明我们用n/3天将3的倍数个橘子吃完后，还需要用两天时间（使用方案一）将剩下2个橘子吃完。
++ 方案三如方案二分析同理，我们要用n/2将2的倍数个橘子吃完后，还需要$n\ Mod\ 2$天（使用方案一，且已经预处理过）吃掉剩余的橘子。
+
+因此，我们只需要交给程序去考虑当前的n是选择方案二更优还是方案三，自顶而下向下递归。无需再考虑`n-1`的方向，同时无需考虑当前的n是否被3整除/被2整除。转移方程见下方代码。
+
+```C++
+class Solution {
+private:
+    unordered_map<int, int> dp;
+public:
+    int minDays(int n) {
+        if(n == 1)           return dp[1] = 1;
+        else if(n == 2)      return dp[2] = 2;
+        else if(n == 3)      return dp[3] = 2;
+        else if(dp.count(n)) return dp[n];
+        else return dp[n] = min(minDays(n / 3) + 1 + n % 3,
+                                minDays(n / 2) + 1 + n % 2);
+        
+    }
+};
+```
+

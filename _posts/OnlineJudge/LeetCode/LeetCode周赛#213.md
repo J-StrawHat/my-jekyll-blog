@@ -1,0 +1,196 @@
+# 5554. 能否连接形成数组
+
+## [题目链接](https://leetcode-cn.com/problems/check-array-formation-through-concatenation/)
+
+## 题意
+
+给定整数数组 `arr` ，其中每个整数互不相同 。另有一个由整数数组构成的数组 `pieces`，其中的整数也互不相同 。请以 任意顺序 连接 `pieces` 中的数组以形成 `arr` 。但是，不允许 对每个数组内部 `pieces[i]` 中的整数重新排序。若可连接 `pieces` 中的数组形成 `arr` ，返回 `true` ；否则，返回 `false` 。
+
+## 样例
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/20201101230634.png"/>
+
+## 分析
+
+如果遍历`arr`每个元素找到其对应的`pieces[i]`子数组，考虑的细节有很多。不妨遍历每个`pieces[i]`数组，以其子数组的首元素作为切入口，找到`arr`数组对应位置，再将`pieces[i]`这个子数组遍历完，如果无法遍历完又或者`arr`对应指针到达末端，则说明无法满足题目要求。
+
+```c++
+class Solution {
+public:
+    bool canFormArray(vector<int>& arr, vector<vector<int>>& pieces) {
+        int tot = 0, i = 0;
+        for (; i < pieces.size(); i++){ //遍历每一组piece首元素，找到arr对应的位置。
+            int pos;
+            for (pos = 0; pos < arr.size(); pos++){
+                if(arr[pos] == pieces[i][0]) break;
+            }
+            if(pos == arr.size()) return false; //说明pieces存在arr没有的元素
+            for (int j = 0; j < pieces[i].size(); j++){ //继续深入该子数组
+                if(pieces[i][j] == arr[pos]) pos++;
+                else return false; //说明不连续
+                if(pos >= arr.size() && j + 1 < pieces[i].size()) //此时arr指针指向arr末端，但pieces子数组指针还没到达末端，说明不连续
+                    return false;
+            }
+        }
+        return (i == pieces.size());
+    }
+};
+```
+
+# 5555. 统计字典序元音字符串的数目 #组合数 #暴力搜索
+
+## [题目链接](https://leetcode-cn.com/problems/count-sorted-vowel-strings/)
+
+## 题意
+
+给定整数 $n(\le 50)$，请返回长度为 $n$ 、仅由元音 ($a, e, i, o, u$) 组成且按 **字典序排列** 的字符串**数量**。
+
+字符串 $s$ 按 字典序排列 需要满足：对于所有有效的 $i$，$s[i]$ 在字母表中的位置总是与 $s[i+1]$ 相同或在 $s[i+1]$ 之前。
+
+## 分析
+
+下面是我在比赛时交的暴搜版本（主要是因为数据规模不大），每次递归是枚举当前位置放置第$i$个元音字母且保证不超过上一个字母。
+
+```c++
+class Solution {
+private:
+    int depest = 0;
+public:
+    int DFS(int depth, int pre){
+        if(depth == depest) return 1;
+        int ans = 0;
+        for (int i = 1; i <= pre; i++) ans += DFS(depth + 1, i);
+        return ans;
+    }
+    int countVowelStrings(int n) {
+        depest = n;
+        int ans = 0;
+        for (int i = 1; i <= 5; i++) ans += DFS(1, i);//从第i个元音字母出发
+        return ans;
+    }
+};
+```
+
+仔细一想，其实我们直接用挡板法便能求出来。因为所求的字符串一定是按$a\le e\le i\le o\le u$的顺序的，不过每种元音字母的数量可以为$0$。由于隔板法需要保证每个箱子至少有一个球，那我们可以给每个元音字母分配一个虚拟的位置（即需要$n+5$个小球），插完隔板之后再将虚拟位置去掉即可。故答案即为$C^{5-1}_{n+5-1}$。
+
+```c++
+class Solution {
+public:
+    int countVowelStrings(int n) {
+        return (n + 4) * (n + 3) * (n + 2) * (n + 1) / 24;
+    }
+};
+```
+
+# 5556. 可以到达的最远建筑 #贪心
+
+## [题目链接](https://leetcode-cn.com/problems/furthest-building-you-can-reach/)
+
+## 题意
+
+给定整数数组 `heights` ，表示建筑物的高度。另有一些`bricks`个砖块  和 `ladders` 梯子。
+
+你从建筑物 0 开始出发，不断向后面的建筑物移动，当从建筑物 `i` 移动到建筑物 `i+1`（下标 从 0 开始 ）时：
+
++ 若当前建筑物的高度 大于或等于 下一建筑物的高度，则不需要梯子或砖块。
++ 如果当前建筑的高度 小于 下一个建筑的高度，您可以使用 一架梯子 或 `(h[i+1] - h[i])` 个砖块
+
+如果以最佳方式使用给定的梯子和砖块，返回你可以到达的**最远**建筑物的下标（下标 从 0 开始 ）。
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/20201101232955.png"/>
+
+## 分析
+
+感谢[@零神的题解](https://leetcode-cn.com/problems/furthest-building-you-can-reach/solution/ke-yi-dao-da-de-zui-yuan-jian-zhu-by-zerotrac2/)，讲解得十分好。
+
+我试着用自己的语言去总结下吧，题目中的梯子可以爬无限高的楼，设梯子数量为$l$，出于贪心思想，我们一定会将所有的梯子用在前$l$大的楼层高度差Δ$h$。但是我们不可能即时确定下来这$l$个较大的Δ$h$，因而需要用个小根堆去维护。
+
+为什么用小根堆？因为每次到达新的楼时，判断新的Δ$h$是否比小根堆的堆顶（即第$l$大的Δ$h$）还大，如果成立则应该将这个新的Δ$h$加入堆，并把原来的堆顶pop出来，交给砖块去跨越。
+
+何时终止？当砖块的数量不足以解决新pop出来的Δ$h$时，算法即终止。
+
+```c++
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        priority_queue<int, vector<int>, greater<int>> myque; //小根堆放进梯子要爬的楼层差，并维护堆中最小的楼层差。
+        int brickSum = 0;
+        for (int i = 0; i + 1 < heights.size(); i++){
+            int diff = heights[i + 1] - heights[i];
+            if(diff < 0) continue;
+            myque.push(diff);
+            if(myque.size() > ladders){  
+                brickSum += myque.top(); //交给砖块解决
+                myque.pop();
+            }
+            if(brickSum > bricks) //砖块解决不了就终止
+                return i;
+        }
+        return heights.size() - 1;
+    }
+};
+```
+
+# 5600. 第 K 条最小指令 #组合公式 #分治
+
+## [题目链接](https://leetcode-cn.com/problems/kth-smallest-instructions/)
+
+## 题意
+
+Bob 站在单元格 (0, 0) ，想要前往目的地坐标 `destination ：(row, column)` 。你可以为 Bob 提供导航 **指令** 来帮助他到达目的地 `destination` 。
+
+指令 用字符串表示，其中每个字符：`'H'` ，意味着水平向右移动；`'V'` ，意味着竖直向下移动。
+能够为 Bob 导航到目的地 destination 的指令可以有多种，例如，如果目的地 destination 是 (2, 3)，`"HHHVV", "HHVHV", "HHVVH", "HVHHV", ...`都是有效 指令 。然而，Bob 想要遵循 按**字典序**排列后的**第 k 条最小指令** （从1）的导航前往目的地 `destination` 。例如，Bob需要第3条最小，对应指令即为`"HHVVH"`。
+
+给定整数数组 `destination` 和一个整数 `k` ，现要返回这个按字典序排列后的第 k 条最小字符串指令 。
+
+## 分析
+
+再次感谢[@零神的题解](https://leetcode-cn.com/problems/kth-smallest-instructions/solution/di-k-tiao-zui-xiao-zhi-ling-by-zerotrac2/)orz…
+
+设需要放入$h$个`'H'`和$v$个`'V'`，题目要求第$k$小，那么我们可以从高位到低位，不断淘汰出前$k$小的串，具体如下：
+
+我们考虑当前最高位`pos`，应该放`'H'`还是`'V'`。假设放`'V'`，那么所有`pos`位为`'H'`的字符串都会被淘汰掉，且总共有$cur = C^{h-1}_{h+v-1}$个被淘汰掉。我们判断下$cur$个串是否超出$k$：
+
++ 若$k > cur$，说明最高位放置`'V'`，也没有将足够多的串给淘汰掉，因而我们接下来要继续在$pos+1$位放置`'V'`去淘汰剩余的$cur-k$个串（该串此时只允许放$h$个`'H'`、$v-1$个`'V'`）。
++ 若$k<cur$，说明淘汰过多，最高位应该放置`'H'`，即淘汰不成功，考虑$pos+1$位放置`'V'`去淘汰剩余的$k$个串（该串此时只允许放$h-1$个`'H'`、$v$个`'V'`）
+
+注意，我们可能要计算$C^{14}_{29}$，先做乘法运算时会超过$long\ long$范围，因此需要用递推式预先处理组合公式。
+
+```c++
+class Solution {
+public:
+    string kthSmallestPath(vector<int>& destination, int k) {
+        int v = destination[0], h = destination[1];
+        int comb[35][35] = {0};
+        comb[0][0] = 1;
+        for(int i = 1; i <= (v + h); i++){
+            comb[i][0] = comb[i][i] = 1;
+            for(int j = 1; j < i; j++)
+                comb[i][j] = comb[i - 1][j - 1] + comb[i - 1][j];
+        } 
+        string ans = "";
+        int sum = 0, posMax = (v + h);
+        for (int pos = 1; pos <= posMax; pos++){
+            if(h >= 1){ //保证数组下标不为负
+                int cur = comb[v + h - 1][h - 1]; //假如当前最高位置'V'，相当于将所有最高位为'H'的字符串给淘汰掉了
+                if(k > cur) { //说明淘汰得还不够
+                    k -= cur;
+                    v--;
+                    ans += "V";
+                }
+                else { //淘汰过高
+                    h--; //最高位只能先放下'H'
+                    ans += "H";
+                }
+            }
+            else{ //说明h已经用完了，只能放v了
+                ans += "V";
+                v--;
+            }
+        }
+        return ans;
+    }
+};
+```
+

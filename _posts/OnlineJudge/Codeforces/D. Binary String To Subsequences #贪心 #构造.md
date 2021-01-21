@@ -1,0 +1,149 @@
+# D. Binary String To Subsequences #贪心 #构造
+
+## [题目链接](https://codeforces.com/contest/1399/problem/D)
+
+## 题意
+
+给定一个$01$串$s$，完全分割成若干子序列(**注意，不要混淆子串与子序列的概念**)，其中的子序列不包含两个相邻的$0$或$1$$(eg:"0101", "1010")$。对$s$按这样的分割方式，最少能分出多少串子序列？同时，还要求输出$s$串中每一字符所在的分割出的子序列编号
+
+## 分析
+
+参考了官方题解的思路，我们可以定义两个数组为$now0$和$now1$，$now0$存下了当前以0为结尾的所有10子序列，$now1$反之。
+
+假定我们遇到$str[i]$为'$0$'，为了使分割的子序列数量越少越好，当然是希望能够将这个字符'0'接入之前已创建好的子序列中，因此先检查$now1$是否存在以$1$结尾的10子序列。
+
+如果存在，我们就接入(注意，接入后，该子序列的末尾是'0'了，因而需要在$now0$数组留下标记)；如果不存在，我们只能从$now0$中创建一个新编号，注意这个编号是基于所有子序列的数量的。
+
+```C++
+#include <string>
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+typedef long long ll;
+int main(){
+    int q; scanf("%d", &q);
+    while(q--){
+        vector<int> ans;
+        vector<int> now1, now0;
+        int n; scanf("%d", &n);
+        string str; cin >> str;
+        //利用vector模拟过程，便于查看当前集合的元素个数，及增加/修改元素
+        for (int i = 0; i < n; i++){
+            int newkey = now0.size() + now1.size();//newkey用于统计最新子序列编号(从0开始)
+            if(str[i] == '0'){
+                if(now1.empty()){ //暂无最新的01串，只能构建以0为开头的新子序列
+                    now0.push_back(newkey);
+                } //新子串+1
+                else{ //当前存在可接入的01串，为该串的尾部放置合适位置
+                    newkey = now1.back(); //注意获取最新01串的编号
+                    now0.push_back(newkey); //第newkey串结尾改为0
+                    now1.pop_back(); //第newkey串结尾不再是1
+                }
+            }
+            else {
+                if(now0.empty()){ //暂无最新的10串
+                    now1.push_back(newkey);
+                }
+                else{ 
+                    newkey = now0.back();
+                    now1.push_back(newkey);
+                    now0.pop_back();
+                }
+            }
+            ans.push_back(newkey);
+        }
+        printf("%d\n", (int)(now1.size() + now0.size()));
+        for (int i = 0; i < n; i++){
+            printf("%d%c", ans[i] + 1, (i == n - 1) ? '\n' : ' ');
+        }
+    }
+}
+```
+
+其实$for$循环内部不需要分出两个大$if$判断，可以定义$now[2][...]$然后通过$now[!newkey]$进行一系列操作即可
+
+## E1. Weights Division #贪心 #大顶堆
+
+## [题目链接](https://codeforces.com/contest/1399/problem/E1)
+
+## 题意
+
+给定每条边带一定权值的有根树。你可以将任意一条边的权值减少一半，即$w_i:=wi/2$（向下取整），每一次对某一边权值减少一半记为一次操作。定义树的总重量：根节点到**所有叶子**的**路径权值**之和。现给定$S$，需要你用最少的操作次数使得树的总重量**不超过**$S$。
+
+## 分析
+
+根节点到达某一叶子的路径，与 根节点到达另一叶子的路径，很有可能发生部分重合。而题干中不遗漏路径中所有经过边的权值，所以我们需要提前将任何边的经过次数$num$统计下来。
+
+我们很容易往贪心的方向考虑。贪心什么？我最初贪心，是将当前所有边中，出现次数$\times$边权得到的加权最大的边挑出来并进行修改。然而，这样不准确，比如{$w_1=5, num_1=4$}与{$w_2=2, num_2=10$}，他们总加权相等，但由于边权值缩小是向下取整，5缩小一半对总权重的影响比2缩小一半更大。从这里我们可以发现，贪心的目标应该是选择**缩小对树重量的影响最大的边**即缩小前与缩小后之差最大。
+
+```C++
+#include <string>
+#include <cstdio>
+#include <iostream>
+#include <queue>
+using namespace std;
+typedef long long ll;
+const int MAXN = 2e5 + 5;
+int H[MAXN], tot = 0;
+ll s = 0, n, cursum = 0; 
+typedef struct Edge {
+    int to, nextNbr, num; ll w; //num记录该边的经过次数
+    bool operator < (const struct Edge& x) const {
+        return num * (w - w / 2) < x.num * (x.w - x.w / 2);
+    } //对总权重影响最大的，优先取出
+}Edge;
+Edge E[MAXN * 2];
+priority_queue<Edge> myque;
+void addEdge(int u, int v, ll w) {
+    tot++;
+    E[tot].to = v; E[tot].w = w; E[tot].nextNbr = H[u]; E[tot].num = 1;
+    H[u] = tot;
+}
+void Init() {
+    for (int i = 1; i <= n; i++) H[i] = -1;
+    tot = 0; cursum = 0;
+    while (!myque.empty()) myque.pop();
+}
+int dfs(int now, int pre) { 
+    int cnt = 0; //cnt记录从now(除了叶节点)出发，它的出边的经过次数
+    bool f = false;
+    for (int i = H[now]; i >= 0; i = E[i].nextNbr) {
+        if (E[i].to != pre) { //保证不回退
+            E[i].num = dfs(E[i].to, now); //回溯返回该边的经过次数
+            cnt += E[i].num; 
+            myque.push(E[i]);
+            cursum += (ll)E[i].num * E[i].w; //累加当前树的总权重
+            f = true;
+        }
+    }
+    return f ? cnt : 1; //如果是叶子节点即返回1，否则返回给上一条边的经过次数
+}
+int main() {
+    int q; scanf("%d", &q);
+    while (q--) {
+        scanf("%lld%lld", &n, &s); Init();
+        for (int i = 1; i <= n-1; i++) {
+            int u, v; ll w;
+            scanf("%d%d%lld", &u, &v, &w);
+            addEdge(u, v, w); addEdge(v, u, w);
+        }
+        dfs(1, 1); //对每一条边的出现次数及所有边的总权重作统计
+        ll ans = 0;
+        while (cursum > s) {
+            Edge tmp = myque.top(); myque.pop();
+
+            cursum -= tmp.w * tmp.num;
+            tmp.w = (ll)(tmp.w / 2); //该边权值
+            cursum += tmp.w * tmp.num;
+
+            myque.push(tmp);
+            ans++;
+        }
+        printf("%lld\n", ans);
+    }
+    return 0;
+}
+```
+
