@@ -1,0 +1,105 @@
+# C.Increase and Copy #枚举 
+
+## [题目链接](https://codeforces.com/contest/1426/problem/C)
+
+## 题意
+
+最初你有仅包含一个数字$1$的数组$a$，一次操作中可对该数组进行两类操作：
+
++ 从数组中选择**一个**元素，将该元素$+1$；
++ 从数组中选择**一个**元素，复制该元素放到原数组末端。
+
+你需要在尽可能少的操作次数下，使得该数组所有元素值之和不小于$n$($n\leq 1e9$)，现要你求出最少操作次数
+
+## 分析
+
+显然，操作过程中，一定是先对最初元素不断自增，直到某个值后，再复制这个元素，即先进行第一类操作再进行第二类，这样能够保证操作次数尽可能少。
+
+那么我们应该将最初元素加到多少才复制呢？我们可以枚举该元素可以增加**至**$i$，那么消耗次数为$i-1$，那么接下来复制次数即为$\lceil{\frac{n - i}{i}} \rceil$，故总消耗次数为$i-1+\lceil{\frac{n - i}{i}} \rceil$。枚举$i$，找到$i-1+\lceil{\frac{n - i}{i}} \rceil$的最小值即可。另外，我们无需从$1$枚举到$n$，枚举到$\sqrt{n}$即可。
+
+```c++
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <iostream>
+#include <stack>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+typedef long long ll;
+const int MAXN = 15;
+int q, n;
+int main(){
+    scanf("%d", &q);
+    while(q--){
+        scanf("%d", &n);
+        int mymin = 0x3f3f3f3f;
+        for(int i = 1; i * i <= n; i++){
+            int sum = (i - 1) + (n - i) / i + ((n - i) % i != 0);
+            mymin = min(mymin, sum);
+        }
+        printf("%d\n", mymin);
+    }
+    return 0;
+}
+```
+
+由官方题解思路，因为所求最值应该在$\sqrt{n}$的附近，我们枚举$[\lfloor \sqrt{n}\rfloor+5,  \lfloor \sqrt{n}\rfloor-5]$找最值，就能达到$O(1)$复杂度了。
+
+
+
+# D. Non-zero Segments #前缀和 #哈希表
+
+## [题目链接](https://codeforces.com/contest/1426/problem/D)
+
+## 题意
+
+给定长为$n$、包含正整数、也会包含负整数、但一定不包含$0$的数组$a$，你需要在这个数组中某些位置插入任意值，保证该数组**任意**区间值之**和**等于$0$，现要你求出最少插入元素数量。
+
+## 分析
+
+设该数组前缀和$sum_i$，我们知道，**某个区间$[l, r]$的值之和为$0$，那么就意味着$sum_r$与$sum_l$是相等的。**于是，我们便可通过哈希表去记录某个前缀和是否出现过，一旦出现过，假设从左到右遍历到$i$，发现当前的前缀和$sum_i$，在之前出现过，说明这一中间区间的权值之和一定为$0$，那么按照题目要求，我们将某个值插入到$i$的前面，使得这一中间区间的权值之和不为0的同时，保证不会与后面区间相加为$0$（实际插入值无需真的确定下来），此时答案加$1$（当然，这只是个假想的插入操作，无需真的模拟，只需要将当前前缀和置为$0$，从$i$开始重新计$sum$即可）。别忘了，每次迭代的过程中，要记录当前前缀和到哈希表中。另外预处理时，应将前缀和为$0$记录到哈希表，因为有可能相邻两元素恰好为相反数。
+
+```c++
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <iostream>
+#include <stack>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+typedef long long ll;
+const int MAXN = 2e5+5;
+unordered_map<ll, int> mymap;
+int main(){
+    int n, ans = 0;
+    scanf("%d", &n);
+    ll sum = 0, cur;
+    mymap[0] = 1; //考虑到相邻元素恰为相反数
+    for(int i = 1; i <= n; i++){
+        scanf("%lld", &cur);
+        sum += cur;
+        if(mymap[sum] > 0){ //发现之前出现过该前缀和
+            mymap.clear();
+            mymap[0] = 1;
+            sum = cur; //前缀和清零（假想cur之前插入了一个数，保证前面区间不会与后面区间相加为0）
+            ans++;
+        }
+        mymap[sum]++;//记录该前缀和
+    }
+    printf("%d\n", ans);
+    return 0;
+}
+```
+

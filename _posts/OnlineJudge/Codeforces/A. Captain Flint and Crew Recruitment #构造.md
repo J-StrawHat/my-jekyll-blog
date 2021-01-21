@@ -1,0 +1,167 @@
+# A. Captain Flint and Crew Recruitment #构造
+
+## [题目链接](https://codeforces.com/contest/1388/problem/A)
+
+## 题意
+
+定义一类正整数，能够被$p*q$表示，其中$p、q(1<p<q)$均为素数，称之为$nearly\ prime$ 。现要求判断整数$n$，是否能被**4个不同整数之和**表示，且其中至少三个整数为$nearly\ prime$ (是则，输出`YES`否则输出`NO`)
+
+## 分析
+
+ $ n = 31 = 2\times7+2\times5+2\times3+1$，其中$14,10,6$为$nearly\ prime$
+
+ $ n = 32 = 2\times3+2\times5+2\times7+2$，其中$14,10,6$为$nearly\ prime$
+
+容易得到最小的三个$nearly\ prime$为$6,10,14$，因而满足条件的最小整数为31，见上。当$n\leq30=6+10+14$，答案`NO`。当$n>30$，答案定为`YES`
+
+难道剩余的正整数都能被$6,10,14,n-30$表示吗？注意，当$n-30 = 6or10or14$时，出现了重复数字，我们可以构造出比{$2*3,2*5,2*7,n$}稍大的组合，即{$2*3,2*5,3*5,n$}
+
+```C++
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+typedef long long ll;
+int main() {
+    int Q; scanf("%d", &Q);
+    while (Q--) {
+        int n;
+        scanf("%d", &n);
+        if (n <= 30) {
+            printf("NO\n");
+            continue;
+        }
+        int last = n - 30;
+        if (last == 6 || last == 10 || last == 14) {
+            printf("YES\n6 10 15 %d\n", n - 31);
+        }
+        else {
+            printf("YES\n6 10 14 %d\n", n - 30);
+        }
+    }
+    return 0;
+}
+```
+
+
+
+# B. Captain Flint and a Long Voyage #构造 #贪心
+
+## [题目链接](https://codeforces.com/contest/1388/problem/B)
+
+## 题意
+
+给定整数$n$，找出一个十进制数字$x$满足：长度为$n$，得到$x$在二进制下的串，去掉后面的$n$位，新二进制串是最大的，且数字$x$越小越好。~~好绕，原题面看得十分吃力~~
+
+## 分析
+
+我们将$[0, 9]$数字分别转化为二进制串，可以观察到数字$8,9$的二进制串长度最长，分别为$1000, 1001$，由题干要求，抹除$n$位后的二进制串最大，那么利用贪心思想，要找到这样的串，那么十进制数字$x$的二进制串越长越好，于是我们可以断定这个**$x$肯定由$8or9$组成**。
+
+但别忘了题干还要求我们数字$x$越小越好，为什么可以有这样的条件？拿数字$8,9$的二进制串$1000, 1001$而言，当我们抹除最后1位时，得到的两个新串是相等的！于是但凡得到数字$999...999$，我们可以在合法的长度内将末位的几个$9$替换为$8$，这样既保证二进制串大且原十进制数小的情况了，即**$x$的组成肯定为$999...888$**。
+
+如何确定这一合法的替换长度呢？考虑到8/9二进制串长度为4。对于原数字$x$最末尾的最末尾的(向上取整)$n/4$个要被去除的串，选8还是9的二进制串是没有区别的
+
+```c++
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+typedef long long ll;
+int main(){
+    int Q; scanf("%d", &Q);
+    while(Q--){
+        int n;
+        scanf("%d", &n);
+        int len = n / 4; //将最后n位换成len个数字8的二进制串
+        if(n % 4 != 0) len++; //余数为[1, 3]说明还可以再替换多一个数字8的二进制串
+        for (int i = 1; i <= n - len; i++)
+            printf("9");
+        for (int i = 1; i <= len; i++)
+            printf("8");
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+
+
+# C. Uncle Bogdan and Country Happiness #DFS #逆向思维
+
+## [题目链接](https://codeforces.com/contest/1388/problem/C)
+
+## 题意
+
+给定$n$个节点的树结构，$m$个人初始在根节点$1$号，已知每个人都有各自要到达的节点(默认走最短路)，他们刚出发有各自的心情状态(好/坏)且我们未知，在节点之间的转移过程中**好心情会转化为坏心情**，但心情坏的不会发生改变。先给定每个节点数据$h[i]$，理论上值为该节点上 心情好的人数 - 心情坏的人数，现要判断给定数据是否正确。
+
+## 分析
+
+若从节点1出发来考虑似乎不容易，我们可以尝试从每个到达的目标节点逆推到根节点。
+
+设**经过**城市$now$人数有$sum[now]$，该城市理论快乐指数为$h[now]$，可以计算出理论上该城市的快乐人数
+
+ $Hapsum[now] =(sum[now]+h[now])/2$
+
+$= (Hapsum[now]+badsum[now]+Hapsum[now]-badsum[now])$
+
+参考官方题解，我们有三个标准去衡量数据的合法性：
+
+1.  $sum[now]+h[now]$一定能被整除
+2. $0\leq Hapsum[now]\leq sum[now]$ 即快乐人数肯定不会超过总人数
+3. $Hapsum[to_1]+Hapsum[to_2]+...+Hapsum[to_{k}]\leq Hapsum[now]$ 即每个人从now出发可能会心情变糟，因而子节点的快乐人数总数一定不超过父节点
+
+```C++
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+typedef long long ll;
+const int MAXN = 1e5 + 5;
+struct Edge {
+    int to, nextNbr;
+}E[MAXN << 1];
+int Head[MAXN], tot = 0;
+void addEdge(int u, int v) {
+    tot++;
+    E[tot].to = v; E[tot].nextNbr = Head[u]; Head[u] = tot;
+}
+int n, m, delt[MAXN], cnt[MAXN], sum[MAXN], HapSum[MAXN];
+bool f = true;
+void dfs(int pre, int now) {
+    if (f == false) return;
+    sum[now] = cnt[now];
+    int tmp_sum = 0;
+    for (int i = Head[now]; i >= 0; i = E[i].nextNbr) {
+        int v = E[i].to;
+        if (v != pre) {
+            dfs(now, v);
+            sum[now] += sum[v]; 
+            tmp_sum += HapSum[v]; //统计 快乐人数
+        }
+    } //sum[now]统计now节点为根的子树的总人数
+    if ((sum[now] + delt[now]) % 2 != 0) f = false; //说明不是整数...case1
+    HapSum[now] = (sum[now] + delt[now]) >> 1; //利用给定数据算出经过该城市后的理论快乐人数
+    if (HapSum[now] < 0 || HapSum[now] > sum[now]) f = false;//说明快乐人数比总人数还多...case2
+    if (HapSum[now] < tmp_sum) f = false;
+    //说明经过now城市后的快乐人数 竟然比 走得更远的城市的快乐人数 还 少...case3
+}
+int main() {
+    int Q; scanf("%d", &Q);
+    while (Q--) {
+        scanf("%d%d", &n, &m);
+        tot = 0; f = true;
+        for (int i = 1; i <= n; i++) scanf("%d", &cnt[i]);
+        for (int i = 1; i <= n; i++) scanf("%d", &delt[i]), Head[i] = -1;
+        for (int i = 1; i <= n - 1; i++) {
+            int x, y; scanf("%d%d", &x, &y);
+            addEdge(x, y); addEdge(y, x);
+        }
+        dfs(0, 1);
+        printf("%s\n", f ? "YES" : "NO");
+    }
+    return 0;
+}
+```
+
+
+

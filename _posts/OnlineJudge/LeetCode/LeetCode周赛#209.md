@@ -1,0 +1,195 @@
+# 1609. 奇偶树 #广搜 #二叉树的层次遍历
+
+## [题目链接](https://leetcode-cn.com/problems/even-odd-tree/)
+
+## 题意
+
+如果一棵二叉树满足下述几个条件，则可以称为奇偶树 ：
+
++ 二叉树根节点所在层下标为 0 ，根的子节点所在层下标为 1 ，根的孙节点所在层下标为 2 ，依此类推。
+
++ 偶数下标 层上的所有节点的值都是 奇 整数，从左到右按顺序 **严格**递增
++ 奇数下标 层上的所有节点的值都是 偶 整数，从左到右按顺序 **严格**递减
+
+给定根节点，要求判断该二叉树是否为奇偶树
+
+## 分析
+
+BFS对于已知根节点，按深度遍历时，十分高效。这里要注意下入队列顺序是从左至右。
+
+```c++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isEvenOddTree(TreeNode* root) {
+        queue<TreeNode*> myque;
+        myque.push(root);
+        int depth = 0;
+        while (!myque.empty()) {
+            int n = myque.size();
+            TreeNode* pre = nullptr, * cur = nullptr;//pre节点为与cur同高的左边节点
+            while (n--) { //将当前高度的所有节点都遍历一次
+                cur = myque.front(); myque.pop();
+                if (depth & 1) {
+                    if (cur->val & 1) return false;
+                    if (pre != nullptr && pre->val <= cur->val) return false;
+                }
+                else {
+                    if (cur->val % 2 == 0) return false;
+                    if (pre != nullptr && pre->val >= cur->val) return false;
+                }
+                if (cur->left) myque.push(cur->left);
+                if (cur->right) myque.push(cur->right);
+                pre = cur; 
+            }
+            depth++;
+        }
+        return true;
+    }
+};
+```
+
+# 1610. 可见点的最大数目 #极角 #排序 #双指针
+
+## [题目链接](https://leetcode-cn.com/problems/maximum-number-of-visible-points/)
+
+## 题意
+
+你的位置为$(pos_x, pox_y)$，视野角度为$angle$。现给定一组顶点坐标$points$。现问你的视野中最多能看到多少个顶点。
+
+## 样例
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/image-20201008001911188.png"/>
+
+## 分析
+
+感谢[@前额叶没长好](https://leetcode-cn.com/u/time-limit/)的讲解！
+
+> `atan2(y, x)`函数，取值范围为$(-\pi, +\pi]$（你可以理解为，极径从$-\pi$弧度**逆时针**旋转至$\pi$弧度）。当函数返回值为**正**，即表示从**$x$轴逆时针**旋转的**弧度**，返回值为**负**，表示从$x$轴**顺时针**旋转的弧度。`atan2(y,x)`与$arctan(y/x)$的关系如下：
+> $$
+> atan2(y,x)=\begin{cases}
+> 			arctan(\frac{y}{x}) &第一象限或第四象限的点 \\
+> 			\pi+arctan(\frac{y}{x}) &第二象限的点 \\
+> 			arctan(\frac{y}{x}) &第三象限的点 \\
+> 			+\frac{\pi}{2} &y>0且x=0 \\
+> 			-\frac{\pi}{2} &y<0且x=0
+> 			\end{cases}
+> $$
+由此我们便可利用`atan2(y,x)`计算$(y,x)$的极角了，我们把点集$points$所有点的极角（此时为角度制）都存到一个数组中，对其**从小到大排序**后，每个弧度代表的点的顺序恰好$xoy$平面的逆时针方向，为：第三象限->第四象限->第一象限->第四象限。接着，我们通过**双指针**，便能找到给定区间$angle$下的最多点数。
+
+但是注意，我们要求的是区间实际是一个**环**，还要考虑到下图中的弧$ab$，如果直接逆时针从小到大遍历的话，就无法覆盖第二象限与第三象限之间的**劣弧**$ab$了。我们不妨**再**给极角数组中所有点$+360^{\circ}$，这样就能将圆环的首尾相连了。由于我们用的是双指针，不会将之前的点重复计入。
+
+![image-20201008094506290](https://gitee.com/j__strawhat/MyImages/raw/master/image-20201008094506290.png)
+
+另外，建议将角度换算为角度制而不是弧度制，弧度制太小了，容易出现精度问题（~~wa了8发~~）
+
+```c++
+const double EPS = 1e-8;
+class Solution {
+public:
+    int visiblePoints(vector<vector<int>>& points, int angle, vector<int>& location) {
+        vector<double> pangle;
+        int cnt = 0, ans = 0;
+        for (int i = 0; i < points.size(); i++){
+            double dx = location[0] - points[i][0], dy = location[1] - points[i][1];
+            if(dx == 0 && dy == 0) //有可能该点与位置点重合
+                cnt++;
+            else{
+                double tmp = 180 * atan2(dy, dx) / acos(-1.0); //求极角
+                pangle.push_back(tmp);
+                pangle.push_back(tmp + 360);
+            }
+        }
+        sort(pangle.begin(), pangle.end());
+        double ang = angle; int hi = 1;
+        for (int lo = 0; lo < pangle.size(); lo++){
+            while(hi < pangle.size() && 
+            (pangle[hi] - pangle[lo] < angle + EPS))
+                hi++;
+            ans = max(ans, hi - 1 - lo + 1);
+        }
+        return ans + cnt;
+    }
+};
+```
+
+# 1611. 使整数变为0的最少操作次数 #记忆化搜索 #格雷码
+
+## [题目链接](https://leetcode-cn.com/problems/minimum-one-bit-operations-to-make-integers-zero/)
+
+## 题意
+
+给定整数$ n$，你需要重复执行多次下述操作将其转换为**$0$** ：
+
++ 翻转$ n $的二进制表示中最右侧位（第$0$位）。
+
++ 如果第$ (i-1) $位为$ 1 $且从第$ (i-2) $位到第$ 0 $位都为$ 0$，则翻转$ n $的二进制表示中的第$ i $位。
+
+返回将 $n$ 转换为$ 0 $的最小操作次数。
+
+## 分析
+
+再次感谢[@前额叶没长好](https://leetcode-cn.com/problems/minimum-one-bit-operations-to-make-integers-zero/solution/ji-yi-hua-sou-suo-zheng-ming-by-time-limit/)的讲解qaq
+
+我们观察这一组数据
+
+```c++
+100 -> 101 -> 111 -> 110 -> 010 -> 011 -> 001 -> 000
+```
+
+观察到 `100->...->010->...->000`是三个位数不同的状态，也就说在操作过程中位数是单调递减的！我们再用多组数据观察发现，要使操作次数最小，他们的操作路径都是固定方向的一条直线！同时上面三个二进制数也是**位数发生改变**后的**首个**二进制数 。
+
+不妨设`f(xxxxxx)`表示将二进制`xxxxxx`变为0的最小操作次数。
+
++ 当`xxxxxx`形如`11xxxx`时，要使它位数降低，只有题目中的操作二才能做到。我们是不是应该要将后面未知的`xxxx`变为`0000`呢，即将`11xxxx`变为`110000`，从而满足操作二的执行条件，由此`110000`通过操作二变为`010000`。总的来说，就是对`11xxxx`->…->`110000`->…->`010000`->….->`000000`（只保留了关键步骤），这样的思想就是计算汉诺塔时候用到的思想！故操作次数`f(11xxxx)=f(00xxxx)+1+f(010000)`（`f(00xxxx)`表示`11xxxx`变为`110000`的操作次数，`1`表示`110000`变为`010000`的操作次数，`f(010000)`表示从`010000`变为`000000`操作次数
++ 当`xxxxxx`形如`10xxxx`时，我们就要先将`0xxxx`转化为`10000`即将`10xxxx`变为`110000`，接下来操作与上面情况相同了。操作次数即为`f(10xxxx)=f(10000)-f(xxxx)+1+f(10000)`，（`f(10000)-f(xxxx)`表示将`10xxxx`变为`110000`的操作次数）
+
+```c++
+class Solution {
+private:
+    unordered_map<int, int> f;
+public:
+    int DFS(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        if (f.count(n) > 0) return f[n];
+        int hiBit = 1 << 30, loBit = 1 << 29;
+        int ans = 0;
+        while (hiBit > 0) {
+            if (n & hiBit) {
+                if (n & loBit) {
+                    ans = DFS(n ^ (hiBit | loBit)) + 1 + DFS(loBit);
+                    break;
+                }
+                else {
+                    ans = DFS(loBit) - DFS(n ^ hiBit) + 1 + DFS(loBit);
+                    break;
+                }
+            }
+            else {
+                hiBit >>= 1;
+                loBit >>= 1;
+            }
+        }
+        return f[n] = ans;
+    }
+    int minimumOneBitOperations(int n) {
+        f.clear();
+        return DFS(n);
+    }
+};
+```
+
+另外，题目要求的操作实际上，与**格雷码**的枚举基本一致，可参考此篇[题解](https://leetcode-cn.com/problems/minimum-one-bit-operations-to-make-integers-zero/solution/xiang-jie-ge-lei-ma-by-simpleson/)
+
+

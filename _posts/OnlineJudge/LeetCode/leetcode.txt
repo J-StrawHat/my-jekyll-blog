@@ -1,0 +1,15 @@
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null) return 0;
+        int m1 = minDepth(root.left);
+        int m2 = minDepth(root.right);
+        //1.如果左孩子和右孩子有为空的情况，直接返回m1+m2+1
+        //2.如果都不为空，返回较小深度+1
+        return root.left == null || root.right == null ? m1 + m2 + 1 : Math.min(m1,m2) + 1;
+    }
+}
+
+作者：reals
+链接：https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/solution/li-jie-zhe-dao-ti-de-jie-shu-tiao-jian-by-user7208/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
