@@ -1,7 +1,7 @@
 ---
 title: 「CSS知识精炼02」盒子模型、浮动、文档流、定位
 author: JoyDee
-categories: [Web前端, HTML&CSS]
+categories: [Web前端, HTML与CSS]
 tags: [CSS]
 date: 2020-07-20 20:04:00 +0800
 math: true

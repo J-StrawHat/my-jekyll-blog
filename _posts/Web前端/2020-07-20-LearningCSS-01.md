@@ -1,7 +1,7 @@
 ---
 title: 「CSS知识精炼01」简介、样式表、选择器
 author: JoyDee
-categories: [Web前端, HTML&CSS]
+categories: [Web前端, HTML与CSS]
 tags: [CSS]
 date: 2020-07-20 14:04:00 +0800
 math: true
