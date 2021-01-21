@@ -1,7 +1,7 @@
 ---
 title: HTML5知识提炼
 author: JoyDee
-categories: [Web前端, HTML&CSS]
+categories: [Web前端, HTML与CSS]
 tags: [HTML]
 date: 2020-07-20 00:40:00 +0800
 math: true
