@@ -7,14 +7,12 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 
-title: JoyDee Blog                          # the main title
+title: JoyDee's Blog                          # the main title
 
 tagline: The dream is still alive.  # it will display as the sub-title
 
 description:                         # used by seo meta and the atom feed
-  A minimal, portfolio, sidebar,
-  bootstrap Jekyll theme with responsive web design
-  and focuses on text presentation.
+  Welcome to my personal blog.
 
 # fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
 url: 'https://J-StrawHat.github.io'

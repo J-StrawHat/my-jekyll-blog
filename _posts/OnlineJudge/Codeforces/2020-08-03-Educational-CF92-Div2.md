@@ -1,17 +1,23 @@
-
-
+---
+title: Educational Codeforces Round 92 (Rated for Div. 2) B、C题解
+author: JoyDee
+categories: [Online Judge, Codeforces]
+tags: [算法-暴力, 思维-性质观察, 算法-贪心]
+date: 2020-08-03 16:54:00 +0800
+math: true
+---
 
 ~~TAT 第一场codeforces~~
 
-### B. Array Walk #暴力 #贪心
+# B. Array Walk #暴力 #贪心
 
-#### [题目链接](https://codeforces.com/contest/1389/problem/B)
+## [题目链接](https://codeforces.com/contest/1389/problem/B)
 
-#### 题意：
+## 题意：
 
 有$a1, a2, ..., an$ 个格子(每个格子有各自分数)，最初为1号格(初始分数为$a1$)，支持两种走法(经过的格子分数会相应累加)，只能走$k$步：①向右走。②向左走，但是**每一次向左操作走完一格后不能再连续地向左移动**，允许向左走的操作次数为$z$。现要求你走完k次后获得的最大分数。
 
-#### 分析：
+## 分析：
 
 参考了官方题解，假定我们有$t$次移动是向左的，那么剩下$k-t$次向右，我们知道遍历的格子在$[1, 1+k-2t]$的，即最终停留的位置一定为$1+k-2t$号格子(因为每一次的向左移动之后需要进行一次向右走)。
 
@@ -49,15 +55,15 @@ int main(){
 
 ```
 
-### C. Good String #暴力 #性质观察
+# C. Good String #暴力 #性质观察
 
-#### [题目链接](https://codeforces.com/contest/1389/problem/C)
+## [题目链接](https://codeforces.com/contest/1389/problem/C)
 
-#### 题意:
+## 题意:
 
 给定由数字$0-9$组成的串$s = t_1t_2...t_n$，现要求最少从$s$中删除几个字符，使得新串满足$t_2...t_{n-1}t_{n}t_1 == t_{n}t_1t_2...t_{n-2}t{n-1}$
 
-#### 分析：
+## 分析：
 
 递推一下条件，可以得到$t_1 = t_3 = ... = t_{2k-1}$ 以及$t_2 = t_4 = ... = t_{2k}$，偶/奇数位置的字符各自相等，故满足$good string$ 当且仅当 该串的字符种数不超过2种。(eg: $23 23 23 23 ... 23$)
 
