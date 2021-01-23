@@ -1,7 +1,7 @@
 ---
 title: CodeBlocks相关配置
 author: JoyDee
-categories: [其他知识技术分享, 软件或环境配置]
+categories: [其他知识技术分享, 软件与环境配置]
 date: 2020-10-06 16:33:00 +0800
 tags: [Cpp, 配置]
 ---
