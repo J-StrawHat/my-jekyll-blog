@@ -59,6 +59,17 @@ body {
   font-family: 'Ubuntu',-apple-system,BlinkMacSystemFont,"Helvetica Neue","Arial","PingFang SC","Hiragino Sans GB","STHeiti","Microsoft YaHei","Microsoft JhengHei","Source Han Sans SC","Noto Sans CJK SC","Source Han Sans CN","Noto Sans SC","Source Han Sans TC","Noto Sans CJK TC","WenQuanYi Micro Hei",SimSun,sans-serif;
 }
 
+.v[data-class=v] .vcards .vcard .vh .vmeta .vat {
+  color: #1B86F9;
+}
+.v[data-class=v] .status-bar, .v[data-class=v] .veditor, .v[data-class=v] .vinput, .v[data-class=v] p, .v[data-class=v] pre code {
+  color: var(--text-color);
+}
+.v[data-class=v] .vwrap {
+  border: 1px solid var(--btn-border-color);
+  border-radius: 10px;
+}
+
 /*--- sidebar layout ---*/
 
 $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab

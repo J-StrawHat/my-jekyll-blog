@@ -75,7 +75,7 @@ valine_comment:
   enable: true
   leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
   leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
-  placeholder: 留下你的评论吧！填写邮箱还能获得回复通知噢！
+  placeholder: 留下你的评论吧，支持markdown语法！填写邮箱还能获得回复通知噢！
 
 disqus:
   comments: false  # boolean type, the global switch for posts comments.
