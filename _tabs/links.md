@@ -9,6 +9,19 @@ toc: true
 
 由于经常要用到不同的电脑，在此整理下qwq
 
+## 友链
+
+~~其实就是日常膜拜链接~~
+
++ [为神](https://www.cnblogs.com/hunxuewangzi/)——身边的神，还需说啥
+
++ [Soptlog](https://soptq.me/)——SCU计科珠峰计划班大佬，目前研究机器学习，他的博客简直就是我的理想型博客
+ 
++ [wu-kan](https://wu-kan.cn/archive/)——SYSU计科超算方向的大佬，ACM队员、超算队队长
+
++ [迟先生](https://www.skyzh.dev/posts/academic/)——SJTU的18级CS第一大佬，为学弟学妹留下了[CS“自救”指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
+
+
 ## 竞赛网站
 
 + [LeetCode](https://leetcode-cn.com/contest/)
