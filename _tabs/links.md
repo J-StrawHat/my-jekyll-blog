@@ -6,6 +6,8 @@ order: 5
 toc: true
 ---
 
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/undraw_delivery_address_03n0.svg" width="35%" class="emoji"/>
+
 由于经常要用到不同的电脑，在此整理下qwq
 
 ## 友链
