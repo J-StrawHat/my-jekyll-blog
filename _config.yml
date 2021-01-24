@@ -71,6 +71,11 @@ google_analytics:
 # placeholde
 #  placeholder: “Share your ideas"
 
+valine_comment:
+  enable: true
+  leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
+  leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
+  placeholder: Just go go
 
 disqus:
   comments: false  # boolean type, the global switch for posts comments.
