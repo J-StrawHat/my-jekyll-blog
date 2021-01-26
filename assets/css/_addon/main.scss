@@ -618,7 +618,7 @@ footer {
 
 #back-to-top {
   display: none;
-  z-index: 1;
+  z-index: 10;
   cursor: pointer;
   position: fixed;
   background: var(--button-bg);
@@ -1637,40 +1637,90 @@ div.mb-3, .my-3 {
     padding-right: calc(100% - #{$sidebar-width-large}
      - (1920px - #{$sidebar-width-large}) ) /* 100% - 350px - (1920px - 350px); */
   }
-
   #topbar {
     max-width: calc(#{$main-content-max-width} + 20px)
   }
-
   #main > div.row {
     padding-left: calc((100% - #{$main-content-max-width} - 2%) / 2);
   }
-
   #panel-wrapper {
     margin-left: 3%;
   }
-
   footer {
     padding-left: 0;
     padding-right: calc(100% - #{$sidebar-width-large} - 1180px);
   }
-
   #back-to-top {
     right: calc(100% - 1920px + 15rem);
   }
-
 }
 
 @media (min-width: 1920px) {
   #main > div.row {
     padding-left: 190px;
   }
-
   #search-result-wrapper {
     padding-right: calc(100% - #{$sidebar-width-large} - 1530px);
   }
-
   #panel-wrapper {
     margin-left: 41px;
   }
+}
+
+.sticky {
+  height: 40rem;
+  z-index: 1;
+  border-top: 0;
+  overflow: auto; display: inline-block; /* scrollbars */
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+}
+
+/* show TOC only on large screens */
+@media (max-width: 1070px) {
+  .sticky {
+  transform:translate(9999px);
+  opacity: 0;
+  }
+  .toc-title {
+  transform:translate(9999px);
+  opacity: 0;
+  }
+}
+
+/* show TOC only when the navigation bar is hidden */
+#sidebar-checkbox:checked ~ .wrap .sticky,
+#sidebar-checkbox:checked ~ .wrap .toc-title {
+  transform:translate(9999px);
+  opacity: 0;
+}
+
+#sidebar-checkbox:not(:checked) ~ .wrap .sticky,
+#sidebar-checkbox:not(:checked) ~ .wrap .toc-title {
+	opacity: 1;
+  -webkit-transition-delay: 0.5s; /* Safari */
+  transition-delay: 0.5s;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.3s;
+}
+
+/* Customizations of Bootstrap Table of Contents v0.4.1 (bootstrap-toc, with modifications) */
+@media (min-height: 600px) { // always expand sub-headers at wide screen height
+  nav[data-toggle='toc'] .nav .nav {
+    margin-bottom: 0;
+    display: block;
+  }
+}
+nav[data-toggle='toc'] .nav .nav > li > a {
+  padding-bottom: 3px !important;
 }
