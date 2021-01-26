@@ -1,18 +1,7 @@
 /*
-* The main styles.
-* v2.0
-* https://github.com/cotes2020/jekyll-theme-chirpy
-* © 2018-2019 Cotes Chung
-* MIT Licensed
+  The common styles
 */
-
-@import "_addon/module";
-@import "_addon/variables";
-@import "_colors/light-typography";
-@import "_colors/dark-typography";
-
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;900&display=swap');
-
 
 @mixin mode-toggle($dark-mode: false) {
   @if $dark-mode {
@@ -71,7 +60,7 @@ body {
 
 /*--- sidebar layout ---*/
 
-$tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
+$tab-count: 5 !default;
 
 $sidebar-display: "sidebar-display";
 
@@ -671,6 +660,12 @@ h5 {
   font-size: 1.1rem;
 }
 
+ol, ul {
+  ol, ul {
+    margin-bottom: 1rem;
+  }
+}
+
 blockquote {
   border-radius: 4px;
   padding-top: 1px;
@@ -748,10 +743,10 @@ b, strong {
 
 a {
   transition: all .3s ease;
-  @at-root p>#{&} {
+  p > & {
     @extend %link-color;
   }
-  @at-root span>#{&} {
+  span > & {
     @extend %link-color;
   }
   .post-preview & {
@@ -1027,7 +1022,7 @@ div.mb-3, .my-3 {
   display: none !important;
 }
 
-.visable {
+.visible {
   visibility: visible !important;
 }
 
