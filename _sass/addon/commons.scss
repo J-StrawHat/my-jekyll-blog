@@ -108,7 +108,7 @@ $sidebar-display: "sidebar-display";
   .nav-link {
     border-radius: 0;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: bold;
     letter-spacing: 1px;
     display: table-cell;
     vertical-align: middle;
@@ -320,6 +320,7 @@ $sidebar-display: "sidebar-display";
   font-size: 1rem;
   color: gray;
   padding-left: 0.5rem;
+  font-weight: bolder;
   a:hover {
     @extend %link-hover;
   }
@@ -368,6 +369,7 @@ $sidebar-display: "sidebar-display";
   padding: 0.18rem 0.3rem;
   color: var(--text-color);
   font-size: 95%;
+  font-style: italic;
 }
 
 #search-input {
@@ -685,7 +687,7 @@ kbd {
   margin: 0 0.3rem;
   padding: 3px 5px;
   color: #444d56;
-  background-color: #fafbfc;
+  background-color: #fafbfc!important;
   border: 1px solid #d1d5da;
   border-radius: 3px;
 }
