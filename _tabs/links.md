@@ -36,6 +36,15 @@ toc: true
 
 
 ## 工具\查询 网站
+
++ [谷歌站长工具](https://search.google.com/search-console?resource_id=https%3A%2F%2Fj-strawhat.github.io%2F)——网站与谷歌搜索引擎产生关联的工具
+
++ [谷歌分析工具](https://analytics.google.com/)
+
++ [谷歌网站性能分析](https://developers.google.com/speed/pagespeed/insights/)
+
++ [Valine 评论数据管理](https://github.com/DesertsP/Valine-Admin)
+
 + [计算机专业术语对照](https://github.com/EarsEyesMouth/computerese-cross-references)
 
 + [desmos函数图像](https://www.desmos.com/calculator?lang=zh-CN)
@@ -47,6 +56,7 @@ toc: true
 + [LaTeX符号、命令公式](https://www.cnblogs.com/J-StrawHat/p/13452821.html)
 
 ## 文章阅读
+
 + [CS-Notes](https://github.com/CyC2018/CS-Notes)
 
 + [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
