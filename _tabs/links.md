@@ -10,7 +10,7 @@ toc: true
 
 由于经常要用到不同的电脑，在此整理下qwq
 
-## 友链
+## 👨‍🚀 友链
 
 ~~其实就是日常膜拜链接~~
 
@@ -23,7 +23,7 @@ toc: true
 + [迟先生](https://www.skyzh.dev/posts/academic/)——SJTU的18级CS第一大佬，为学弟学妹留下了[CS“自救”指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
 
 
-## 竞赛网站
+## 🏆 竞赛网站
 
 + [LeetCode](https://leetcode-cn.com/contest/)
 
@@ -35,7 +35,7 @@ toc: true
 
 
 
-## 工具\查询 网站
+## 🧰 工具\查询 网站
 
 + [谷歌站长工具](https://search.google.com/search-console?resource_id=https%3A%2F%2Fj-strawhat.github.io%2F)——网站与谷歌搜索引擎产生关联的工具
 
@@ -55,7 +55,7 @@ toc: true
 
 + [LaTeX符号、命令公式](https://www.cnblogs.com/J-StrawHat/p/13452821.html)
 
-## 文章阅读
+## 📚 文章阅读
 
 + [CS-Notes](https://github.com/CyC2018/CS-Notes)
 
@@ -63,7 +63,7 @@ toc: true
 
 + [矩阵乘法](https://www.luogu.com.cn/blog/shehuizhuyihao/post-zhen-sheng-fa)
 
-## 软件下载
+## 💾 软件下载
 
 + [Visual Studio IDE](https://visualstudio.microsoft.com/zh-hans/)
 
@@ -81,7 +81,7 @@ toc: true
 
 + Clash  相关订阅地址见OneDrive
 
-## 编程配置
+## 💻 编程配置
 
 + VS Code 配置
 
