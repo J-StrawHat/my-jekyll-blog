@@ -128,6 +128,7 @@ $sidebar-display: "sidebar-display";
         color: #007bff;
         background-color: var(--main-wrapper-bg);
         border-radius: 15px 0px 0px 15px;
+        box-shadow: 0 3px 8px rgba(0,2,4,0.06), 0 0 1px rgba(0,2,4,0.11);
       }
     }
   }
@@ -259,8 +260,8 @@ $sidebar-display: "sidebar-display";
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
-    border: 2px solid #b6b6b6;
-    box-shadow: 0 5px 18px rgba(149,157,165,0.2);
+    border: 3px solid #fff;
+    box-shadow: 0 1px 10px rgba(0,0,0,.2);
     overflow: hidden;
     transform: translateZ(0); // fixed the zoom in Safari
     -webkit-transition: border-color 0.35s ease-in-out;
@@ -311,7 +312,7 @@ $sidebar-display: "sidebar-display";
   transition: top 0.2s ease-in-out;
   z-index: 50;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05); */
   background-color: var(--topbar-wrapper-bg);
 }
 
@@ -496,6 +497,7 @@ $sidebar-display: "sidebar-display";
 #main>.row,
 #search-result-wrapper>.row {
   @include ml-mr(0);
+  box-shadow: -3px 4px 10px rgba(0,2,4,0.03), 0 0 1px rgba(0,2,4,0.08);
 }
 
 footer {
