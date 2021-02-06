@@ -4,7 +4,7 @@
 
 @mixin btn-sharing-color($light-color, $important: false) {
   @if $important {
-    color: var(--btn-share-color, $light-color)!important;
+    color: var(--btn-share-color, $light-color) !important;
   } @else {
     color: var(--btn-share-color, $light-color);
   }
@@ -41,9 +41,10 @@
 
 .post-content {
   .preview-img {
-    margin-top: 0;
-    margin-bottom: 2.5rem;
     @include align-center;
+
+    margin-top: 0;
+    margin-bottom: 2.5rem !important;
   }
 }
 
@@ -62,6 +63,7 @@
   padding-bottom: 1rem;
   .btn {
     @include btn-post-nav;
+
     color: var(--link-color);
     &:hover {
       background:  #1B86F9;
@@ -70,6 +72,7 @@
     }
     &.disabled {
       @include btn-post-nav;
+
       pointer-events: auto;
       cursor: not-allowed;
       background: none;
@@ -81,7 +84,6 @@
     &.btn-outline-primary.disabled:focus {
       box-shadow: none;
     }
-
   }
 
   p {
@@ -114,6 +116,7 @@
       font-weight: bold;
     }
   }
+
 } // .post-navigation
 
 @keyframes fade-up {
@@ -144,15 +147,16 @@
   }
 }
 
-#toc li>a {
+#toc li > a {
   line-height: 1rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
 }
 
-/*--- Related Posts ---*/
+/* --- Related Posts --- */
+
 #related-posts {
-  >h3 {
+  > h3 {
     @include label(1.1rem, 600);
   }
   .card {
@@ -168,7 +172,7 @@
     &:hover {
       -webkit-transform: translate3d(0, -3px, 0);
       transform: translate3d(0, -3px, 0);
-      box-shadow: 0 10px 15px -4px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 15px -4px rgba(0, 0, 0, 0.15);
     }
   }
   .timeago {
@@ -189,7 +193,7 @@
   ul {
     list-style-type: none;
     padding-inline-start: 1.5rem;
-    >li::before {
+    > li::before {
       background: #c2c9d4;
       width: 5px;
       height: 5px;
@@ -215,12 +219,17 @@
 }
 
 %btn-share-hovor {
-  color: var(--btn-share-hover-color)!important;
+  color: var(--btn-share-hover-color) !important;
 }
 
 .share-wrapper {
   vertical-align: middle;
   user-select: none;
+
+  i {
+    font-weight: 400;
+  }
+
   .share-icons {
     font-size: 1.2rem;
     a {
@@ -229,12 +238,12 @@
       }
       &:hover {
         text-decoration: none;
-        >i {
+        > i {
           @extend %btn-share-hovor;
         }
       }
     }
-    >i {
+    > i {
       padding-top: 0.35rem;
       &:hover {
         @extend %btn-share-hovor;
@@ -242,7 +251,7 @@
     }
     .fab {
       &.fa-twitter {
-        @include btn-sharing-color(rgba(29, 161, 242, 1.00));
+        @include btn-sharing-color(rgba(29, 161, 242, 1));
       }
       &.fa-facebook-square {
         @include btn-sharing-color(rgb(66, 95, 156));
@@ -263,9 +272,9 @@
 
 } // .share-wrapper
 
-
 .share-label {
   @include label(inherit, 400, inherit);
+
   &::after {
     content: ":";
   }
@@ -273,15 +282,13 @@
 
 .license-wrapper {
   line-height: 1.2rem;
-  >a {
+  > a {
     font-weight: 600;
     &:hover {
       @extend %link-hover;
     }
   }
-  i {
-    font-weight: 400;
-  }
+
   span:last-child {
     font-size: 0.85rem;
   }
@@ -289,8 +296,8 @@
 
 @media all and (max-width: 576px) {
   .post-tail-bottom {
-    -ms-flex-wrap: wrap-reverse!important;
-    flex-wrap: wrap-reverse!important;
+    -ms-flex-wrap: wrap-reverse !important;
+    flex-wrap: wrap-reverse !important;
     >div:first-child {
       width: 100%;
       margin-top: 1rem;
@@ -299,8 +306,8 @@
 
   .post-content > div[class^='language-'] {
     @include ml-mr(-1.25rem);
-    border-radius: 0;
 
+    border-radius: 0;
     &::before { // the lang badge
       right: 1rem;
     }
@@ -321,10 +328,10 @@
         @include dot(0.5rem, 0.2rem);
       }
       &.flex-column {
-        -webkit-box-orient: horizontal!important;
-        -webkit-box-direction: normal!important;
-        -ms-flex-direction: row!important;
-        flex-direction: row!important;
+        -webkit-box-orient: horizontal !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+        flex-direction: row !important;
       }
     }
   } // .post
