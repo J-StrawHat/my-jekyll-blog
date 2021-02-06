@@ -1,5 +1,18 @@
 # The Site Configuration
 
+# Import the theme
+theme: jekyll-theme-chirpy
+
+# Only if your site type is GitHub Project sites and doesn't have a custom domain,
+# change below value to '/projectname'.
+baseurl: ''
+
+# the HTML language tag › https://www.w3.org/International/questions/qa-choosing-language-tags
+lang: en-US
+
+# Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
+timezone: Asia/Shanghai
+
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 
 title: JoyDee's Blog                          # the main title
@@ -34,14 +47,6 @@ social:
 google_site_verification: google_meta_tag_verification # change to your verification string
 # --------------------------
 
-
-# Only if your site type is GitHub Project sites and doesn't have a custom domain,
-# change below value to '/projectname'.
-baseurl: ''
-
-# Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Asia/Shanghai
-
 google_analytics:
   id: 'G-7E6EFX8P3K'          # Fill with your Google Analytics ID
   pv:
@@ -70,12 +75,7 @@ valine_comment:
   enable: true
   leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
   leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
-  placeholder: 留下你的评论吧，支持markdown语法！填写邮箱还能获得回复通知噢！
-
-disqus:
-  comments: false  # boolean type, the global switch for posts comments.
-  shortname: 'https-j-strawhat-github-io'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-
+  placeholder: 留下你的评论吧，支持markdown语法。
 
 
 # Prefer color scheme setting.
@@ -87,7 +87,6 @@ disqus:
 # Available options:
 #
 #     light  - Use the light color scheme
-#
 #     dark   - Use the dark color scheme
 #
 theme_mode:   # [light|dark]
@@ -100,12 +99,18 @@ theme_mode:   # [light|dark]
 img_cdn: ''
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://gitee.com/j__strawhat/MyImages/raw/master/img/avatar.webp
+avatar: /assets/img/sample/avatar.jpeg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
 
+disqus:
+  comments: false  # boolean type, the global switch for posts comments.
+  shortname: ''    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+
 paginate: 10
+
+# ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
   syntax_highlighter: rouge
@@ -119,7 +124,7 @@ kramdown:
       start_line: 1
 
 # DO NOT change this unless you're a Pro user on Jekyll and Web development,
-# or you think you're smart enough to change other relevant URLs within this template.
+# Or you think you're smart enough to change other relevant URLs within this template.
 permalink: /posts/:title/
 
 collections:
@@ -137,10 +142,6 @@ defaults:
       layout: post
       comments: true    # Enable comments in posts.
       toc: true         # Display TOC column in posts.
-      breadcrumb:
-        -
-          label: Posts
-          url: /
   -
     scope:
       path: _drafts
@@ -148,44 +149,12 @@ defaults:
       comments: false
   -
     scope:
-      path: index.html
-    values:
-      breadcrumb:
-        -
-          label: Posts
-  -
-    scope:
-      path: tags
-    values:
-      breadcrumb:
-        -
-          label: Home
-          url: /
-        -
-          label: Tags
-          url: /tabs/tags/
-  -
-    scope:
-      path: categories
-    values:
-      breadcrumb:
-        -
-          label: Home
-          url: /
-        -
-          label: Categories
-          url: /tabs/categories/
-  -
-    scope:
       path: ''
       type: tabs             # see `site.collections`
     values:
       layout: page
+      permalink: /:title/
       dynamic_title: true    # Hide title in mobile screens.
-      breadcrumb:
-        -
-          label: Home
-          url: /
 
 sass:
   style: compressed
@@ -201,8 +170,10 @@ compress_html:
 
 exclude:
   - vendor
-  - Gemfile.lock
   - Gemfile
+  - Gemfile.lock
+  - '*.gem'
+  - '*.gemspec'
   - tools
   - docs
   - README.md

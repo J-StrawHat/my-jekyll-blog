@@ -1,6 +1,6 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "jekyll", "~> 4.1"
+source "https://rubygems.org"
 
 # plugins
 group :jekyll_plugins do
@@ -11,6 +11,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap", "~> 1.4"
   gem 'jemoji'
 end
+gemspec
 
 group :test do
   gem "html-proofer", "~> 3.18"
