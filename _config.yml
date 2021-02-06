@@ -77,11 +77,6 @@ valine_comment:
   leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
   placeholder: 留下你的评论吧，支持markdown语法！填写邮箱还能获得回复通知噢！
 
-disqus:
-  comments: false  # boolean type, the global switch for posts comments.
-  shortname: 'https-j-strawhat-github-io'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-
-
 
 # Prefer color scheme setting.
 #
