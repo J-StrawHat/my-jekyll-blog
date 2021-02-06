@@ -16,8 +16,7 @@ init() {
   fi
 
   # Gemfile could be changed by `bundle install` in actions workflow
-  if [[ -n $(git ls-files | grep Gemfile.lock) && -n \
-  $(git status Gemfile.lock --porcelain) ]]; then
+  if [[ -n $(git status Gemfile.lock --porcelain) ]]; then
     git checkout -- Gemfile.lock
   fi
 

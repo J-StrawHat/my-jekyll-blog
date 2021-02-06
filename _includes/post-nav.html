@@ -9,8 +9,7 @@
     <p>{{ page.previous.title }}</p>
   </a>
   {% else %}
-  <span class="btn btn-outline-primary disabled"
-    prompt="{{ site.data.label.post.button.previous | default: 'previous' }}">
+  <span class="btn btn-outline-primary disabled">
     <p>-</p>
   </span>
   {% endif %}
@@ -21,8 +20,7 @@
     <p>{{ page.next.title }}</p>
   </a>
   {% else %}
-  <span class="btn btn-outline-primary disabled"
-    prompt="{{ site.data.label.post.button.next | default: 'next' }}">
+  <span class="btn btn-outline-primary disabled">
     <p>-</p>
   </span>
   {% endif %}

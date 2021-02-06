@@ -17,12 +17,14 @@ $(function() {
   const input = $("#search-input");
   const hints = $("#search-hints");
 
+
+  /*--- Actions in small screens (Sidebar unloaded) ---*/
+
   const scrollBlocker = (function () {
     let offset = 0;
     return {
       block() {
-        offset = window.scrollY;
-        $("html,body").scrollTop(0);
+        offset = $(window).scrollTop();
       },
       release() {
         $("html,body").scrollTop(offset);
@@ -32,9 +34,6 @@ $(function() {
       }
     };
   }());
-
-
-  /*--- Actions in small screens (Sidebar unloaded) ---*/
 
   const mobileSearchBar = (function () {
     return {
@@ -61,11 +60,11 @@ $(function() {
     return {
       on() {
         if (!visible) {
-          // the block method must be called before $(#main) unloaded.
-          scrollBlocker.block();
           resultWrapper.removeClass("unloaded");
-          main.addClass("unloaded");
+          main.addClass("hidden");
+
           visible = true;
+          scrollBlocker.block();
         }
       },
       off() {
@@ -76,13 +75,12 @@ $(function() {
           }
           resultWrapper.addClass("unloaded");
           btnClear.removeClass("visible");
-          main.removeClass("unloaded");
-
-          // now the release method must be called after $(#main) display
-          scrollBlocker.release();
+          main.removeClass("hidden");
 
           input.val("");
           visible = false;
+
+          scrollBlocker.release();
         }
       },
       isVisible() {

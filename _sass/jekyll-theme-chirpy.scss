@@ -1,23 +1,22 @@
 /*!
  * The styles for Jekyll theme Chirpy
  *
- * Chirpy v3.1.1 (https://github.com/cotes2020/jekyll-theme-chirpy)
- * © 2019 Cotes Chung
+ * Chirpy v3.0.1 (https://github.com/cotes2020/jekyll-theme-chirpy)
+ * © 2021 Cotes Chung
  * MIT Licensed
  */
 
-@import
-  "colors/light-typography",
-  "colors/dark-typography",
+@import "colors/light-typography";
+@import "colors/dark-typography";
 
-  "addon/module",
-  "addon/variables",
-  "addon/syntax",
-  "addon/commons",
+@import "addon/module";
+@import "addon/variables";
+@import 'addon/syntax';
+@import "addon/commons";
 
-  "layout/home",
-  "layout/post",
-  "layout/tags",
-  "layout/archives",
-  "layout/categories",
-  "layout/category-tag";
+@import "layout/home";
+@import "layout/post";
+@import "layout/tags";
+@import "layout/archives";
+@import "layout/categories";
+@import "layout/category-tag";
