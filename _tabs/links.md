@@ -6,7 +6,7 @@ order: 5
 toc: true
 ---
 
-<img src="https://gitee.com/j__strawhat/MyImages/raw/master/undraw_delivery_address_03n0.svg" width="35%" class="emoji"/>
+
 
 由于经常要用到不同的电脑，在此整理下qwq
 
@@ -14,13 +14,15 @@ toc: true
 
 ~~其实就是日常膜拜链接~~
 
-+ [为神](https://www.cnblogs.com/hunxuewangzi/)——身边的神，还需说啥
+| [云游君](https://www.yunyoujun.cn/share/how-to-build-your-site/) |                [Sukka](https://blog.skk.moe/)                |    [hunxuewangzi](https://www.cnblogs.com/hunxuewangzi/)     |         [故犹](https://www.cnblogs.com/a821403286/)          |              [Cotes](https://blog.cotes.info/)               |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://www.yunyoujun.cn/images/avatar.jpg" class="myavatar emoji"/> | <img src="https://cdn.jsdelivr.net/npm/skx@0.3.4/img/144x144.png" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/20200905125521.jpeg" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/20200906001731.jpeg" class="myavatar emoji"/> | <img src="https://cdn.jsdelivr.net/gh/cotes2020/blog-images/commons/avatar.jpeg" class="myavatar emoji"/> |
+|                           博客超棒                           |                      将博客速度做到极致                      |    身边大佬，[旧博客](https://blog.csdn.net/m0_46209312)     |                           身边大佬                           |                        本博客主题作者                        |
 
-+ [Soptlog](https://soptq.me/)——SCU计科珠峰计划班大佬，目前研究机器学习，他的博客简直就是我的理想型博客
- 
-+ [wu-kan](https://wu-kan.cn/archive/)——SYSU计科超算方向的大佬，ACM队员、超算队队长
-
-+ [迟先生](https://www.skyzh.dev/posts/academic/)——SJTU的18级CS第一大佬，为学弟学妹留下了[CS“自救”指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
+|                [Soptlog](https://soptq.me/)                |             [wu-kan](https://wu-kan.cn/archive/)             |       [迟先生](https://www.skyzh.dev/posts/academic/)        | [DotIN13](https://www.wannaexpresso.com/2020/03/04/jekyll-blog-troubleshooting/) |         [Cwolf9](https://blog.csdn.net/qq_39599067)          |
+| :--------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://soptq.me/img/avatar.jpg" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/289efba375d63424de3c49569c446744.jpeg" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/v2-4c769907eadc4d70299cff7fd31ff4ab_r.jpeg" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/orange320x320.webp" class="myavatar emoji"/> | <img src="https://gitee.com/j__strawhat/MyImages/raw/master/35797478.jpeg" class="myavatar emoji"/> |
+|                       SCU计科珠峰班                        |                       SYSU计科超算方向                       |                       SJTU18级CS系1st                        |                           FDU大佬                            |                         17级保研学长                         |
 
 
 ## 🏆 竞赛网站
@@ -32,8 +34,6 @@ toc: true
 + [CodeForces](https://codeforces.com/contests)
 
 + [洛谷](https://www.luogu.com.cn/training/list)
-
-
 
 ## 🧰 工具\查询 网站
 
@@ -47,7 +47,7 @@ toc: true
 
 + [计算机专业术语对照](https://github.com/EarsEyesMouth/computerese-cross-references)
 
-+ [desmos函数图像](https://www.desmos.com/calculator?lang=zh-CN)
++ [无需上传的图片转换器](https://renzhezhilu.gitee.io/webp2jpg-online/)
 
 + [Office Tool plus](https://www.coolhub.top/archives/67)
 
@@ -58,10 +58,10 @@ toc: true
 ## 📚 文章阅读
 
 + [CS-Notes](https://github.com/CyC2018/CS-Notes)
-
 + [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
++ [CS“自救”指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
++ [计算机教育中缺失的一课（中文版）](https://missing-semester-cn.github.io/)
 
-+ [矩阵乘法](https://www.luogu.com.cn/blog/shehuizhuyihao/post-zhen-sheng-fa)
 
 ## 💾 软件下载
 
@@ -81,7 +81,19 @@ toc: true
 
 + Clash  相关订阅地址见OneDrive
 
-## 💻 编程配置
++ [互联网行业工具清单](https://caryyu.top/posts/%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%9A%E5%B7%A5%E5%85%B7%E6%B8%85%E5%8D%95/)
+
+## 💻 环境配置
+
++ <img src="https://gitee.com/j__strawhat/MyImages/raw/master/20210207154102.png" style="zoom:67%;" />
+
++ [Git Pages + Jekyll/Hexo Build your own blog 最全教程](http://liyuankun.top/Git-Pages-Jekyll-Hexo-Build-your-own-blog.html#hexo-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98)
+
++ [Hexo-Next添加第三方服务](https://tding.top/archives/7696c13f.html)
+
++ [配置Jekyll博客本地开发环境](https://juejin.cn/post/6844904153043435528)
+
++ [各种包管理软件配置国内源或镜像源](https://www.cnblogs.com/muen2020/p/13844865.html)：包括 NPM (Nodejs)、Pip (Python)、Gem (Ruby)
 
 + VS Code 配置
 
@@ -89,9 +101,9 @@ toc: true
 
   注意，每次新建**项目**，都需如此。
 
-  ![image-20201006164533831](https://gitee.com/j__strawhat/MyImages/raw/master/image-20201006164533831.png)
+  <img src="https://gitee.com/j__strawhat/MyImages/raw/master/image-20201006164533831.png" alt="image-20201006164533831" style="zoom: 67%;" />
 
-  ![image-20201006164629111](https://gitee.com/j__strawhat/MyImages/raw/master/image-20201006164629111.png)
+  <img src="https://gitee.com/j__strawhat/MyImages/raw/master/image-20201006164629111.png" alt="image-20201006164629111" style="zoom:67%;" />
 
 + [CodeBlocks 调试打开及调试窗口](https://www.cnblogs.com/J-StrawHat/p/13773769.html#%E6%89%93%E5%BC%80%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F)
 
