@@ -47,9 +47,15 @@ layout: default
           <!-- read time -->
           {% include read-time.html content=content %}
 
-          <span id="busuanzi_value_page_pv"></span> views
 
           <!-- page views -->
+
+          <span id="{{ page.url }}" class="leancloud_visitors" data-flag-title="{{ page.title }}">
+            <span id="pv" class="pageviews">
+            <i class="leancloud-visitors-count" font-style="normal">1000000</i>
+            </span>
+          </span>
+
           {% if site.google_analytics.pv.enabled %}
           <span id="pv" class="pageviews"><i class="fas fa-spinner fa-spin fa-fw"></i></span>
           {% endif %}
