@@ -72,12 +72,13 @@ layout: page
         <i class="far fa-clock fa-fw"></i>
         {% include read-time.html content=post.content %}
 
-        <!--访问量统计-->
+        <!-- page views -->
+        {% if site.google_analytics.pv.enabled %}
         <i class="far fa-eye fa-fw"></i>
-        <span id="{{ post.url | relative_url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
-          <i class="leancloud-visitors-count" font-style="normal">0</i>
+        <span id="pv_{{-post.title-}}" class="pageviews">
+          <i class="fas fa-spinner fa-spin fa-fw"></i>
         </span>
-
+        {% endif %}
 
         <!-- tags -->
         
