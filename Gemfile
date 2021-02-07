@@ -10,6 +10,7 @@ group :jekyll_plugins do
   gem "jekyll-archives", "~> 2.2"
   gem "jekyll-sitemap", "~> 1.4"
   gem 'jemoji'
+  gem "jekyll-last-modified-at"
 end
 
 group :test do
