@@ -47,15 +47,16 @@ body {
   font-family: 'Source Sans Pro', 'PingFang SC', 'Microsoft Yahei', sans-serif; 
 }
 
-.v[data-class=v] .vcards .vcard .vh .vmeta .vat {
-  color: #1B86F9;
+.v[data-class=v] .vcards .vcard .vh .vmeta .vat .vpower a {
+  color: #1B86F9!important;
 }
 .v[data-class=v] .status-bar, .v[data-class=v] .veditor, .v[data-class=v] .vinput, .v[data-class=v] p, .v[data-class=v] pre code {
   color: var(--text-color);
 }
 .v[data-class=v] .vwrap {
   border: 1px solid var(--btn-border-color);
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 0 var(--card-box-shadow);
 }
 
 /*--- sidebar layout ---*/
@@ -312,7 +313,7 @@ $sidebar-display: "sidebar-display";
   transition: top 0.2s ease-in-out;
   z-index: 50;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  /* box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05); */
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05);
   background-color: var(--topbar-wrapper-bg);
 }
 
@@ -493,11 +494,14 @@ $sidebar-display: "sidebar-display";
     - #{$footer-height} - #{$post-extend-min-height})!important;
 }
 
+#main{
+  box-shadow: -3px 4px 10px rgba(0,2,4,0.03), 0 0 1px rgba(0,2,4,0.08);
+}
+
 #topbar-wrapper.row,
 #main>.row,
 #search-result-wrapper>.row {
   @include ml-mr(0);
-  box-shadow: -3px 4px 10px rgba(0,2,4,0.03), 0 0 1px rgba(0,2,4,0.08);
 }
 
 footer {
