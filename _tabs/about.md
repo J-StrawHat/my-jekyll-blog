@@ -7,7 +7,8 @@ math: true
 
 ### Hey guys 👋 I am Joy Dee
 
-[![J-StrawHat's github stats](https://github-readme-stats.vercel.app/api?username=J-StrawHat&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+[![J-StrawHat's GitHub stats](https://github-readme-stats.vercel.app/api?username=j-strawhat&show_icons=true&include_all_commits=true&count_private=true&cache_seconds=7200)](https://github.com/anuraghazra/github-readme-stats)
+
 
 I am a sophomore majoring in [CS](https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/663582?fr=aladdin), loving technology and mathematics. 
 
