@@ -47,8 +47,8 @@ body {
   font-family: 'Source Sans Pro', 'PingFang SC', 'Microsoft Yahei', sans-serif; 
 }
 
-.v[data-class=v] .vcards .vcard .vh .vmeta .vat .vpower a {
-  color: #1B86F9!important;
+.v[data-class=v] .vcards .vcard .vh .vmeta .vat, .v[data-class=v] .vpower a{
+  color: #1B86F9;
 }
 .v[data-class=v] .status-bar, .v[data-class=v] .veditor, .v[data-class=v] .vinput, .v[data-class=v] p, .v[data-class=v] pre code {
   color: var(--text-color);
