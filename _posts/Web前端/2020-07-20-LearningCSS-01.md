@@ -52,6 +52,18 @@ p{
   </head>
   ```
 
+  或者这样引入：
+
+  ```html
+  <head>
+      ...
+      <style>
+          @import "css/mycss.css";
+      </style>
+      ...
+  </head>
+  ```
+
 - 对于CSS文件：
 
   ```css
