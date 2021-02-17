@@ -242,17 +242,22 @@ html列表属于块元素，共分三种类型：
 HTML代码实例：
 
 ```html
-<table border = "1">
+<table border = "1px" width = "50%">
+    <tr>
+        <td colspan = "2">
+            <img src="https://gitee.com/j__strawhat/MyImages/raw/master/winter.svg" width = "30%" />
+        </td>
+    </tr>
     <tr>
         <th> 姓名 </th>
         <th> 学号 </th>
     </tr>
-    <tr>
+    <tr align="center">
         <td> Luffy </td>
         <td> 01 </td>
     </tr>
-    <tr>
-    	<td> Zoro </td>
+    <tr align="center">
+        <td> Zoro </td>
         <td> 02 </td>
     </tr>
 </table>
@@ -260,9 +265,7 @@ HTML代码实例：
 
 在浏览器显示如下：
 
-
-
-
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/20210216171108.png" style="zoom:67%;" />
 
 ## 使用HTML表格布局存在的缺点
 
@@ -358,4 +361,181 @@ HTML代码实例：
 - `width`和`height`
 - `frameborder`：指定内联框架的边框，默认情况带有边框（即值为1），若要去掉边框则设置0。
 
-# 十二、HTML 表单和输入
+# 十二、表单和输入
+
+## 表单标签
+
+表单是一个包含表单元素的区域，用于和服务器进行交互。表单元素是允许用户在表单中输入内容。
+
+而表单使用表单标签 `<form>` 来设置，它定义了一个**范围**，代表采集用户数据的范围。
+
+其属性：
+
++ `action`：指定提交数据的 URL 
+
++ `method`：指定提交方式，共七种可选，其中两种（`get`、`post`）较常用。
+
+  对于属性值 `post`：
+
+  1. 请求参数不会在浏览器地址栏中显示，会封装到请求行中
+
+     > 若使用属性值 `get`，则请求参数会出现在地址栏中：
+     >
+     > <img src="https://gitee.com/j__strawhat/MyImages/raw/master/20210210153052.png" style="zoom:67%;" />
+
+  2. 请求参数大小无限制
+
+  3. 较安全
+
+表单项中的数据要想要被提交，必须指定其 `name` 属性，如：
+
+```html
+<form action = '#' method = "get"> 
+    用户名<input name = "username"> <br>
+    密码<input name = "password"> <br>
+</form>
+```
+
+## 表单项标签
+
+### 1.  `<input>`标签
+
+#### ① type  属性
+
+通过 `type` 属性值，来改变元素展示的样式其可选的属性值有：
+
++ `text`：文本输入框
+
+  > `placeholder` 属性，能够指定输入框的提示信息。当输入框的内容发生变化，会自动清空原来的提示信息。
+
++ `password`：密码输入框
+
++ `radio`：单选框，注意：
+
+  1. 要想让多个单选框实现单选的效果，则多个单选框的**name属性值**必须一样。
+  2. 一般会给每一个单选框提供value属性，指定其被选中后提交的值
+
+  >  `checked` 属性，可以指定默认值。如下面的代码举例所示
+
++ `checkbox`：复选框
+
++ `file`：文件选择框
+
++ `date`：包含年、月、日 的控件，不包括时间
+
++ `datetime-local`：包含年、月、日、时、分、秒、几分之一秒的控件，不带时区
+
++ `hidden`：隐藏域，用于提交一些信息
+
+还有其他关于“按钮”的 `type` 属性，其按钮上的文本是用 `value` 属性去指明（见下文举例）
+
++ `submit`：提交按钮
++ `button`：普通按钮
++ `image`：图片提交按钮，其中 `src` 属性 指定图片的路径
+
+举例使用如下：
+
+```html
+<form>
+    用户名 <input type = "text" name = "username" placeholder = "请输入您的用户名"> <br>
+    密码 <input type = "password" name = "password"> <br>
+    性别 <input type = "radio" name = "gender" value = "male"> 男
+        <input type = "radio" name = "gender" value = "female" checked> 女
+    	<br>
+    爱好 <input type = "checkbox" name = "hobby" value = "shopping"> 逛街
+        <input type = "checkbox" name = "hobby" value = "learning"> 学习
+        <input type = "checkbox" name = "hobby" value = "sleeping"> 睡大觉
+   		<br>
+    生日 <input type = "date" name = "birthday"> <br>
+    上传头像 <input type = "file" name = "avatar"> <br> 
+    <input type = "submit" value = "登陆">
+    <input type = "button" value = "一个普通按钮">
+</form>   
+```
+
+浏览器展示如下：
+
+<form>
+    用户名 <input type = "text" name = "username" placeholder = "请输入您的用户名"> <br>
+    密码 <input type = "password" name = "password"> <br>
+    性别 <input type = "radio" name = "gender" value = "male"> 男
+        <input type = "radio" name = "gender" value = "female" checked> 女
+    	<br>
+    爱好 <input type = "checkbox" name = "hobby" value = "shopping"> 逛街
+        <input type = "checkbox" name = "hobby" value = "learning"> 学习
+        <input type = "checkbox" name = "hobby" value = "sleeping"> 睡大觉
+   		<br>
+    生日 <input type = "date" name = "birthday"> <br>
+    上传头像 <input type = "file" name = "avatar"> <br> 
+    <input type = "submit" value = "登陆">
+    <input type = "button" value = "一个普通按钮">
+</form>   
+<br>
+#### ② label 属性
+
+通过 `label` 属性值，能够指定输入项的文字描述信息
+
+`label` 属性的属性值 `for` 一般会和 `<input>` 的 `id`属性值 对应。如果对应了，则点击 `label` 区域，会让 `<input>`输入框获取焦点（你会观察到框中有闪烁光标）。
+
+举例如下：
+
+```html
+<form>
+    <label for = "username"> 用户名 </label>
+    <input type = "text" name = "username" placeholder = "请输入您的用户名" id = "username"> <br>
+</form>
+```
+
+浏览器展示如下：
+
+<form>
+    <label for = "username"> 用户名 </label>
+    <input type = "text" name = "username" placeholder = "请输入您的用户名" id = "username"> <br>
+</form>
+<br>
+
+<br>
+
+### 2.  `<select>` 标签
+
+该标签用于展示下拉列表，它还需要搭配子元素 `<option>` 标签，来指定列表项。
+
+举例如下：注意 `<select>` 的 `name` 属性 以及 `<option>` 的 `value` 属性 共同指定
+
+```html
+<form >
+    省份 <select name = "province">
+        <option value = "">--请选择--</option>
+        <option value = "1">广东</option>
+        <option value = "2">湖南</option>
+        </select>
+</form>
+```
+
+浏览器展示如下：
+
+<form >
+    省份 <select name = "province">
+        <option value = "">--请选择--</option>
+        <option value = "1">广东</option>
+        <option value = "2">湖南</option>
+        </select>
+</form>
+
+<br>
+
+<br>
+
+### 3. `<textarea>` 标签
+
+该标签为文本域，举例使用如下：其中 `cols` 、`rows` 属性分别指定文本框长、宽所占的字符数
+
+```html
+<form>
+    备注 <textarea cols = "20" rows = "5"></textarea>
+</form>
+```
+
+<form>
+    备注 <textarea cols = "20" rows = "5"></textarea>
+</form>
