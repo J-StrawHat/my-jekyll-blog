@@ -649,8 +649,8 @@ h2 {
   @extend %section;
   @extend %anchor;
   font-size: 1.4rem;
-  border-bottom: 4px dashed #d7dfe9;
-  padding-bottom: 0.3rem;
+  padding-bottom: .3em;
+  border-bottom: 2px solid #eaecef;
 }
 
 h3 {
