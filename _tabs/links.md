@@ -70,6 +70,8 @@ toc: true
 
 ## 💾 软件下载
 
++ [OneDrive 世纪互联](https://pursuitmydream-my.sharepoint.cn/personal/j_strawhat_pursuitmydream_partner_onmschina_cn/_layouts/15/onedrive.aspx)
+
 + [Visual Studio IDE](https://visualstudio.microsoft.com/zh-hans/)
 
 + [CodeBlocks](http://www.codeblocks.org/downloads/26)
