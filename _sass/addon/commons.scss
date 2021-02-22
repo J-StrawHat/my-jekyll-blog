@@ -49,6 +49,7 @@ body {
 
 .v[data-class=v] .vcards .vcard .vh .vmeta .vat, .v[data-class=v] .vpower a{
   color: #1B86F9;
+  font-size: 1em;
 }
 .v[data-class=v] .status-bar, .v[data-class=v] .veditor, .v[data-class=v] .vinput, .v[data-class=v] p, .v[data-class=v] pre code {
   color: var(--text-color);
@@ -650,7 +651,7 @@ h2 {
   @extend %anchor;
   font-size: 1.4rem;
   padding-bottom: .3em;
-  border-bottom: 1px solid #eaecef;
+  border-bottom: 2px solid var(--main-border-color);
 }
 
 h3 {
