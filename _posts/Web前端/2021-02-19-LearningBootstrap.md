@@ -1,7 +1,7 @@
 ---
 title: Bootstrap 学习笔记
 author: JoyDee
-categories: [Web前端, Bootstrap]
+categories: [Web前端, Bootstrap, 配置]
 tags: [Bootstrap]
 date: 2021-02-19 10:30:00 +0800
 math: true
