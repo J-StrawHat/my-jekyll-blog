@@ -321,7 +321,7 @@ Schema 的约束文件名后缀为 `xsd`
 
 + `parse(URL url, int timeoutMills)`：通过网络路径 URL 获取指定的 HTML 或 XML 的文档对象 （可用于爬虫）
 
-  > URL 为 统一资源定位符。
+  > URL 为 统一资源定位器。
 
   ```java
   URL url = new URL("https://baike.baidu.com/item/jsoup/9012509?fr=aladdin");
