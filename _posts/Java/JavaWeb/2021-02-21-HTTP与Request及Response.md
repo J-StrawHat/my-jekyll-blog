@@ -2,7 +2,7 @@
 title: 「JavaWeb学习笔记04」请求与响应
 author: JoyDee
 categories: [Java, JavaWeb]
-tags: [JavaWeb]
+tags: [JavaWeb, HTTP]
 date: 2021-02-21 18:30:00 +0800
 ---
 
