@@ -521,11 +521,11 @@ try {
 
      字符输出流：`PrintWriter getWriter()`
 
-     字节输出流：`ServletOutputStream getOutputStream()`
+     字节输出流：`ServletOutputStream getOutputStream()`
 
   2. 使用输出流，将数据输出到客户端浏览器
 
-  > 在 Tomcat 实现中，若 Servlet 的 `service()` 方法没有调用上述的输出流`PrintWriter` 或 `ServletOutputStream` 的 `close()` 方法，那么 Tomcat 在调用完 Servlet 的 `service()` 方法后，**会关闭上述的输出流**，以确保 Servlet 输出的所有数据被提交给客户。
+  > 在 Tomcat 实现中，若 Servlet 的 `service()` 方法没有调用上述的输出流`PrintWriter` 或 `ServletOutputStream` 的 `close()` 方法，那么 Tomcat 在调用完 Servlet 的 `service()` 方法后，**会关闭上述的输出流**，以确保 Servlet 输出的所有数据被提交给客户。
 
 ### 中文乱码问题
 
@@ -584,13 +584,30 @@ HTTP 协议规定重定向机制，其运作流程如下：
 
 ### ⭐️重定向与转发的区别
 
+> 注意，重定向和请求转发之后的代码**都会运行**，直到**方法结束或者遇到了return语句**
+
 |             转发（`forward`）             |     重定向（`redirect`）     |
 | :---------------------------------------: | :--------------------------: |
 |             浏览器地址栏不变              |     浏览器地址栏发生变化     |
 |        只能访问当前服务器下的资源         | 可访问其他站点（服务器）资源 |
 | 一次请求，可使用<br>`request`对象共享数据 |      两次请求，无法共享      |
 
-> 可理解为，转发：该商店没有该顾客需要的货，商家去别的店为他调货；重定向：商家让顾客去其他的商店。
+> 可理解为，你有一个问题问老师，转发：老师不会，她去问了另一老师，然后再给你解答；重定向：老师说我不会，你去问另一老师。
+
+代码写法：
+
+````java
+request.getRequestDispatcher("xxx").forward(request, response); //转发
+response.sendRedirect("xxxx"); //重定向
+````
+
+选择重定向作为页面跳转的理由之一：（引用自[dubx的文章](https://zhuanlan.zhihu.com/p/40114605)）
+
+> 假如开发者在 Servlet 中做了耗时间的查询数据库操作，然后放到 Session 里面去，让目标页面拿 Session 显示给用户。
+>
+> 此时若使用转发，那么在刷新这个页面的时候，该 Servlet 又会被请求一遍，也就说把“查询数据库->设置 Session ”这个步骤再做一遍，而实际上是毫无意义的。
+>
+> 重定向则不会有问题，由于重定向之后的是一个 JSP 页面，刷新页面无非是让页面重新加载一次罢了。
 
 ### ⭐️关于路径
 
@@ -637,7 +654,7 @@ String contextPath = request.getContextPath(); //注意是从 request 获取
 response.sendRedirect(contextPath + "/responseDemo2"); //调用的 response 的重定向方法
 ```
 
-另外， `ServletContext` 的 `getRealPath(String path)` 方法是，根据虚拟路径，返回文件系统中的一个真实路径
+另外， `ServletContext` 的 `getRealPath(String path)` 方法是，根据虚拟路径，返回文件系统中的一个真实路径
 
 ## 7.3 文件下载案例
 
@@ -656,7 +673,7 @@ response.sendRedirect(contextPath + "/responseDemo2"); //调用的 response 的�
    + 指定 `response ` **响应头**：
      + `content-type=文件的MIME类型`
      + `content-disposition:attachment;filename=文件名`
-   + 将数据写出到 `response ` 的输出流
+   + 将数据写出到 `response ` 的输出流
 
 <img src="https://gitee.com/j__strawhat/MyImages/raw/master/20210225133525.png"/>
 
