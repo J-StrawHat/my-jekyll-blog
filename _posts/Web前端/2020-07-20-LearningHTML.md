@@ -402,11 +402,13 @@ HTML代码实例：
 
 #### ① type  属性
 
-通过 `type` 属性值，来改变元素展示的样式其可选的属性值有：
+通过 `type` 属性，来改变元素展示的样式。`type`可选的属性值有：
 
 + `text`：文本输入框
 
   > `placeholder` 属性，能够指定输入框的提示信息。当输入框的内容发生变化，会自动清空原来的提示信息。
+  >
+  > **`value` 属性**，能够在文本框中填入 `value` 属性值，能够实现“回显信息”。见下方代码第七行（邮箱）。此外，若 `value` 属性与 `readonly="readonly"` 一起使用，则该文本框所填的内容只读而不能修改
 
 + `password`：密码输入框
 
@@ -442,8 +444,9 @@ HTML代码实例：
     性别 <input type = "radio" name = "gender" value = "male"> 男
         <input type = "radio" name = "gender" value = "female" checked> 女
     	<br>
+    邮箱 <input type = "text" name = "email" value = "123456789@gmail.com"> <br>
     爱好 <input type = "checkbox" name = "hobby" value = "shopping"> 逛街
-        <input type = "checkbox" name = "hobby" value = "learning"> 学习
+        <input type = "checkbox" name = "hobby" value = "learning" checked> 学习
         <input type = "checkbox" name = "hobby" value = "sleeping"> 睡大觉
    		<br>
     生日 <input type = "date" name = "birthday"> <br>
@@ -461,8 +464,9 @@ HTML代码实例：
     性别 <input type = "radio" name = "gender" value = "male"> 男
         <input type = "radio" name = "gender" value = "female" checked> 女
     	<br>
+    邮箱 <input type = "text" name = "email" value = "123456789@gmail.com"> <br>
     爱好 <input type = "checkbox" name = "hobby" value = "shopping"> 逛街
-        <input type = "checkbox" name = "hobby" value = "learning"> 学习
+        <input type = "checkbox" name = "hobby" value = "learning" checked> 学习
         <input type = "checkbox" name = "hobby" value = "sleeping"> 睡大觉
    		<br>
     生日 <input type = "date" name = "birthday"> <br>
@@ -470,12 +474,13 @@ HTML代码实例：
     <input type = "submit" value = "登陆">
     <input type = "button" value = "一个普通按钮">
 </form>   
+
 <br>
 #### ② label 属性
 
 通过 `label` 属性值，能够指定输入项的文字描述信息
 
-`label` 属性的属性值 `for` 一般会和 `<input>` 的 `id`属性值 对应。如果对应了，则点击 `label` 区域，会让 `<input>`输入框获取焦点（你会观察到框中有闪烁光标）。
+`label` 属性的属性值 `for` 一般会和 `<input>` 的 `id`属性值 对应。如果对应了，则点击 `label` 区域，会让 `<input>`输入框获取**焦点**（你会观察到框中有闪烁光标）。
 
 举例如下：
 
@@ -521,6 +526,7 @@ HTML代码实例：
         <option value = "2">湖南</option>
         </select>
 </form>
+如果对某一个 `<option>` 加上一个 `selected` 属性，则页面显示为，默认选中这个带有 `selected` 属性的标签。
 
 <br>
 

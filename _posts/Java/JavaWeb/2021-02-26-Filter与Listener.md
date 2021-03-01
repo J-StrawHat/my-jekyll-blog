@@ -55,7 +55,7 @@ public class FilterDemo1 implements Filter {
 
 当然，过滤器**映射的 URL** ，可在 `web\WEB-INF` 目录下的 `web.xml` 文档中配置：
 
-> 在 `web.xml` 文件中，必须先**配置所有过滤器**，再配置 Servlet 。
+> 在 `web.xml` 文件中，必须先**配置所有过滤器**，再配置 Servlet 。
 
 ```xml
 <filter>
@@ -115,16 +115,152 @@ public class FilterDemo1 implements Filter {
 5. 过滤器A
 ```
 
-## 12.6 监听器 Listener
+## 案例演示：登陆验证
 
-### 12.6.1 事件监听机制
+### 需求
+
+必须要确保用户已经登陆，才能访问项目的其他资源。
+
+> 若不进行验证，但用户知道某些资源的路径，便能够直接越过登陆进行访问了。
+
+若用户：
+
++ 已经登陆，则直接放行。
++ 没有登陆，强制跳转到登陆页面，并提示“您尚未登陆，请先登陆”
+
+### 代码示例
+
+> 通过下面的过滤器代码，能够体现过滤器的作用。同时，也进一步体会 Session 跟踪客户状态的作用。
+
+```java
+@WebFilter("/*")
+public class LoginFilter implements Filter {
+    public void destroy() {
+    }
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+        HttpServletRequest request = (HttpServletRequest) req; //强转
+        String uri = request.getRequestURI(); //获取请求的【路径】
+        if(uri.contains("/login.jsp") || uri.contains("/loginServlet") || uri.contains("/css/") 
+        || uri.contains("/js/") || uri.contains("/fonts/") || uri.contains("/checkCodeServlet")){
+            //判断请求路径是否为登陆相关的资源路径，注意排除掉CSS/JS等静态资源
+            chain.doFilter(req, resp);  //若是，说明用户请求登陆，放行即可
+        }
+        else { //不包含，需要验证用户是否已经登陆
+            Object user = request.getSession().getAttribute("user");//从Session中获取user信息
+            if(user != null){  //若已经存在user信息
+                chain.doFilter(req, resp); //则直接放行
+            }
+            else { //若不存在user信息，需要跳转登陆页面并给予登陆提示信息
+                request.setAttribute("login_msg", "您尚未登陆，请先登陆!");
+                request.getRequestDispatcher("/login.jsp").forward(request, resp);
+            }
+        }
+        //chain.doFilter(req, resp);
+    }
+    public void init(FilterConfig config) throws ServletException {
+    }
+}
+```
+
+## 12.6 动态代理
+
+### 12.6.1 相关概念
+
++ 设计模式：一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，是对面向对象设计中反复出现的问题的解决方案。
++ 抽象角色：通过接口或抽象类声明真实角色实现的业务方法。
++ 真实角色：实现抽象角色，定义真实角色所要实现的业务逻辑，供代理角色调用。
++ 代理角色：实现抽象角色，是真实角色的代理，通过真实角色的业务逻辑方法来实现抽象方法，并可以**附加自己的操作**，达到增强真实角色功能的目的。
+
+关于代理，分两种实现方式：
+
++ 静态代理：有一个类文件描述代理模式
++ 动态代理：在内存中形成代理类
+
+### 12.6.2 动态代理的实现步骤
+
+1. 代理对象和真实对象实现**相同的接口**；
+2. 代理对象 = `Proxy.newProxyInstance()`
+3. 使用代理对象调用真实对象的方法
+4. 增强真实对象的方法，分三种增强：
+   + 增强参数列表
+   + 增强返回值类型
+   + 增强方法体执行逻辑
+
+具体见下面代码。
+
+### 案例演示：敏感词屏蔽
+
+需求：对新录入的数据进行敏感词过滤，使得敏感词替换为 `***` 。
+
+```java
+@WebFilter("/*")
+public class SensitiveWordsFilter implements Filter {
+    public List<String> list = new ArrayList<String>(); //敏感词汇集合
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        try {
+            //1. 通过 ServletContext 获取文件真实路径
+            ServletContext servletContext = filterConfig.getServletContext();
+            String realPath = servletContext.getRealPath("/WEB-INF/classes/敏感词汇.txt");
+            //2. 字符缓冲流与文件建立联系
+            BufferedReader br = new BufferedReader(new FileReader(realPath));
+            //3. 将敏感词汇文件中的每一个敏感词（独占一行）添加到list集合
+            String line = null;
+            while((line = br.readLine()) != null){
+                list.add(line);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        //1. 创建代理对象，增强 getParameter 方法中的【返回值】
+        ServletRequest proxy_req = (ServletRequest) 
+            Proxy.newProxyInstance(req.getClass().getClassLoader(),
+            req.getClass().getInterfaces(), 
+            new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    if(method.getName().equals("getParameter")){ //判断是否为getParameter方法
+                        String parameter = (String) method.invoke(req, args); 
+                        //获取原方法的返回值（即请求参数）
+                        if(parameter != null){
+                            for(String sensitive_str : list){ //遍历敏感词汇集合
+                                if(parameter.contains(sensitive_str)) //若请求参数中含有敏感词，将其替换为***
+                                    parameter = parameter.replaceAll(sensitive_str, "***");
+                            }
+                        }
+                        return parameter;
+                    }
+                    return method.invoke(req, args);
+                }
+        	});
+        //2. 过滤器放行
+        chain.doFilter(proxy_req, resp);
+    }
+
+    @Override
+    public void destroy() {
+    }
+}
+```
+
+## 12.7 监听器 Listener
+
+### 12.7.1 事件监听机制
 
 + 事件
 + 事件源：事件发生的地方
 + 监听器：一个对象
 + 注册监听：将事件、事件源、监听器绑定在一起。当事件源上发生某个事件后，执行监听器代码。
 
-### 12.6.2 ServletContextListener
+### 12.7.2 ServletContextListener
 
 `ServletContextListener` 监听 ServletContext 对象的创建和销毁
 
@@ -150,7 +286,5 @@ public class FilterDemo1 implements Filter {
        </listener-class>
    </listener>
    ```
-
-   
 
    方式二——注解：`@WebListener`
