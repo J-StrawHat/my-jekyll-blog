@@ -1,5 +1,5 @@
 ---
-title: jQuery 学习笔记
+title: 「jQuery 学习笔记01」选择器、DOM操作
 author: JoyDee
 categories: [Web前端, jQuery]
 tags: [jQuery, JS]
@@ -130,6 +130,8 @@ window.onload = function(){
 | 执行时机 | 必须等待网页**全部加载完毕**<br>（包括图片等），然后再执<br>行包裹代码 | 只需等待网页中 **DOM结构加载完毕**<br>就能执行包裹的代码。 |
 | 执行次数 | 只能执行一次，若代码中有<br>第二个`window.onload` ，则<br>第一个的执行会被覆盖。 | 可执行**多次**，第 N 次都不会被<br>上一次执行所覆盖        |
 
+> 程序的执行顺序是：加载完页面（其中包括定义在 HTML 头中 JS，比 body 优先加载）-->jQuery的入口函数
+
 ### 2.1.3 样式控制：CSS 方法
 
 举例使用：
@@ -175,17 +177,17 @@ $("#div1").css("background-color", "red");
 
 ### 2.2.4 简单过滤选择器
 
-| 选择器         | 语法             |
-| -------------- | ---------------- |
-| 首元素选择器   | `:first`         |
-| 尾元素选择器   | `:last`          |
-| 非元素选择器   | `:not(selector)` |
-| 偶数选择器     | `:even`          |
-| 奇数选择器     | `:odd`           |
-| 等于索引选择器 | `:eq(index)`     |
-| 大于索引选择器 | `:gt(index)`     |
-| 小于索引选择器 | `:lt(index)`     |
-| 标题选择器     | `:header`        |
+| 选择器         | 语法             | 描述                |
+| -------------- | ---------------- | ------------------- |
+| 首元素选择器   | `:first`         |                     |
+| 尾元素选择器   | `:last`          |                     |
+| 非元素选择器   | `:not(selector)` |                     |
+| 偶数选择器     | `:even`          | 从0开始计数         |
+| 奇数选择器     | `:odd`           | 从1开始计数         |
+| 等于索引选择器 | `:eq(index)`     |                     |
+| 大于索引选择器 | `:gt(index)`     |                     |
+| 小于索引选择器 | `:lt(index)`     |                     |
+| 标题选择器     | `:header`        | 获取标题(h1~h6)元素 |
 
 ### 2.2.5 内容过滤选择器
 
@@ -219,6 +221,133 @@ $(function(){
 })
 ```
 
+## 案例：隔行换色
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/20210302133306.png" style="zoom:80%;" />
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script  src="../../js/jquery-3.3.1.min.js"></script>
+		<script>
+			//需求：将数据行的奇数行背景色设置为 pink，偶数行背景色设置为 yellow
+			$(function () {
+				//1. 获取数据行（第一行开始）的奇数行（从0计数）的tr，设置背景色为pink
+				$("tr:gt(1):odd").css("backgroundColor","pink");
+				//2. 获取数据行的偶数行的tr,设置背景色为yellow
+                $("tr:gt(1):even").css("backgroundColor","yellow");
+            });
+		</script>
+	</head>
+	<body>
+		<table id="tab1" border="1" width="800" align="center" >
+			<tr>
+				<td colspan="5"><input type="button" value="删除"></td>
+			</tr>
+			<tr style="background-color: #999999;">
+				<th><input type="checkbox"></th>
+				<th>分类ID</th>
+				<th>分类名称</th>
+				<th>分类描述</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>0</td>
+				<td>手机数码</td>
+				<td>手机数码类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>1</td>
+				<td>电脑办公</td>
+				<td>电脑办公类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>2</td>
+				<td>鞋靴箱包</td>
+				<td>鞋靴箱包类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>3</td>
+				<td>家居饰品</td>
+				<td>家居饰品类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+		</table>
+	</body>
+</html>
+
+```
+
+
+
+## 案例：全选与全不选
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script  src="../../js/jquery-3.3.1.min.js"></script>
+		<script>
+			//分析：需要保证下边的选中状态和第一个复选框的选中状态一致即可
+            function selectAll(obj){ //传入this对象是为了获取首行的选中状态
+                //选择下边的复选框，即class属性为itemSelect
+				$(".itemSelect").prop("checked",obj.checked);
+            }
+
+		</script>
+	</head>
+	<body>
+		<table id="tab1" border="1" width="800" align="center" >
+			<tr>
+				<td colspan="5"><input type="button" value="删除"></td>
+			</tr>
+			<tr> <!--此处的this用得很妙-->
+				<th><input type="checkbox" onclick="selectAll(this)" ></th>
+				<th>分类ID</th>
+				<th>分类名称</th>
+				<th>分类描述</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>1</td>
+				<td>手机数码</td>
+				<td>手机数码类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>2</td>
+				<td>电脑办公</td>
+				<td>电脑办公类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>3</td>
+				<td>鞋靴箱包</td>
+				<td>鞋靴箱包类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+		</table>
+	</body>
+</html>
+```
+
+
+
 # Chapter 3. DOM 操作
 
 ## 3.1 内容操作
@@ -246,7 +375,230 @@ $(function () {
 
 （一）通用属性操作
 
-+ `attr()`
++ `attr()`：获取/设置元素的**自定义**属性
+
++ `prop()`：获取/设置元素的**固有**属性
+
++ `removeAttr()`：删除元素的**自定义**属性
+
++ `removeProp()`：删除元素的**固有**属性
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>jQuery学习</title>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  </head>
+  <body>
+      <script type = "text/javascript">
+          $(function () {
+              var name = $("#gz").attr("name"); //获取广州节点的name属性
+              $("#gz").attr("name", "LargerGuangzhou"); //设置广州节点的name属性为LargerGuanggzhou
+              $("#hn").attr("discription", "school"); //新增湖南节点的discription属性
+              $("#hn").removeAttr("name"); //删除它的name属性
+  
+              var checked = $("#hobbies").prop("checked"); //获取（或新增）id为hobby的复选框的选中状态
+              alert(checked);
+          });
+      </script>
+  
+      <ul>
+          <li id = "gz" name = "Guangzhou" xxx="yyy">我是广州</li>
+          <li id = "hn" name = "Hunan" >我是湖南</li>
+      </ul>
+      <input type = "checkbox" id = "hobbies"/>
+  </body>
+  </html>
+  ```
 
 （二）对 class 属性操作
 
++ `addClass()`：添加 class 属性值
+
+  ```javascript
+  $("#mybutton").click(function () {
+      $("#NoOne").prop("class", "secondClass");
+  });
+  //等效于
+  $("#mybutton").click(function () {
+      $("#NoOne").addClass("secondClass");
+  })
+  ```
+
++ `removeClass()`：删除 class 属性值
+
++ `toggleClass("属性")`：若元素对象原本就存在该属性，则该方法能够使该属性删除；若元素对象本不存在该属性，则该方法能够添加该属性。
+
+  <img src="https://gitee.com/j__strawhat/MyImages/raw/master/jQuery切换样式.gif"/>
+
+## 3.3 CRUD 操作
+
++ `clone()`：生成被选元素的副本，包含子节点、文本和属性。
+
++ `append()`：在被选元素**内部**结尾插入内容
+
+  > 若内容是已经存在的标签对象，则 `append()` 会使该对象的位置发生变化
+
+  ```html
+  <p>
+  	<span class = "s1">s1</span>
+  </p>
+  <script>
+  	$("p").append('<span class="s2">s2</span>');
+  </script>
+  ```
+
+  结果展示的 HTML 为：
+
+  ```html
+  <p>
+      <span class = "s1">s1</span>
+      <span class = "s2">s2</span>
+  </p>
+  ```
+
++ `prepend()`：在被选元素**内部**开头插入内容
+
++ `after()`：在被选元素**外部**之后插入内容
+
+  ```html
+  <p>
+      <span class = "s1">s1</span>
+  </p>
+  <script>
+  	$("p").after('<span class="s2">s2</span>');
+  </script>
+  ```
+
+  结果展示的 HTML 为：
+
+  ```html
+  <p>
+      <span class = "s1">s1</span>
+  </p>
+  <span class = "s2">s2</span>
+  ```
+
++ `before()`：在被选元素**外部**之前插入内容
+
+## 案例：表情选择
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/jQuery添加标签.gif" style="zoom:80%;" />
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>QQ表情选择</title>
+	 <script  src="../../js/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+    *{margin: 0;padding: 0;list-style: none;}
+
+    .emoji{margin:50px;}
+    ul{overflow: hidden;}
+    li{float: left;width: 48px;height: 48px;cursor: pointer;}
+    .emoji img{ cursor: pointer; }
+    </style>
+	<script>
+        //需求：点击qq表情，将其追加到发言框中
+        $(function () {
+            //1.给img图片添加onclick事件
+            $("ul img").click(function(){
+                //2.追加到p标签中即可。
+                $(".word").append($(this).clone());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="emoji">
+        <ul>
+            <li><img src="img/01.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/02.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/03.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/04.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/05.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/06.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/07.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/08.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/09.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/10.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/11.gif" height="22" width="22" alt="" /></li>
+            <li><img src="img/12.gif" height="22" width="22" alt="" /></li>
+        </ul>
+        <p class="word">
+            <strong>请发言：</strong>
+            <img src="img/12.gif" height="22" width="22" alt="" />
+        </p>
+    </div>
+</body>
+</html>
+```
+
+## 案例：多选下拉列表的项进行左右移动
+
+<img src="https://gitee.com/j__strawhat/MyImages/raw/master/jQuery多选下拉列表的项进行左右移动.gif" style="zoom:80%;" />
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script  src="../../js/jquery-3.3.1.min.js"></script>
+		<style>
+			#leftName , #btn,#rightName{
+				float: left;
+				width: 100px;
+				height: 300px;
+			}
+			#toRight,#toLeft{
+				margin-top:100px ;
+				margin-left:30px;
+				width: 50px;
+			}
+			.border{
+				height: 500px;
+				padding: 100px;
+			}
+		</style>
+
+		<script>
+			//需求：实现下拉列表选中条目左右选择功能
+			$(function () {
+				//toRight
+				$("#toRight").click(function () {
+					//获取右边的下拉列表对象，append(左边下拉列表选中的option)
+					$("#rightName").append($("#leftName > option:selected"));
+                });
+                //toLeft
+                $("#toLeft").click(function () {
+                    //appendTo   获取右边选中的option，将其移动到左边下拉列表中
+					$("#rightName > option:selected").appendTo($("#leftName"));
+                });
+            });
+		</script>
+	</head>
+	<body>
+		<div class="border">
+			<select id="leftName" multiple="multiple">
+				<option>张三</option>
+				<option>李四</option>
+				<option>王五</option>
+				<option>赵六</option>
+			</select>
+			<div id="btn">
+				<input type="button" id="toRight" value="-->"><br>
+				<input type="button" id="toLeft" value="<--">
+			</div>
+			<select id="rightName" multiple="multiple">
+				<option>钱七</option>
+			</select>
+		</div>
+	</body>
+</html>
+
+```
