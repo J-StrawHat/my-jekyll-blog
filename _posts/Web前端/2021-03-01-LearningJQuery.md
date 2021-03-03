@@ -228,62 +228,62 @@ $(function(){
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<script  src="../../js/jquery-3.3.1.min.js"></script>
-		<script>
-			//需求：将数据行的奇数行背景色设置为 pink，偶数行背景色设置为 yellow
-			$(function () {
-				//1. 获取数据行（第一行开始）的奇数行（从0计数）的tr，设置背景色为pink
-				$("tr:gt(1):odd").css("backgroundColor","pink");
-				//2. 获取数据行的偶数行的tr,设置背景色为yellow
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <script  src="../../js/jquery-3.3.1.min.js"></script>
+        <script>
+            //需求：将数据行的奇数行背景色设置为 pink，偶数行背景色设置为 yellow
+            $(function () {
+                //1. 获取数据行（第一行开始）的奇数行（从0计数）的tr，设置背景色为pink
+                $("tr:gt(1):odd").css("backgroundColor","pink");
+                //2. 获取数据行的偶数行的tr,设置背景色为yellow
                 $("tr:gt(1):even").css("backgroundColor","yellow");
             });
-		</script>
-	</head>
-	<body>
-		<table id="tab1" border="1" width="800" align="center" >
-			<tr>
-				<td colspan="5"><input type="button" value="删除"></td>
-			</tr>
-			<tr style="background-color: #999999;">
-				<th><input type="checkbox"></th>
-				<th>分类ID</th>
-				<th>分类名称</th>
-				<th>分类描述</th>
-				<th>操作</th>
-			</tr>
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>0</td>
-				<td>手机数码</td>
-				<td>手机数码类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>1</td>
-				<td>电脑办公</td>
-				<td>电脑办公类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>2</td>
-				<td>鞋靴箱包</td>
-				<td>鞋靴箱包类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>3</td>
-				<td>家居饰品</td>
-				<td>家居饰品类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-		</table>
-	</body>
+        </script>
+    </head>
+    <body>
+        <table id="tab1" border="1" width="800" align="center" >
+            <tr>
+                <td colspan="5"><input type="button" value="删除"></td>
+            </tr>
+            <tr style="background-color: #999999;">
+                <th><input type="checkbox"></th>
+                <th>分类ID</th>
+                <th>分类名称</th>
+                <th>分类描述</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>0</td>
+                <td>手机数码</td>
+                <td>手机数码类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>1</td>
+                <td>电脑办公</td>
+                <td>电脑办公类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>2</td>
+                <td>鞋靴箱包</td>
+                <td>鞋靴箱包类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>3</td>
+                <td>家居饰品</td>
+                <td>家居饰品类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+        </table>
+    </body>
 </html>
 
 ```
@@ -295,54 +295,53 @@ $(function(){
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<script  src="../../js/jquery-3.3.1.min.js"></script>
-		<script>
-			//分析：需要保证下边的选中状态和第一个复选框的选中状态一致即可
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <script  src="../../js/jquery-3.3.1.min.js"></script>
+        <script>
+            //分析：需要保证下边的选中状态和第一个复选框的选中状态一致即可
             function selectAll(obj){ //传入this对象是为了获取首行的选中状态
                 //选择下边的复选框，即class属性为itemSelect
-				$(".itemSelect").prop("checked",obj.checked);
+                $(".itemSelect").prop("checked",obj.checked);
             }
-
-		</script>
-	</head>
-	<body>
-		<table id="tab1" border="1" width="800" align="center" >
-			<tr>
-				<td colspan="5"><input type="button" value="删除"></td>
-			</tr>
-			<tr> <!--此处的this用得很妙-->
-				<th><input type="checkbox" onclick="selectAll(this)" ></th>
-				<th>分类ID</th>
-				<th>分类名称</th>
-				<th>分类描述</th>
-				<th>操作</th>
-			</tr>
-			<tr>
-				<td><input type="checkbox" class="itemSelect"></td>
-				<td>1</td>
-				<td>手机数码</td>
-				<td>手机数码类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" class="itemSelect"></td>
-				<td>2</td>
-				<td>电脑办公</td>
-				<td>电脑办公类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" class="itemSelect"></td>
-				<td>3</td>
-				<td>鞋靴箱包</td>
-				<td>鞋靴箱包类商品</td>
-				<td><a href="">修改</a>|<a href="">删除</a></td>
-			</tr>
-		</table>
-	</body>
+        </script>
+    </head>
+    <body>
+        <table id="tab1" border="1" width="800" align="center" >
+            <tr>
+                <td colspan="5"><input type="button" value="删除"></td>
+            </tr>
+            <tr> <!--此处的this用得很妙-->
+                <th><input type="checkbox" onclick="selectAll(this)" ></th>
+                <th>分类ID</th>
+                <th>分类名称</th>
+                <th>分类描述</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="itemSelect"></td>
+                <td>1</td>
+                <td>手机数码</td>
+                <td>手机数码类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="itemSelect"></td>
+                <td>2</td>
+                <td>电脑办公</td>
+                <td>电脑办公类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="itemSelect"></td>
+                <td>3</td>
+                <td>鞋靴箱包</td>
+                <td>鞋靴箱包类商品</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
+            </tr>
+        </table>
+    </body>
 </html>
 ```
 
