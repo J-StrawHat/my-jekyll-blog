@@ -1,5 +1,5 @@
 ---
-title: 「jQuery 学习笔记02」动画
+title: 「jQuery 学习笔记02」动画、对象遍历、事件
 author: JoyDee
 categories: [Web前端, jQuery]
 tags: [jQuery, JS]
