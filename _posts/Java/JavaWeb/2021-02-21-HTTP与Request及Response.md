@@ -590,9 +590,11 @@ HTTP 协议规定重定向机制，其运作流程如下：
 | :---------------------------------------: | :--------------------------: |
 |             浏览器地址栏不变              |     浏览器地址栏发生变化     |
 |        只能访问当前服务器下的资源         | 可访问其他站点（服务器）资源 |
-| 一次请求，可使用<br>`request`对象共享数据 |      两次请求，无法共享      |
+| 一次请求，可使用<br>`request`对象共享数据 |    两次请求，**无法共享**    |
 
 > 可理解为，你有一个问题问老师，转发：老师不会，她去问了另一老师，然后再给你解答；重定向：老师说我不会，你去问另一老师。
+
+【2021/3/16 更新】在学习 SSM 框架时，又对重定向有新的理解。重定向是为了防止多次刷新增加服务器压力，防止恶意请求攻击的，不是为了传参的（若需要传参，则相应的 JSP 页面需使用 `${param}`）。`WEB-INF` 目录是受到保护的，不能被外部直接访问到，只能被服务器内部访问到。
 
 代码写法：
 
@@ -609,9 +611,11 @@ response.sendRedirect("xxxx"); //重定向
 >
 > 重定向则不会有问题，由于重定向之后的是一个 JSP 页面，刷新页面无非是让页面重新加载一次罢了。
 
-### ⭐️关于路径
+> 
 
-#### 路径分类
+## ⭐️关于路径
+
+### 路径分类
 
 （一）相对路径：不以 `/` 开头，而是以 `.` 开头。如：`./index.html`
 
@@ -641,18 +645,25 @@ response.sendRedirect("xxxx"); //重定向
   request.getRequestDispatcher("/responseDemo2").forward(request, response);
   ```
 
-#### 动态获取虚拟目录
+### 动态获取虚拟目录
 
 如上的绝对路径中，若将项目中的代码将虚拟目录“写死”了，改动较大。为解决该问题，可调用 **`request`** 的方法获取动态的虚拟目录字符串：
 
 + `getContextPath()`：（Request 章节中有提及）返回客户端所请求访问的 Web 应用的 URL 入口。
 
   > 如客户端访问 URL 为：`http://localhost:8080/helloapp/info`，那么该方法返回 `"/helloapp"`
+  
+  ```java
+  String contextPath = request.getContextPath(); //注意是从 request 获取
+  response.sendRedirect(contextPath + "/responseDemo2"); //调用的 response 的重定向方法
+  ```
 
-```java
-String contextPath = request.getContextPath(); //注意是从 request 获取
-response.sendRedirect(contextPath + "/responseDemo2"); //调用的 response 的重定向方法
-```
++ 在 HTML 页面中，利用 EL 表达式：`${pageContext.request.contextPath}`，同样能够取得这个 URL 入口：
+
+  ```html
+  <a href = "${pageContext.request.contextPath}/user/some.do">链接</a> 
+  <!--相当于拼接上你的项目地址-->
+  ```
 
 另外， `ServletContext` 的 `getRealPath(String path)` 方法是，根据虚拟路径，返回文件系统中的一个真实路径
 
