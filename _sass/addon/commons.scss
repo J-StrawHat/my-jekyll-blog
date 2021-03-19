@@ -122,12 +122,12 @@ $sidebar-display: "sidebar-display";
     height: $tab-height;
     &:hover {
       .nav-link {
-        color: #1B86F9;
+        color: #5a84fc;
       }
     }
     &.active {
       .nav-link {
-        color: #007bff;
+        color: #5a84fc;
         background-color: var(--main-wrapper-bg);
         border-radius: 15px 0px 0px 15px;
         box-shadow: 0 3px 8px rgba(0,2,4,0.06), 0 0 1px rgba(0,2,4,0.11);
@@ -211,7 +211,7 @@ $sidebar-display: "sidebar-display";
     }
 
     a:hover, #mode-toggle-wrapper > i:hover {
-      color: #1B86F9;
+      color: #5c86ff;
     }
 
     #mode-toggle-wrapper {
