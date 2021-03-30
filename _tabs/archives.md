@@ -1,6 +1,6 @@
 ---
 layout: archives
-title: Archives
+title: 归档 / Archives
 icon: far fa-calendar-alt
 order: 3
 ---

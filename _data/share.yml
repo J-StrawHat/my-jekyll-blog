@@ -3,6 +3,14 @@
 
 platforms:
   -
+    type: QQ
+    icon: "fab fa-qq"
+    link: "http://connect.qq.com/widget/shareqq/index.html?url=URL&title=TITLE"
+  -
+    type: 微博
+    icon: "fab fa-weibo"
+    link: "http://service.weibo.com/share/share.php?title=TITLE&url=URL"
+  -
     type: Twitter
     icon: "fab fa-twitter"
     link: "https://twitter.com/intent/tweet?text=TITLE&url=URL"
@@ -14,6 +22,9 @@ platforms:
     type: Telegram
     icon: "fab fa-telegram"
     link: "https://telegram.me/share?text=TITLE&url=URL"
+
+
+
 
   # Uncomment below if you need to.
   # -
