@@ -5,19 +5,19 @@
 
 @mixin dark-syntax {
   $highlight-background   : #1d1f21;
-  $highlight-foreground   : #c5c8c6;
+  $highlight-foreground   : #C9D1D9;
   $highlight-comment      : #969896;
   $highlight-red          : #e06c75;
   $highlight-orange       : #d19a66;
-  $highlight-yellow       : #e6c07b;
-  $highlight-green        : #98c379;
-  $highlight-aqua         : #8abeb7;
+  $highlight-yellow       : #ffa657;
+  $highlight-green        : #7ee787;
+  $highlight-aqua         : #89ddff;
   $highlight-blue         : #61aeee;
   $highlight-purple       : #c678dd;
 
   /* -----  My styles ------ */
   --highlight-bg-color: #272C33;
-  --highlighter-rouge-color: #bfbfbf;
+  --highlighter-rouge-color: #C9D1D9;
   --highlight-lineno-color: #6c6c6d;
   --highlight-lineno-border-color: #303435;
   --inline-code-bg: #272c33;
@@ -26,12 +26,12 @@
     .gp { color: #818c96; }
   }
 
-  pre { color: #bfbfbf; } /* override Bootstrap */
+  pre { color: #C9D1D9; } /* override Bootstrap */
   kbd { background-color: black; }
 
   /* syntax highlight colors from https://raw.githubusercontent.com/jwarby/pygments-css/master/monokai.css */
   .highlight pre { background-color: #272C33; }
-  .highlight .hll { background-color: #ffffcc; } 
+  .highlight .hll { background-color: #C9D1D9; } 
   .highlight .c   { color: $highlight-comment; } /* Comment */
   .highlight .err { color: $highlight-red; } /* Error */
   .highlight .k   { color: $highlight-purple; } /* Keyword */
