@@ -1,5 +1,5 @@
 ---
-title: 链接 / Links
+title: 链接 | Links
 icon: fas fa-link
 order: 5
 toc: true

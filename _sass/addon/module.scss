@@ -66,7 +66,7 @@
 
 @mixin sidebar-links($color: var(--sidebar-text-color)) {
   color: $color;
-  transition: color 0.35s ease-in-out;
+  transition: all 250ms ease 0s;
   user-select: none;
 }
 

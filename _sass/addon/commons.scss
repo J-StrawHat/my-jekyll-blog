@@ -76,11 +76,10 @@ $sidebar-display: "sidebar-display";
   width: $sidebar-width-medium;
   z-index: 99;
   background: var(--sidebar-bg);
-
+  border-right: 1px solid var(--main-border-color);
   a {
     @include sidebar-links;
     &:hover {
-      color: #fff;
       @include no-text-decoration;
     }
   }
@@ -108,11 +107,13 @@ $sidebar-display: "sidebar-display";
   }
 
   .nav-link {
-    border-radius: 0;
+    padding: .5rem 1rem .5rem .5rem;
+    width: 270px;
+    border-radius: 8px;
     font-size: 0.95rem;
     font-weight: bold;
     letter-spacing: 1px;
-    display: table-cell;
+    display: inline-block;
     vertical-align: middle;
   }
 
@@ -122,14 +123,14 @@ $sidebar-display: "sidebar-display";
     height: $tab-height;
     &:hover {
       .nav-link {
-        color: #5a84fc;
+        background-color: var(--tag-hover);
       }
     }
     &.active {
       .nav-link {
-        color: #5a84fc;
+        color: #1B86F9;
         background-color: var(--main-wrapper-bg);
-        border-radius: 15px 0px 0px 15px;
+        
         box-shadow: 0 3px 8px rgba(0,2,4,0.06), 0 0 1px rgba(0,2,4,0.11);
       }
     }
@@ -149,9 +150,10 @@ $sidebar-display: "sidebar-display";
         > a {
           position: relative;
           left: $cursor-width / 2;
-          width: 100%;
+          width: 270px;
+          display: inline-block;
         }
-
+        /*
         &::after { // the cursor
           display: table;
           visibility: hidden;
@@ -163,7 +165,7 @@ $sidebar-display: "sidebar-display";
           border-radius: 1px;
           background-color: var(--nav-cursor-color);
           pointer-events: none;
-        }
+        } */
       }
     } // li
 
@@ -494,14 +496,12 @@ $sidebar-display: "sidebar-display";
     - #{$footer-height} - #{$post-extend-min-height})!important;
 }
 
-#main{
-  box-shadow: -3px 4px 10px rgba(0,2,4,0.03), 0 0 1px rgba(0,2,4,0.08);
-}
 
 #topbar-wrapper.row,
 #main>.row,
 #search-result-wrapper>.row {
   @include ml-mr(0);
+  border-bottom: 1px solid var(--main-border-color);
 }
 
 footer {
@@ -520,6 +520,7 @@ footer {
     margin-bottom: 1rem;
     > div {
       width: 350px;
+      border-right: 1px solid var(--main-border-color);
     }
   }
   a {
@@ -1520,7 +1521,6 @@ div.mb-3, .my-3 {
 
   #sidebar {
     width: $sidebar-width-large;
-
     .profile-wrapper {
       margin-top: 4rem;
       margin-bottom: 1rem;

@@ -1,5 +1,5 @@
 ---
-title: 关于 / About
+title: 关于 | About
 icon: fas fa-user-circle
 order: 4
 math: true

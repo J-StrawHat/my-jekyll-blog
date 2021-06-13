@@ -64,13 +64,17 @@ layout: page
     <div class="post-meta text-muted d-flex justify-content-between">
 
       <div>
+        
         <!-- posted date -->
-        <i class="far fa-calendar fa-fw"></i>
+        <i class="far fa-calendar-alt fa-fw"></i>
+        Created
         {% include timeago.html date=post.date tooltip=true %}
 
         <!-- time to read -->
         <i class="far fa-clock fa-fw"></i>
+        Read
         {% include read-time.html content=post.content %}
+        
 
         <!-- page views -->
         {% if site.google_analytics.pv.enabled %}
