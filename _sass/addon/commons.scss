@@ -47,10 +47,20 @@ body {
   font-family: 'Source Sans Pro', 'PingFang SC', 'Microsoft Yahei', sans-serif; 
 }
 
-.v[data-class=v] .vcards .vcard .vh .vmeta .vat, .v[data-class=v] .vpower a{
+.v[data-class=v] .vcards .vcard .vhead .vnick:hover,  .v[data-class=v] a:hover{
+  color: #1B86F9;
+}
+
+.v[data-class=v] .vwrap .vheader .vinput:focus {
+  border-bottom-color: #1B86F9;
+}
+
+.v[data-class=v] a, .v[data-class=v] .vcards .vcard .vh .vmeta .vat, .v[data-class=v] .vpower a{
   color: #1B86F9;
   font-size: 1em;
 }
+
+
 .v[data-class=v] .status-bar, .v[data-class=v] .veditor, .v[data-class=v] .vinput, .v[data-class=v] p, .v[data-class=v] pre code {
   color: var(--text-color);
 }
@@ -781,7 +791,7 @@ a {
 
 } // a
 
-img:not(.emoji) {
+img:not(.emoji, .vemoji) {
   max-width: 100%;
   border-radius: 5px;
   box-shadow: 0 1px 15px rgba(27,31,35,.15), 0 0 1px rgba(106,115,125,.35);
