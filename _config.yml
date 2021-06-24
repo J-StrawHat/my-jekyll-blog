@@ -59,9 +59,9 @@ google_analytics:
 
 valine_comment:
   enable: true
-  leancloud_appid: EENEA9r3ULJmKLcsgKxSCNqh-gzGzoHsz
-  leancloud_appkey: IcFH9q9WfYblgGkcR0fq9OYh
-  placeholder: 留下你的评论吧，支持markdown语法，没有填写网址也没关系
+  leancloud_appid: CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI
+  leancloud_appkey: pAaJnzwcML3OuaGyI4aHjfge
+  placeholder: 昵称填上你的QQ号，留下评论吧，支持markdown语法!
 
 disqus:
   comments: false  # boolean type, the global switch for posts comments.
