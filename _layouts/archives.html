@@ -3,8 +3,10 @@ layout: page
 # The Archives of posts.
 ---
 
-
 <div id="archives" class="pl-xl-2">
+  <div id = "mycalendar" style="width:100%;height:200px;background-color: white;">
+  </div>
+
 {% for post in site.posts %}
   {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
   {% capture pre_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
@@ -16,10 +18,11 @@ layout: page
   {% endif %}
     <li>
       <div>
-        {% capture this_day %}{{ post.date | date: "%d" }}{% endcapture %}
         {% capture this_month %}{{ post.date | date: "%b" }}{% endcapture %}
-        <span class="date day">{{ this_day }}</span>
+        {% capture this_day %}{{ post.date | date: "%d" }}{% endcapture %}
+        
         <span class="date month small text-muted">{{ this_month }}</span>
+        <span class="date day">{{ this_day }}</span>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       </div>
     </li>
@@ -33,4 +36,133 @@ layout: page
     {% assign last_month = "" %}
   {% endif %}
 {% endfor %}
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+<script type="text/javascript">
+  var startDate, endDate;
+  var mymap = new Map();
+
+  {% assign sz = 1 %}
+  {% assign arr = "" | split: "" %}
+  {% capture cur_year %} {{ site.time | date: "%Y" }} {% endcapture %}
+  var startDate = new Date("January 1, " + "2021");
+  var endDate = new Date("December 31, " + "2021");
+  console.log("今年:" + startDate + "," + endDate);
+
+  {% for post in site.posts %}
+
+    {% capture this_year %} {{ post.date | date: "%Y" }} {% endcapture %}
+    {% if this_year != cur_year %}
+      {% break %}
+    {% endif %}
+
+    {% capture this_month %} {{ post.date | date: "%b" }} {% endcapture %}
+    {% capture this_day %} {{ post.date | date: "%d" }} {% endcapture %}
+    {% capture last_day %} {{ post.previous.date | date: "%d" }} {% endcapture %}
+    {% capture total_day %} {{ post.date | date: "%j" }} {% endcapture %}
+
+    {% if this_day != last_day %}
+      {% assign arr = arr | push: sz %}
+      
+      var cntDate = new Date("{{this_month}}" + " " + "{{this_day}}" + "," + "{{this_year}}");
+      var size = parseInt("{{sz}}", 10);
+      mymap.set(cntDate.getTime(), size);
+      {% assign sz = 1 %}
+    {% else %}
+      {% assign sz = sz | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  var chatData = [];
+  for (var i = startDate.getTime(); i <= endDate.getTime(); i = i + (24 * 3600 * 1000)) {
+    var cnt = (mymap.has(i)) ? mymap.get(i) : 0;
+    var curDate = new Date(i);
+    var curMonth = ((curDate.getMonth() + 1 < 10) ? "0" : "") + (curDate.getMonth() + 1);
+    var curDay = ((curDate.getDate() < 10) ? "0" : "") + curDate.getDate();
+    var str = curDate.getFullYear() + "-" + curMonth + "-" + curDay;
+    chatData.push(
+      [str, cnt]
+    );
+  }
+  console.log(chatData);
+  
+  var myChart = echarts.init(document.getElementById('mycalendar'),'null',{renderer: 'svg'});
+  // 指定图表的配置项和数据
+  var option = {
+        title: {
+            top: 0,
+            text: 'Calendar in 2021',
+            left: 'center',
+        },
+        tooltip: {
+            padding: 5,
+            backgroundColor: '#191919',
+            borderColor: '#777',
+            borderWidth: 1,
+            formatter: function (obj) {
+                var value = obj.value;
+                var postStr = "post";
+                if(value[1] > 1) postStr = "posts"
+                return '<div style="font-size: 10px;color:#ffffff">' + value[1] + ' ' + postStr + ' on ' + value[0] + '</div>';
+            }
+        },
+        visualMap: {
+            show: true,
+            showLabel: true,
+            categories: [0, 1, 2, 3, 4],
+            calculable: true,
+            inRange: {
+                symbol: 'rect',
+                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+            },
+            itemWidth: 12,
+            itemHeight: 12,
+            orient: 'horizontal',
+            left: 'center',
+            top: 160
+        },
+        calendar: [{
+            left: 'center',
+            range: 2021,
+            cellSize: [13, 13],
+            splitLine: {
+                show: false
+            },
+            itemStyle: {
+                width: '1.88679%',
+                height: '15px',
+                color: '#EEEEEE',
+                borderColor: '#FFF',
+                borderWidth: 2
+            },
+            yearLabel: {
+                show: false
+            },
+            monthLabel: {
+                fontWeight: 'regular',
+                fontSize: 12
+            },
+            dayLabel: {
+                show: true,
+                formatter: '{start}  1st',
+                fontWeight: 'regular',
+                nameMap: ['','Mon',' ','Wed',' ','Fri','',],
+                fontSize: 11
+            }
+        }],
+        series: [{
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            calendarIndex: 0,
+            data: chatData
+        }]
+    };
+  option && myChart.setOption(option);
+  window.onresize = function(){
+    myChart.resize();
+  }
+</script>
+
+
 </div>
+
+

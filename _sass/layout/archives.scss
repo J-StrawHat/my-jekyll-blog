@@ -11,6 +11,9 @@
   position: relative;
   background-color: var(--timeline-color);
 }
+div#mycalendar {
+  border-radius: 8px;
+}
 
 #archives {
   letter-spacing: 0.03rem;
