@@ -1,0 +1,1741 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「JavaSE学习笔记02」对象与类" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="Chapter 4. 对象与类" /><meta property="og:description" content="Chapter 4. 对象与类" /><link rel="canonical" href="https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" /><meta property="og:url" content="https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-10-23T22:27:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「JavaSE学习笔记02」对象与类" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"Chapter 4. 对象与类","url":"https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/","@type":"BlogPosting","headline":"「JavaSE学习笔记02」对象与类","dateModified":"2021-04-09T00:39:17+08:00","datePublished":"2020-10-23T22:27:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/"},"@context":"https://schema.org"}</script><title>「JavaSE学习笔记02」对象与类 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「JavaSE学习笔记02」对象与类</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<h1 data-toc-skip>「JavaSE学习笔记02」对象与类</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Fri, Oct 23, 2020, 10:27 PM +0800"> Oct 23, 2020 <i class="unloaded">2020-10-23T22:27:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Fri, Apr 9, 2021, 12:39 AM +0800"> Apr 9 <i class="unloaded">2021-04-09T00:39:17+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="9805 words">108 min</span> <span id="/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" class="leancloud_visitors" data-flag-title="「JavaSE学习笔记02」对象与类"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<h1 id="chapter-4-对象与类">Chapter 4. 对象与类</h1>
+<h2 id="41-面向对象程序设计概述">4.1 面向对象程序设计概述</h2>
+<p><strong>面向对象程序设计</strong>（简称<em>OOP</em>），是当今主流程序设计范型。面向对象的程序是由对象组成的，每个对象（来自于标准库或自定义的）包含对用户公开的特定功能和隐藏的实现部分。在OOP中，不必关心对象的具体实现，只要能够满足用户的需求即可。面向对象的语言中，包含了<strong>三大基本特征</strong>：封装、继承、多态。</p>
+<h3 id="411-类">4.1.1 类</h3>
+<p>类(<em>class</em>)，是构造对象的<strong>模板或蓝图</strong>。由类构造(<em>construct</em>)对象的过程，成为<strong>类的实例</strong>(<em>instance</em>)。</p>
+<p>封装(<em>encapsulation</em>)，给予对象“黑盒”特征，将数据与行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式。对象中的数据成为<strong>实例域</strong>(<em>instance fields</em>)，操纵数据的过程成为<strong>方法</strong>(<em>method</em>)。对于每个特定的类实例（对象）都有一组特定的实例域值，这些值的集合就是这个对象的当前状态。</p>
+<p>类之间，最常用的关系：</p>
+<ul>
+<li>
+<p>依赖（<em>“uses-a”</em>）——一个类的方法操纵另一个类的对象</p>
+<blockquote><p>应尽可能将相互依赖的类减至最小。若类A不知道B的存在，它就不关心B的任何改变（即不会导致A产生BUG）。用软件工程的术语来说，就是<strong>让类之间的耦合度最小</strong>。</p></blockquote>
+</li>
+<li><p>聚合（<em>“has-a”</em>）——意味着类A的对象包含类B的对象</p></li>
+<li><p>继承（<em>“is-a”</em>）——若类A拓展类B，类A不但包含从类B继承的方法，还会拥有一些额外的功能。</p></li>
+</ul>
+<h3 id="412-对象">4.1.2 对象</h3>
+<p>对象，是类的实体。它是一类事物的具体体现，它必然具备某类事物的属性和行为。</p>
+<p>要想使用OOP，需清楚<strong>对象</strong>的三个<strong>主要特性</strong>：</p>
+<ul>
+<li>对象的行为——可对对象施加哪些操作或哪些方法？</li>
+<li>对象的状态——当施加那些方法时，对象如何响应？</li>
+<li>对象标识——如何辨识具有相同行为与状态的不同对象？</li>
+</ul>
+<p>同一个类的所有对象实例，由于支持相同行为而具有家族相似性。对象的行为是用可调用的方法定义的。</p>
+<p>此外，每个对象都保存着描述当前特征的信息，即对象的状态。对象状态的改变必须通过<strong>调用方法</strong>实现。（若不经方法调用就改变对象状态，说明封装性遭破坏）</p>
+<p>但是，对象的状态并不能完全描述一个对象，每个对象均有一个唯一的身份。需注意，作为一个类的实例，每个对象的标识<strong>永远不同</strong>，状态<strong>常常存在差异</strong>。</p>
+<h2 id="42-对象与类的相关操作">4.2 对象与类的相关操作</h2>
+<p>我们接下来编写的主力类(<em>workhorse class</em>)，没有<code class="language-plaintext highlighter-rouge">main</code>方法而却有自定义的实例域和实例方法。若要创建一个完整的程序，应将若干类组合在一起，其中只有一个类有<code class="language-plaintext highlighter-rouge">main</code>方法。</p>
+<p>Java中，一个源文件<strong>只能有一个</strong>公有类。但可以有任意个非公有类。许多程序员习惯将每一个类存在一个单独的源文件中。</p>
+<h3 id="421-最简单的类的定义">4.2.1 最简单的类的定义</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">//在Phone.java文件中</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Phone</span><span class="o">{</span>
+    <span class="c1">//成员变量</span>
+    <span class="nc">String</span> <span class="n">brand</span><span class="o">,</span> <span class="n">color</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+    <span class="c1">//成员方法</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">(</span><span class="nc">String</span> <span class="n">sb</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"给"</span> <span class="o">+</span> <span class="n">sb</span> <span class="o">+</span> <span class="s">"打电话"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendMessage</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"群发短信"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>注意事项：</p>
+<ol>
+<li>成员变量是直接定义在类内部，在方法外部。若成员变量没有进行复制，那么会有默认值（规则与数组相同）</li>
+<li>成员方法不用写<code class="language-plaintext highlighter-rouge">static</code>关键字。</li>
+<li>在Java中，所有方法都必须在<strong>类的内部</strong>定义，但并不表示它们是内联方法（这交给Java虚拟机去解决）。</li>
+</ol>
+<p>局部变量与成员变量的区别：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center"> </th>
+<th style="text-align: center">局部变量</th>
+<th style="text-align: center">成员变量</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center">定义位置</td>
+<td style="text-align: center">方法内部</td>
+<td style="text-align: center">方法外部、写于类内部</td>
+</tr>
+<tr>
+<td style="text-align: center">内存位置</td>
+<td style="text-align: center">栈内存</td>
+<td style="text-align: center">堆内存</td>
+</tr>
+<tr>
+<td style="text-align: center">作用域</td>
+<td style="text-align: center">只有在方法当中可以使用</td>
+<td style="text-align: center">在整个类均可使用</td>
+</tr>
+<tr>
+<td style="text-align: center">生命周期</td>
+<td style="text-align: center">随方法进栈而诞生（随方法出栈而消失）</td>
+<td style="text-align: center">随对象创建而诞生（随对象被垃圾回收而消失）</td>
+</tr>
+<tr>
+<td style="text-align: center">默认值</td>
+<td style="text-align: center">无默认值，若要使用则必须赋值。</td>
+<td style="text-align: center">若没有赋值，则会<strong>自带默认值</strong>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="422-标准类java-bean的定义">4.2.2 标准类（Java Bean）的定义</h3>
+<p>标准的类，也称<em>Java Bean</em>。它需满足：</p>
+<ul>
+<li><p>都要使用<code class="language-plaintext highlighter-rouge">private</code>关键字修饰，相应地，需为每一成员变量编写一对<code class="language-plaintext highlighter-rouge">Getter/Setter</code>方法。（详见下方的4.3）</p></li>
+<li><p>类需要编写一个无参数的构造方法与一个全参数的构造方法。</p></li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span><span class="o">{</span>
+    <span class="c1">//成员方法</span>
+    <span class="c1">//1. 构造方法</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">()</span> <span class="o">{</span> <span class="c1">//无参构造方法</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="s">"张三"</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="mi">19</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//全参构造方法</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//2. Getter和Setter</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//2. 成员变量</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>利用IDEA来生成相应方法：(以<code class="language-plaintext highlighter-rouge">Getter/Setter</code>为例，若要生成构造方法同理）</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201024113806.png"></p>
+<p>选择你需要生成的方法类型，此处选中<code class="language-plaintext highlighter-rouge">Getter和Setter</code>，得到下面窗口。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201024113954.png"></p>
+<p>下图即为生成成功。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201024114026.png"></p>
+<blockquote>
+<p>TIPS：有些程序员会为每个参数前面加上一个前缀”a”。如：<code class="language-plaintext highlighter-rouge">public Employee(String aName, double aSalary)</code>，十分清晰。</p>
+<p>C++中一般用下划线作为实例域的前缀（<del>确实</del>），如<code class="language-plaintext highlighter-rouge">salary</code>域会被命名为<code class="language-plaintext highlighter-rouge">_salary</code>。但Java程序员通常不这样做。</p>
+</blockquote>
+<h3 id="423-对象的构造方法">4.2.3 对象的构造方法</h3>
+<p>构造方法（构造器）就是专门用于创建对象的方法，当我们通过关键字<code class="language-plaintext highlighter-rouge">new</code>来创建对象时，实际上就是在调用构造方法。其格式为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="n">类名称</span><span class="o">(</span><span class="n">参数类型</span> <span class="n">参数名称</span><span class="o">,</span> <span class="o">...</span> <span class="o">){</span>
+    <span class="n">方法体</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>注意事项：</p>
+<ol>
+<li>仅当类没有提供任何构造方法的时候，系统才会提供一个默认的构造方法。（一旦编写了至少一个构造方法，系统则不再提供）</li>
+<li>构造方法的名称必须与所在的类名称完全一样（包括大小写）。</li>
+<li>构造方法不要写返回值类型（连<code class="language-plaintext highlighter-rouge">void</code>都不写），当然也不能<code class="language-plaintext highlighter-rouge">return</code>一个具体的返回值。</li>
+<li>构造方法总是伴随<code class="language-plaintext highlighter-rouge">new</code>操作一起调用。</li>
+</ol>
+<h3 id="424-对象的创建与使用">4.2.4 对象的创建与使用</h3>
+<p>我们知道，一个类并不能直接使用，需要根据类创建一个对象，方能使用。</p>
+<ol>
+<li>
+<p>导包：指出需要使用的类在哪里</p>
+<p>格式：<code class="language-plaintext highlighter-rouge">import 包名称.类名称;</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">day03.demo1.Student</span><span class="o">;</span> <span class="c1">//别漏分号</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>注：对于和当前类属于同一个包的情况，可省略不写导包语句</p>
+<blockquote><p>在Java中，<code class="language-plaintext highlighter-rouge">package</code>与<code class="language-plaintext highlighter-rouge">import</code>语句，类似于C++中<code class="language-plaintext highlighter-rouge">namespace</code>和<code class="language-plaintext highlighter-rouge">using </code>指令</p></blockquote>
+</li>
+<li>
+<p>创建</p>
+<p>格式：<code class="language-plaintext highlighter-rouge">类名称 对象名 = new 类名称()</code> 或者 <code class="language-plaintext highlighter-rouge">类名称 对象名 = new 类名称(参数1, 参数2, ...)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Student</span> <span class="n">stu</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>使用</p>
+<p>(在没有<code class="language-plaintext highlighter-rouge">Setter&amp;Getter</code>的情况下)使用成员变量：<code class="language-plaintext highlighter-rouge">对象名.成员变量名</code></p>
+<p>使用成员方法：<code class="language-plaintext highlighter-rouge">对象名.成员方法名(参数1, 参数2, ...)</code></p>
+</li>
+</ol>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">//在Demo01PhoneOne.java文件中</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo01PhoneOne</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">Phone</span> <span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Phone</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">one</span><span class="o">.</span><span class="na">brand</span><span class="o">);</span>
+        <span class="n">one</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="s">"苹果"</span><span class="o">;</span>
+        <span class="n">one</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="s">"Cook"</span><span class="o">);</span>
+        <span class="n">one</span><span class="o">.</span><span class="na">sendMessage</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="附几个对象的内存图">[附]几个对象的内存图</h3>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/02-两个对象使用同一个方法的内存图.png"></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/03-两个引用指向同一个对象的内存图.png"></p>
+<p>在Java中，任何对象变量的值都是对存储在另外一个地方的一个对象的<strong>引用</strong>。<code class="language-plaintext highlighter-rouge">new</code>操作符的返回值也是一个引用。</p>
+<blockquote>
+<p>可以将Java对象变量看作C++的对象指针。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Date</span> <span class="n">birthday</span><span class="o">;</span> <span class="c1">//Java;</span>
+<span class="n">等同于</span>
+<span class="nc">Date</span><span class="o">*</span> <span class="n">birthday</span><span class="o">;</span> <span class="c1">//C++</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</blockquote>
+<h3 id="425-匿名对象">4.2.5 匿名对象</h3>
+<p>格式：<code class="language-plaintext highlighter-rouge">new 类名称();</code></p>
+<p>注意事项：匿名对象只能使用唯一一次，下次再使用时必须创建一个新对象。</p>
+<p>使用建议：若确定有一个对象只需要使用唯一的一次，便可用匿名对象。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">).</span><span class="na">nextInt</span><span class="o">();</span>
+<span class="n">methodParam</span><span class="o">(</span><span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span> <span class="c1">//使用匿名对象来进行传参</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="426-静态static关键字">4.2.6 静态static关键字</h3>
+<p>若类中的某个成员变量或方法用<code class="language-plaintext highlighter-rouge">static</code>关键字修饰，则以后创建的对象中的<code class="language-plaintext highlighter-rouge">static</code>修饰的变量或方法不再属于对象自己，而是属于类，也就说凡是本类的对象，都共享同一份。</p>
+<p>无论是成员变量，还是成员方法。若有了<code class="language-plaintext highlighter-rouge">static</code>修饰，都推荐使用<strong>类名称</strong>进行调用。</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">static</code>关键字修饰成员变量</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td>
+<td class="rouge-code"><pre><span class="cm">/* Student.java文件中 */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="nc">String</span> <span class="n">room</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">idCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="c1">//学号计数器，每new一个新对象便自增</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="o">++</span><span class="n">idCounter</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="o">++</span><span class="n">idCounter</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+  
+<span class="cm">/* JustTest.java文件中 */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Student</span> <span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Luffy"</span><span class="o">);</span>
+        <span class="n">one</span><span class="o">.</span><span class="na">room</span> <span class="o">=</span> <span class="s">"101教室"</span><span class="o">;</span>
+  
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%s的学号为：%d,教室为：%s\n"</span><span class="o">,</span> <span class="n">one</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">one</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">one</span><span class="o">.</span><span class="na">getRoom</span><span class="o">());</span>
+        <span class="nc">Student</span> <span class="n">two</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Nami"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%s的学号为：%d,教室为：%s\n"</span><span class="o">,</span> <span class="n">two</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">two</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">two</span><span class="o">.</span><span class="na">getRoom</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">static</code>关键字修饰成员方法</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td>
+<td class="rouge-code"><pre><span class="cm">/* MyClass.java文件中 */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="o">;</span> <span class="c1">//成员变量</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">numStatic</span><span class="o">;</span> <span class="c1">//静态变量</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(){</span> <span class="c1">//成员方法</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"我是成员方法！"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span> <span class="c1">//成员方法可访问成员变量</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">numStatic</span><span class="o">);</span> <span class="c1">//成员方法可访问静态变量</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">methodStatic</span><span class="o">(){</span> <span class="c1">//静态方法</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"我是静态方法！"</span><span class="o">);</span>
+        <span class="c1">//System.out.println(num); 错误写法！静态方法不能访问非静态变量</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">numStatic</span><span class="o">);</span> <span class="c1">//静态方法可访问静态变量</span>
+        <span class="c1">//System.out.println(this); 错误写法！静态方法不能使用this关键字</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+  
+<span class="cm">/* JustTest.java文件中 */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">MyClass</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyClass</span><span class="o">();</span> <span class="c1">//创建对象方能使用非静态的成员方法</span>
+        <span class="n">obj</span><span class="o">.</span><span class="na">method</span><span class="o">();</span>
+        <span class="n">obj</span><span class="o">.</span><span class="na">methodStatic</span><span class="o">();</span> <span class="c1">//正确，但不推荐</span>
+        <span class="nc">MyClass</span><span class="o">.</span><span class="na">methodStatic</span><span class="o">();</span> <span class="c1">//对于静态方法，可直接通过类名称来调用</span>
+  
+        <span class="n">myMethod</span><span class="o">();</span> <span class="c1">//本类当中的静态方法，可直接省略类名称</span>
+        <span class="nc">JustTest</span><span class="o">.</span><span class="na">myMethod</span><span class="o">();</span> <span class="c1">//完全等效</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">myMethod</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"这是我的方法！"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+  
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>静态代码块</p>
+<p>格式为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">类名称</span><span class="o">{</span>
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="c1">//静态代码块中的内容</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>特点：</p>
+<ol>
+<li>
+<p>一旦第<strong>一次</strong>使用了该类的静态代码块，该静态代码块以后都不再执行</p>
+<blockquote><p>静态代码块的典型用途：用于一次性地对静态成员变量进行赋值</p></blockquote>
+</li>
+<li><p>静态内容总是<strong>优先</strong>于非静态，故静态代码块比构造方法更早执行。</p></li>
+</ol>
+</li>
+</ul>
+<h2 id="43-封装">4.3 封装</h2>
+<p>封装性在Java中的体现：</p>
+<ul>
+<li>方法是一种封装；</li>
+<li>关键字<code class="language-plaintext highlighter-rouge">private</code>也是一种封装。</li>
+</ul>
+<p>一旦使用<code class="language-plaintext highlighter-rouge">private</code>进行修饰，那么本类当中仍然可以随意访问。但是，超出本类范围之外，不能再直接访问了。要间接访问<code class="language-plaintext highlighter-rouge">private</code>成员变量，就是定义一对<code class="language-plaintext highlighter-rouge">Getter/Setter</code>方法。</p>
+<ul>
+<li><p>仅访问实例域而不进行修改的方法，称之为<strong>访问器方法</strong>（<em>accessor method</em>）。在Java中，对应为<code class="language-plaintext highlighter-rouge">Getter</code>，不能有参数，返回值类型和成员变量相对应。命令规则一般为<code class="language-plaintext highlighter-rouge">getXXX</code>（若为<code class="language-plaintext highlighter-rouge">boolean</code>类型，则应命名为<code class="language-plaintext highlighter-rouge">isXXX</code>）。eg: <code class="language-plaintext highlighter-rouge">getTime</code></p></li>
+<li><p>对实例域做出修改的方法，称之为<strong>更改器方法</strong>（<em>mutator method</em>）。在Java中，对应为<code class="language-plaintext highlighter-rouge">Setter</code>，不能有返回值，参数类型与成员变量相对应。命令规则一般为<code class="language-plaintext highlighter-rouge">setXXX</code>。eg:<code class="language-plaintext highlighter-rouge">setTime</code></p></li>
+</ul>
+<p>如此封装的好处：</p>
+<ol>
+<li>可改变内部实现，除了该类的方法之外，不会影响其他代码。</li>
+<li>更改器方法可以执行<strong>错误检查</strong>，然而直接对域进行赋值将不会进行这些处理。</li>
+</ol>
+<h3 id="431-this">4.3.1 this</h3>
+<p><code class="language-plaintext highlighter-rouge">this</code>关键字可以用来访问本类的内容。</p>
+<p>一、在本类的成员方法中，访问本类的成员<strong>变量</strong>。</p>
+<p>当方法的局部变量和类的成员变量重名的时候，根据“就近原则”，优先使用局部变量。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">", 你好。我是"</span> <span class="o">+</span> <span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>为了解决上方产生的“二义性”，希望在本类的某个方法中访问<strong>本类</strong>当中的成员变量，需使用<code class="language-plaintext highlighter-rouge">this.成员变量名</code>。在每一个方法中，关键字<code class="language-plaintext highlighter-rouge">this</code>表示隐式参数。</p>
+<p>即将上面代码块的第四行改为：<code class="language-plaintext highlighter-rouge">System.out.println(name + "，你好。我是" + this.name);</code></p>
+<p>二、在本类的成员方法中，访问本类的另一个成员<strong>方法</strong>。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">methodA</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A!"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">methodB</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">methodA</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"B!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>三、在本类的构造方法中，访问本类的另一个构造方法。</p>
+<p>注意：<code class="language-plaintext highlighter-rouge">this()</code>调用必须是构造方法的第一个语句，且是唯一一个。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">(</span><span class="s">"张三"</span><span class="o">);</span> <span class="c1">//本类的无参构造，调用本类的有参构造方法。</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="44-scanner类">4.4 Scanner类</h2>
+<p>通过Scanner类的学习，我们能够熟悉如何查询API，如何使用现有的类。</p>
+<h3 id="441-引用类型的使用步骤">4.4.1 引用类型的使用步骤</h3>
+<ol>
+<li>
+<p>导包</p>
+<p>格式：<code class="language-plaintext highlighter-rouge">import 包路径.类名称;</code></p>
+<blockquote><p>只有<code class="language-plaintext highlighter-rouge">java.lang</code>包下的内容不需要导包，其他的包均需要<code class="language-plaintext highlighter-rouge">import</code>语句。</p></blockquote>
+</li>
+<li>
+<p>创建</p>
+<p>格式：<code class="language-plaintext highlighter-rouge">对象名 = new 类名称(参数1,...);</code></p>
+</li>
+<li>
+<p>使用</p>
+<p>格式：<code class="language-plaintext highlighter-rouge">对象名.成员方法名()</code></p>
+</li>
+</ol>
+<h3 id="442-概述">4.4.2 概述</h3>
+<p><code class="language-plaintext highlighter-rouge">Scanner</code>类，是一个可以解析基本类型和字符串的简单文本扫描器。它可以实现键盘输入数据到程序当中。</p>
+<p>关于<code class="language-plaintext highlighter-rouge">Scanner</code>类的导包语句为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>使用实例：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">MyPackages</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span> <span class="c1">//1. 导包</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo01Scanner</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//2. 创建对象。Note: System.in代表从键盘进行输入</span>
+        <span class="nc">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span> 
+        <span class="c1">//3. 获取键盘输入的字符串</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="c1">//4. 获取键盘输入的任何字符串，同时转换为int类型</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+        
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">).</span><span class="na">nextInt</span><span class="o">();</span> <span class="c1">//简写 </span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="45-random类">4.5 Random类</h2>
+<p><code class="language-plaintext highlighter-rouge">Random</code>类用于生成随机数字。</p>
+<p><code class="language-plaintext highlighter-rouge">Random</code>导包语句为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>创建：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">();</span> 
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>使用：</p>
+<ol>
+<li>
+<p>获取一个随机<code class="language-plaintext highlighter-rouge">int</code>型数字，其范围为<code class="language-plaintext highlighter-rouge">int</code><strong>所有范围，含正负</strong>。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>获取一个随机<code class="language-plaintext highlighter-rouge">int</code>型数字，传入参数代表右区间界线。范围为<strong>左闭右开</strong>区间。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span> <span class="c1">//实际上范围为0,1,2</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote>
+<p>由于是左闭右开区间，如果我们想要得到$[a,b]$的随机数，可以这样写：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">;</span>
+<span class="c1">//本来范围为[0, b]，现在整体加a，范围变为[a, b + a];</span>
+<span class="c1">//为了得到[a,b]，则对传入参数-a即可。</span>
+<span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</blockquote>
+</li>
+</ol>
+<h2 id="46-泛型数组列表arraylist集合">4.6 泛型数组列表：ArrayList集合</h2>
+<h3 id="461-引入对象数组">4.6.1 引入——对象数组</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">//Person类的代码就不放了，现在InstanceOfArray.java文件中，</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstanceOfArray</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Person</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="c1">//输出为null</span>
+        <span class="c1">//由于a[0],...未分配相应的空间，默认值为null。不能直接对a[0]的成员进行修改，故11行与12行的代码会发生报错！</span>
+        <span class="c1">//a[0].name = "张三";</span>
+        <span class="c1">//a[0].age = 18;</span>
+        <span class="c1">//正确应有：</span>
+        <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Luffy"</span><span class="o">,</span> <span class="mi">19</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">getAge</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>由于数组无法在运行过程中改变其本身的规模，此处即引入下一节要介绍的<code class="language-plaintext highlighter-rouge">ArrayList</code>类。</p>
+<h3 id="462-概述">4.6.2 概述</h3>
+<p><code class="language-plaintext highlighter-rouge">ArrayList</code>：一种可以动态增长和缩减的索引序列，称为数组列表。在Java SE5.0中，它是一个采用类型参数的<strong>泛型类</strong>。为了指定数组列表保存的元素对象类型，需要用<code class="language-plaintext highlighter-rouge">&lt;&gt;</code>将类名括起来加在后面。例如<code class="language-plaintext highlighter-rouge">ArrayList &lt;Employee&gt;</code></p>
+<blockquote><p>泛型——装在集合当中所有元素，全部是统一的类型。但注意，泛型只能是<strong>引用类型</strong>，不能是基本类型（因为集合保存的均是引用类型的值）</p></blockquote>
+<blockquote>
+<p><code class="language-plaintext highlighter-rouge">ArrayList</code>类似于C++的<code class="language-plaintext highlighter-rouge">vector</code>模板，它与<code class="language-plaintext highlighter-rouge">vector</code>都是泛型类型。但由于Java没有运算符重载，所以它不像<code class="language-plaintext highlighter-rouge">vector</code>模板为了便于访问元素重载<code class="language-plaintext highlighter-rouge">[]</code>运算符。此外，<code class="language-plaintext highlighter-rouge">vector</code>向量是值拷贝，而在Java中，<code class="language-plaintext highlighter-rouge">a=b</code>的赋值语句的操作结果，是让<code class="language-plaintext highlighter-rouge">a</code>和<code class="language-plaintext highlighter-rouge">b</code>引用同一个数组列表。</p>
+<p>另外，<code class="language-plaintext highlighter-rouge">java.util.List</code>正是<code class="language-plaintext highlighter-rouge">ArrayList</code>所实现的接口。</p>
+</blockquote>
+<h3 id="463-数组列表的相关操作">4.6.3 数组列表的相关操作</h3>
+<p>一、创建某个类型的<code class="language-plaintext highlighter-rouge">ArrayList</code>集合：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">listA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">listB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>对于<code class="language-plaintext highlighter-rouge">ArrayList</code>而言，直接打印得到的不是地址值，而是其内容，若内容为空，则得到空的中括号。</p></blockquote>
+<p>二、向集合添加元素：</p>
+<p><code class="language-plaintext highlighter-rouge">public boolean add(E e)</code>：向集合当中添加元素，参数类型与泛型一致，返回值为<code class="language-plaintext highlighter-rouge">boolean</code>表示是否添加成功。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="n">listA</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"ONEPIECE"</span><span class="o">);</span>
+<span class="n">listA</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"I got it"</span><span class="o">);</span>
+<span class="c1">//运行结果为</span>
+<span class="c1">//[ONEPIECE, I got it] </span>
+<span class="c1">//两边的中括号是输出时它本身自带的，输出中元素之间的','号也是本身自带的。</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>三、通过索引值从集合中获取元素：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">listA</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span> <span class="c1">//索引值从0开始，返回值即为编号对应的元素</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>四、从集合当中删除元素，参数为索引编号，返回值为被删除的元素：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">whoRemoved</span> <span class="o">=</span> <span class="n">listA</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>五、遍历集合中的元素：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">listA</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="c1">//do something;</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>六、集合作为参数：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getSmallList</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="464-数组列表存储基本类型数据-与-包装类">4.6.4 数组列表存储基本类型数据 与 包装类</h3>
+<p>如果希望向集合<code class="language-plaintext highlighter-rouge">ArrayList</code>当中存储基本类型数据，则必须使用基本类型所对应的<strong>包装类</strong>。</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">基本类型</th>
+<th style="text-align: center">包装类</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">int</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Integer</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">char</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Character</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">byte</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Byte</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">long</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Long</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">short</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">short</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">double</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Double</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">boolean</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Boolean</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">float</code></td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">Float</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>举例使用：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo05</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">listA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">listA</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+        <span class="n">listA</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">listA</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p><code class="language-plaintext highlighter-rouge">ArrayList&lt;Integer&gt;</code>的效率远远低于<code class="language-plaintext highlighter-rouge">int[]</code>数组，因此应该用它构造小型集合。</p></blockquote>
+<p>从JDK 1.5+开始，支持自动打包（<em>autoboxing</em>）（即 基本类型 –&gt; 包装类型）、自动拆包（即 包装类型 –&gt; 基本类型）。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Integer</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">233</span><span class="o">;</span> <span class="c1">//自动打包，相当于Integer i = Integer.valueOf(233);</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">66</span><span class="o">;</span> <span class="c1">//等号右边是将i对象转换成基本数据类型（自动拆包），i.intValue() + 66;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="47-string类">4.7 String类</h2>
+<p>Java没有内置的字符串类型，而是在标准Java类库中提供了一个预定义类<code class="language-plaintext highlighter-rouge">String</code>，它与C++中的字符串有很大的差异。</p>
+<p>每个用双引号括起来的字符串都是（如<code class="language-plaintext highlighter-rouge">"abcd"</code>）<code class="language-plaintext highlighter-rouge">String</code>类的一个实例。</p>
+<p>特点：</p>
+<ol>
+<li>
+<p>字符串是<strong>常量</strong>，它们的值在创建之后不能更改！</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">strA</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">;</span>
+<span class="n">strA</span> <span class="o">=</span> <span class="s">"Java"</span><span class="o">;</span>
+<span class="c1">//上面的写法中，字符串的内容仍然没有改变，这样的写法是修改字符串变量strA，让它应用另外一个字符串。相当于将存放3的数值变量改成存放4一样</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p>字符串是<strong>共享使用</strong>的。</p></li>
+</ol>
+<h3 id="471-字符串的构造方法和直接创建">4.7.1 字符串的构造方法和直接创建</h3>
+<p>创建字符串的几种方式：</p>
+<ul>
+<li><p>直接创建（无需使用<code class="language-plaintext highlighter-rouge">new</code>）：<code class="language-plaintext highlighter-rouge">String str = "Hello!";</code></p></li>
+<li>创建一个空白字符串，不含任何内容：<code class="language-plaintext highlighter-rouge">public String();</code>
+</li>
+<li>根据字符数组的内容，来创建对应的字符串：<code class="language-plaintext highlighter-rouge">public String(char[] array);</code>
+</li>
+<li>根据字节数组的内容，来创建对应的字符串：<code class="language-plaintext highlighter-rouge">public String(byte[] array);</code>
+</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoString</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">str0</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">;</span>
+        
+        <span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">();</span>
+        
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">charArray</span> <span class="o">=</span> <span class="o">{</span><span class="sc">'A'</span><span class="o">,</span> <span class="sc">'B'</span><span class="o">,</span> <span class="sc">'C'</span><span class="o">};</span>
+        <span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">charArray</span><span class="o">);</span>
+     
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">byteArray</span> <span class="o">=</span> <span class="o">{</span><span class="mi">97</span><span class="o">,</span> <span class="mi">98</span><span class="o">,</span> <span class="mi">99</span><span class="o">};</span>
+        <span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">byteArray</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="472-字符串常量池检测字符串是否相等">4.7.2 字符串常量池、检测字符串是否相等</h3>
+<p><code class="language-plaintext highlighter-rouge">String</code>类没有提供用于修改字符串的方法。</p>
+<p>如果要将下面的<code class="language-plaintext highlighter-rouge">str</code>中后面的<code class="language-plaintext highlighter-rouge">"key"</code>修改为<code class="language-plaintext highlighter-rouge">"ey!"</code>，在Java中，要先提取出需要的字符，然后再拼接上替换的字符串。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Monkey"</span><span class="o">;</span>
+<span class="n">str</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="s">"ey!"</span><span class="o">;</span> <span class="c1">//Money!</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>C++的字符串可以修改，即能够修改字符串中的单个字符，但Java不行。</p></blockquote>
+<p><strong>不可变的字符串</strong>有一个优点：编译器可以让字符串<strong>共享</strong>。</p>
+<p>字符串常量池存放在<em>方法区</em>❓，而字符串变量指向常量池中相应的位置。</p>
+<h4 id="检测字符串是否相等">检测字符串是否相等：</h4>
+<p>由于<code class="language-plaintext highlighter-rouge">==</code>，对于引用类型而言，是根据<strong>地址值</strong>比较的。这个运算符只能够确定两个字符串是否放置在同一位置上。而双引号括住的字符串在常量池当中，而<code class="language-plaintext highlighter-rouge">new</code>出来的字符串不在常量池中。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">a</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">b</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
+<span class="kt">boolean</span> <span class="n">res</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">);</span> <span class="c1">//true，因为字符串a与b为同一常量池中</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>若确实需要字符串的内容进行比较可使用<code class="language-plaintext highlighter-rouge">equals</code>方法：</p>
+<p><code class="language-plaintext highlighter-rouge">public boolean equals(Object obj); </code>：参数可以为任何对象，但只有参数为一个字符串并且内容相同（严格区分英文大小写）的才会返回<code class="language-plaintext highlighter-rouge">true</code>，否则返回<code class="language-plaintext highlighter-rouge">false</code>。</p>
+<p>尽管<code class="language-plaintext highlighter-rouge">equals</code>方法是可交换的（即<code class="language-plaintext highlighter-rouge">a.equals(b)</code>和<code class="language-plaintext highlighter-rouge">b.equals(a)</code>效果基本一致），但是，若要对一个常量与一个变量进行比较时，推荐常量字符串写在前面。原因见下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="s">"abc"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">str</span><span class="o">);</span> <span class="c1">//推荐写法</span>
+<span class="n">str</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"abc"</span><span class="o">);</span> <span class="c1">//不推荐写法</span>
+<span class="c1">//因为，当字符串变量为null时，</span>
+<span class="nc">String</span> <span class="n">tmp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"abc"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">tmp</span><span class="o">));</span> <span class="c1">//返回false</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tmp</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"abc"</span><span class="o">));</span> <span class="c1">//报错！空指针异常</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>【附】：<code class="language-plaintext highlighter-rouge">int compareTo(String other)</code>：按照字典序，若字符串位于<code class="language-plaintext highlighter-rouge">other</code>之前，返回负数；若字符串位于<code class="language-plaintext highlighter-rouge">other</code>之后返回正数；若两个字符串相等，返回<code class="language-plaintext highlighter-rouge">0</code>。</p>
+<h3 id="473-字符串相关api">4.7.3 字符串相关API</h3>
+<p>一、字符串获取：</p>
+<ul>
+<li>
+<p>返回字符串的长度：<code class="language-plaintext highlighter-rouge">int length()</code></p>
+<blockquote><p>注意，<code class="language-plaintext highlighter-rouge">String</code>类获取长度是<strong>方法</strong>，即<code class="language-plaintext highlighter-rouge">s.length()</code>；而数组的长度为<strong>成员</strong>，即<code class="language-plaintext highlighter-rouge">a.length</code>；</p></blockquote>
+</li>
+<li><p>获取<code class="language-plaintext highlighter-rouge">index</code>位置（从0开始）的<strong>单个字符</strong>：<code class="language-plaintext highlighter-rouge">char charAt(int index)</code></p></li>
+<li>
+<p>查找参数字符串<code class="language-plaintext highlighter-rouge">str</code>在本字符串当中首次出现的索引位置，若找不到则返回<code class="language-plaintext highlighter-rouge">-1</code>：<code class="language-plaintext highlighter-rouge">int indexOf(String str)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//e</span>
+<span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="s">"HelloHelloHelloHello"</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="s">"llo"</span><span class="o">);</span> <span class="c1">//2</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<p>二、字符串截取：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">String substring(int index)</code></p>
+<p>截取从<code class="language-plaintext highlighter-rouge">index</code>位置（包括<code class="language-plaintext highlighter-rouge">index</code>）一直到字符串末尾的子串并将该子串返回。</p>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">String substring(int begin, int end)</code></p>
+<p>从<code class="language-plaintext highlighter-rouge">begin</code>位置开始，到达不想复制的第一个位置<code class="language-plaintext highlighter-rouge">end</code>，即<code class="language-plaintext highlighter-rouge">[begin, end)</code>。显然，<code class="language-plaintext highlighter-rouge">s.substring(a, b)</code>的长度即为$b -a$。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">cur</span> <span class="o">=</span> <span class="s">"MonkeyDLuffy"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">6</span><span class="o">));</span> <span class="c1">//DLuffy</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">));</span> <span class="c1">//key</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<p>三、字符串的拼接</p>
+<p>Java语言允许使用<code class="language-plaintext highlighter-rouge">+</code>号拼接两个字符串。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Monkey"</span><span class="o">;</span>
+<span class="n">str</span> <span class="o">+=</span> <span class="s">"Luffy"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span> <span class="c1">//MonkeyLuffy</span>
+
+<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">233</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The answer is "</span> <span class="o">+</span> <span class="n">ans</span><span class="o">);</span> <span class="c1">//The answer is 233</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>当将一个字符串与一个<strong>非字符串</strong>的值进行拼接时，后者被转换成字符串。（任何一个Java对象都可以转换成字符串）</p>
+<p>四、字符串转换：</p>
+<ul>
+<li><p>将当前字符串拆分为字符数组并作为返回值：<code class="language-plaintext highlighter-rouge">char[] toCharArray</code></p></li>
+<li><p>获得当前字符串底层的字节数组（IO流会使用）：<code class="language-plaintext highlighter-rouge">byte[] getBytes()</code></p></li>
+<li>
+<p>将所有出现的目标字符串<code class="language-plaintext highlighter-rouge">target</code>替换为新的字符串，返回替换之后的结果新字符串：<code class="language-plaintext highlighter-rouge">String replace(CharSequence target, CharSequence replacement)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">char</span><span class="o">[]</span> <span class="n">c</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"How do you do?"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"o"</span><span class="o">,</span> <span class="s">"*"</span><span class="o">);</span> <span class="c1">//H*w d* y*u d*?</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<p>五、字符串的分割：</p>
+<ul><li>
+<p>根据字符串<code class="language-plaintext highlighter-rouge">regex</code>，将当前字符串切分成若干子串，并返回由这些子串组成的字符串数组：<code class="language-plaintext highlighter-rouge">String[] split(String regex)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"not to be"</span><span class="o">;</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">words</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">words</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="s">" "</span><span class="o">);</span>
+<span class="cm">/*
+not
+to
+be
+*/</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>注意：split方法的参数为正则表达式，若要按照字符’<code class="language-plaintext highlighter-rouge">.</code>‘进行切分，必须写<code class="language-plaintext highlighter-rouge">\\.</code></p></blockquote>
+</li></ul>
+<h3 id="474-字符串转换为基本类型-与-包装类">4.7.4 字符串转换为基本类型 与 包装类</h3>
+<p>除了<code class="language-plaintext highlighter-rouge">Character</code>类之外，其他所有<strong>包装类都具有</strong><code class="language-plaintext highlighter-rouge">parseXxx</code>静态方法可以将<strong>字符串参数转换为对应的基本类型</strong>：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">public static byte parseByte(String s)</code>：将字符串参数转换为对应的byte基本类型。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">public static short parseShort(String s)</code>：将字符串参数转换为对应的short基本类型。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">public static int parseInt(String s)</code>：将字符串参数转换为对应的int基本类型。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">public static long parseLong(String s)</code>：将字符串参数转换为对应的long基本类型。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">public static float parseFloat(String s)</code>：将字符串参数转换为对应的float基本类型。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">public static double parseDouble(String s)</code>：将字符串参数转换为对应的double基本类型。</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public static boolean parseBoolean(String s)</code>：将字符串参数转换为对应的boolean基本类型。</p>
+<blockquote><p>若字符串参数内容无法正确地转换为对应的基本类型，则会抛出<code class="language-plaintext highlighter-rouge">java.lang.NumberFormatException</code>异常。</p></blockquote>
+</li>
+</ul>
+<h2 id="48-stringbuilder-类">4.8 StringBuilder 类</h2>
+<p>由于<code class="language-plaintext highlighter-rouge">String</code>类的对象内容不可改变，每当进行字符串拼接时，总是需要在内存中创建一个新对象，例如：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringDemo</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="o">;</span> <span class="c1">//创建"Hello"字符串</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">"World!"</span><span class="o">;</span> <span class="c1">//创建"World!"字符串，后再创建"HelloWorld!"</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>如果要进行大量次拼接操作时，需要创建大量新的<code class="language-plaintext highlighter-rouge">String</code>对象，耗时且空间开销大，为解决此问题，可使用<code class="language-plaintext highlighter-rouge">java.lang.StringBuilder</code>类。</p>
+<p><code class="language-plaintext highlighter-rouge">StringBuilder</code>类为<strong>可变</strong>字符序列，它类似于<code class="language-plaintext highlighter-rouge">String</code>的字符串缓冲区，内部拥有一个数组用于存放字符串内容。当进行字符串拼接时，直接在该数组中加入新内容，同时<code class="language-plaintext highlighter-rouge">StringBuilder</code>本身也会自动维护数组的扩容。</p>
+<p>常用方法有：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">public StringBuilder append(...)</code>：添加任意类型数据的字符串形式，并返回当前对象自身（源码中就是返回<code class="language-plaintext highlighter-rouge">this</code>）。</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public String toString()</code>：将当前<code class="language-plaintext highlighter-rouge">StringBuilder</code>对象转换为不可变的<code class="language-plaintext highlighter-rouge">String</code>对象，并将该<code class="language-plaintext highlighter-rouge">String</code>对象进行返回。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StringBuilder</span> <span class="n">curstr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="s">"Hello "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"World"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"!"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">curstr</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p><code class="language-plaintext highlighter-rouge">StringBuilder</code>已经覆写了<code class="language-plaintext highlighter-rouge">Object</code>类的<code class="language-plaintext highlighter-rouge">toString</code>方法。</p></blockquote>
+</li>
+</ul>
+<h2 id="49-大数值类">4.9 大数值类</h2>
+<p><code class="language-plaintext highlighter-rouge">java.math</code>包中有两个有用的类，可以处理包含<strong>任意长度</strong>数字序列的数值。</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">BigInteger</code>：实现任意精度的整数运算。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">BigDecimal</code>：实现任意精度的浮点数运算。</li>
+</ul>
+<blockquote><p>由于Java没有提供运算符重载的功能，无法重定义<code class="language-plaintext highlighter-rouge">+</code>和<code class="language-plaintext highlighter-rouge">*</code>运算符，所以<code class="language-plaintext highlighter-rouge">BigInteger</code>类运算时需用其<code class="language-plaintext highlighter-rouge">add</code>和<code class="language-plaintext highlighter-rouge">multiply</code>。</p></blockquote>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BigIntegerTest</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="o">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="nc">BigInteger</span> <span class="n">ans</span> <span class="o">=</span> <span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//大整数初始化</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)).</span><span class="na">divide</span><span class="o">(</span><span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span> <span class="c1">//组合公式计算</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="491大数值相关api">4.9.1大数值相关API</h3>
+<p>返回该大整数与另一大整数other的和、差、积、商及余数：</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">BigInteger add(BigInteger other)</code></li>
+<li><code class="language-plaintext highlighter-rouge">BigInteger substact(BigInteger other)</code></li>
+<li><code class="language-plaintext highlighter-rouge">BigInteger multiply(BigInteger other)</code></li>
+<li><code class="language-plaintext highlighter-rouge">BigInteger divide(BigInteger other)</code></li>
+<li><code class="language-plaintext highlighter-rouge">BigInteger mod(BigInteger other)</code></li>
+</ul>
+<p>返回值等于<code class="language-plaintext highlighter-rouge">x</code>的大整数：</p>
+<ul><li><code class="language-plaintext highlighter-rouge">static BigInteger valueOf(long x)</code></li></ul>
+<p>若该大整数与另一个大整数other相等，返回<code class="language-plaintext highlighter-rouge">0</code>；若小于other，返回负数；否则，返回正数：</p>
+<ul><li><code class="language-plaintext highlighter-rouge">int compareTo(BigInteger other)</code></li></ul>
+<h2 id="410-数学工具类math">4.10 数学工具类Math</h2>
+<ul>
+<li>获取绝对值，有多种重载：<code class="language-plaintext highlighter-rouge">public static double abs(double num);</code>
+</li>
+<li>向上取整：<code class="language-plaintext highlighter-rouge">public static double ceil(double num);</code>
+</li>
+<li>向下取整：<code class="language-plaintext highlighter-rouge">public static double floor(double num);</code>
+</li>
+<li>
+<strong>四舍五入</strong>，返回<code class="language-plaintext highlighter-rouge">long</code>型：<code class="language-plaintext highlighter-rouge">public static long round(double num);</code>
+</li>
+</ul>
+<h2 id="411-object类">4.11 Object类</h2>
+<p><code class="language-plaintext highlighter-rouge">java.lang.Object</code>类是Java中所有类的最终祖先，即在Java中每个类（包括数组类型）都是由它拓展而来的。</p>
+<p>若一个类没有特别指定父类，那么默认继承自<code class="language-plaintext highlighter-rouge">Object</code>类，如：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span> <span class="cm">/* extends Object */</span><span class="o">{</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="4111-tostring-方法">4.11.1 toString 方法</h3>
+<ul><li>
+<code class="language-plaintext highlighter-rouge">public String toString() </code>：返回该对象的字符串表示，在<code class="language-plaintext highlighter-rouge">Object</code>类中该方法输出为：<code class="language-plaintext highlighter-rouge">对象类型@内存地址值</code>。</li></ul>
+<blockquote><p>当我们直接使用输出语句输出对象名时，其实通过该对象调用了其<code class="language-plaintext highlighter-rouge">toString()</code>方法。</p></blockquote>
+<p>然而在开发中需要根据对象属性得到相应的字符串表现形式，接下来便需要对该方法进行覆写。（以自定义的 <code class="language-plaintext highlighter-rouge">Person</code> 类）一般打印格式为：类的名字，随后是一对括号括起来的域值。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Person{"</span> <span class="o">+</span>
+                <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                <span class="s">", age="</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span>
+                <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//....</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="4112-equals-方法">4.11.2 equals 方法</h3>
+<ul><li>
+<code class="language-plaintext highlighter-rouge">public boolean equals(Object obj)</code>：检测一个对象是否等于另一对象，在<code class="language-plaintext highlighter-rouge">Object</code>类中该方法判断两个对象是否具有相同的<strong>引用</strong>。（相当于<code class="language-plaintext highlighter-rouge">==</code>运算符的运算结果）</li></ul>
+<p>然而，对于大多数类中，更经常地需要检测两个对象状态的相等性，比如所有成员变量相同就判定两个对象相同。因而，可以如下覆写：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">){</span> <span class="c1">//使用Object用于覆写超类的方法</span>
+        <span class="k">if</span><span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">//getClass()返回一个对象所属的类</span>
+        <span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Person</span><span class="o">)</span><span class="n">o</span><span class="o">;</span> <span class="c1">//向下转型，以使用子类特有的成员。</span>
+        <span class="k">return</span> <span class="n">age</span> <span class="o">==</span> <span class="n">person</span><span class="o">.</span><span class="na">age</span> <span class="o">&amp;&amp;</span> <span class="nc">Object</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+        <span class="c1">//基本类型相等，且将引用类型交给java.util.Objects类的equals静态方法取用结果。</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>TIPS：IDEA中的“代码”（Code）菜单——“生成”（Generate）可以快速生成上面的<code class="language-plaintext highlighter-rouge">toString</code>方法和<code class="language-plaintext highlighter-rouge">equals</code>方法的覆写。</p></blockquote>
+<h3 id="4113-objects-工具类">4.11.3 Objects 工具类</h3>
+<p>JDK7添加<code class="language-plaintext highlighter-rouge">Objects</code>工具类（注意，不是<code class="language-plaintext highlighter-rouge">Object</code>类），它由一些静态的实用方法组成，分为<em>null-save</em>（空指针安全）和<em>null-tolerant</em>（容忍空指针），用于计算对象的<code class="language-plaintext highlighter-rouge">hashcode</code>、返回对象的字符串表现形式、比较两个对象。</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public static boolean equals(Object a, Object b)</code>：判断两个对象的<strong>内容</strong>是否相等。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">b</span><span class="o">){</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">a</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">b</span><span class="o">));</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public static &lt;T&gt; T requireNonNull(T obj) </code>：判断传入的引用对象是否为空。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">){</span>
+        <span class="c1">//Objects.requireNonNull(obj);</span>
+        <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">"传递的对象为null!"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="c1">//对传递过来的参数进行合法性判断，判断是否为null</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h2 id="412-日期时间类">4.12 日期时间类</h2>
+<h3 id="4121-date-类">4.12.1 Date 类</h3>
+<p><code class="language-plaintext highlighter-rouge">java.util.Date</code>类 的实例有一个状态，即特定的时间点。这个时间 是 用距离一个固定时间点的毫秒数（可正可负），而这个固定时间点为纪元(<em>epoch</em>)——UTC 时间 1971 年 1 月 1 日 00 : 00 : 00 。</p>
+<blockquote><p>由于我们身处东八区，则基准时间为1970年1月1日8时0分0秒</p></blockquote>
+<blockquote><p>用类描述时间的好处在于，若类的设计不够完善，则可以编写自己的类以便增强或替代系统提供的类</p></blockquote>
+<p>构造方法：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">public Date()</code>：分配Date对象并初始化此对象，以表示分配它的时间（精确到毫秒），自动设置当前系统时间的毫秒时刻；</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public Date(long date)</code>：分配Date对象并初始化此对象以表示自从<em>纪元</em>以来的指定毫秒数。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
+        <span class="c1">//Thu Oct 29 21:03:14 CST 2020</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">(</span><span class="mi">0L</span><span class="o">));</span> <span class="c1">//将毫秒值转成日期对象</span>
+        <span class="c1">//Thu Jan 01 08:00:00 CST 1970</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h3 id="4122-dateformat-类">4.12.2 DateFormat 类</h3>
+<p><code class="language-plaintext highlighter-rouge">java.text.DateFormat</code> 为日期/时间格式化子类的<strong>抽象类</strong>，通过该类可以实现日期与文本间的转换（即Date对象与String对象间转换）</p>
+<ul>
+<li>
+<strong>格式化</strong>：按指定格式，Date对象 -&gt; String对象。</li>
+<li>
+<strong>解析</strong>：按指定格式，String对象 -&gt; Date对象。</li>
+</ul>
+<p>一、构造方法</p>
+<p>由于<code class="language-plaintext highlighter-rouge">DateFormat</code>为<strong>抽象类</strong>，需要常用的子类<code class="language-plaintext highlighter-rouge">java.text.SimpleDateFormat</code>（需要一个模式/格式来指定格式化或解析的标准），构造方法为：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">public SimpleDateFormat(String pattern)</code>：用给定模式和默认语言环境的日期格式符号构造<code class="language-plaintext highlighter-rouge">SimpleDateFormat</code>。其中<code class="language-plaintext highlighter-rouge">pattern</code>为 代表日期时间的自定义格式 的字符串。</p></li>
+<li>
+<p>格式规则</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">标识字母（区分大小写）</th>
+<th style="text-align: center">含义</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center">y</td>
+<td style="text-align: center">年</td>
+</tr>
+<tr>
+<td style="text-align: center">M</td>
+<td style="text-align: center">月</td>
+</tr>
+<tr>
+<td style="text-align: center">d</td>
+<td style="text-align: center">日</td>
+</tr>
+<tr>
+<td style="text-align: center">H</td>
+<td style="text-align: center">时</td>
+</tr>
+<tr>
+<td style="text-align: center">m</td>
+<td style="text-align: center">分</td>
+</tr>
+<tr>
+<td style="text-align: center">s</td>
+<td style="text-align: center">秒</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">DateFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="o">);</span>
+        <span class="c1">//对应日期格式为：2020-10-29 21:33:11</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>二、常用方法</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public String format(Date date)</code>：将Date对象格式化为字符串；</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+        <span class="nc">DateFormat</span> <span class="n">df</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy年MM月dd日"</span><span class="o">);</span> <span class="c1">//创建日期格式化对象，指定风格</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">date</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span> <span class="c1">//2020年10月29日</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public Date parse(String source)</code>：将字符串解析为Date对象；</p>
+<blockquote><p>注意，该方法需要对异常进行处理！</p></blockquote>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.ParseException</span><span class="o">;</span> <span class="c1">//导包</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ParseException</span> <span class="o">{</span> <span class="c1">//异常处理</span>
+        <span class="nc">DateFormat</span> <span class="n">df</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy年MM月dd日"</span><span class="o">);</span> <span class="c1">//创建日期格式化对象，指定风格</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"2001年1月7日"</span><span class="o">;</span>
+        <span class="nc">Date</span> <span class="n">bir</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bir</span><span class="o">);</span> <span class="c1">//2020年10月29日</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">public long getTime()</code>：将日期对象转换成对应的时间毫秒值。（可能已过时，但在计算某些时间差值时比较有用）</p></li>
+</ul>
+<p>计算一个人从出生到此刻的天数：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.text.ParseException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ParseException</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"请按YYYY年MM月dd日的格式输入您的出生日期："</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">birStr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">).</span><span class="na">next</span><span class="o">();</span> <span class="c1">//输入字符串日期</span>
+        <span class="nc">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy年MM月dd日"</span><span class="o">);</span> <span class="c1">//指定日期模式</span>
+        <span class="nc">Date</span> <span class="n">birDate</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">birStr</span><span class="o">);</span> <span class="c1">//调用parse方法将输入的字符串转换为日期对象</span>
+        <span class="kt">long</span> <span class="n">birSec</span> <span class="o">=</span> <span class="n">birDate</span><span class="o">.</span><span class="na">getTime</span><span class="o">();</span> <span class="c1">//返回该日期的毫秒时刻</span>
+
+        <span class="nc">Date</span> <span class="n">curDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span> <span class="c1">//获取此时此刻的日期</span>
+        <span class="kt">long</span> <span class="n">curSec</span> <span class="o">=</span> <span class="n">curDate</span><span class="o">.</span><span class="na">getTime</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">curSec</span> <span class="o">-</span> <span class="n">birSec</span><span class="o">;</span> <span class="c1">//计算差值</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"还没出生呢!"</span><span class="o">);</span>
+        <span class="k">else</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">diff</span><span class="o">/</span><span class="mi">1000</span><span class="o">/</span><span class="mi">60</span><span class="o">/</span><span class="mi">60</span><span class="o">/</span><span class="mi">24</span><span class="o">);</span> <span class="c1">//毫秒转换为天</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="413-calendar-类">4.13 Calendar 类</h2>
+<p><code class="language-plaintext highlighter-rouge">java.util.Calendar</code>为日历类，该类将所有可能用到的时间信息封装为静态成员变量以便获取。</p>
+<blockquote><p><code class="language-plaintext highlighter-rouge">Calendar</code>类中的方法取代了许多<code class="language-plaintext highlighter-rouge">Date</code>的方法。</p></blockquote>
+<p>一、创建对象</p>
+<p>由于<code class="language-plaintext highlighter-rouge">Calendar</code>类为<strong>抽象类</strong>，它不能够直接创建，而是通过静态方法返回一个子类对象来进行创建（多态），该静态方法为：</p>
+<ul><li>
+<p><code class="language-plaintext highlighter-rouge">public static Calendar getInstance()</code>：使用默认时区与语言环境获得一个 日历 。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Calendar</span> <span class="n">cal</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li></ul>
+<p>二、常用方法</p>
+<p><code class="language-plaintext highlighter-rouge">Calendar</code>类中提供很多有关日历的成员常量，它们各自代表不同的日历字段，同时也对应于<code class="language-plaintext highlighter-rouge">Calendar</code>相关方法中的传入参数<code class="language-plaintext highlighter-rouge">field</code>。</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">字段值</th>
+<th style="text-align: center">含义</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center">YEAR</td>
+<td style="text-align: center">年</td>
+</tr>
+<tr>
+<td style="text-align: center">MONTH</td>
+<td style="text-align: center">月（从0开始，可以+1使用）</td>
+</tr>
+<tr>
+<td style="text-align: center">DAY_OF_MONTH</td>
+<td style="text-align: center">月中的天（几号）</td>
+</tr>
+<tr>
+<td style="text-align: center">HOUR</td>
+<td style="text-align: center">时（12小时制）</td>
+</tr>
+<tr>
+<td style="text-align: center">HOUR_OF_DAY</td>
+<td style="text-align: center">时（24小时制）</td>
+</tr>
+<tr>
+<td style="text-align: center">MINUTE</td>
+<td style="text-align: center">分</td>
+</tr>
+<tr>
+<td style="text-align: center">SECOND</td>
+<td style="text-align: center">秒</td>
+</tr>
+<tr>
+<td style="text-align: center">DAY_OF_WEEK</td>
+<td style="text-align: center">周中的天（周几，周日为1，可以-1使用）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote><p><code class="language-plaintext highlighter-rouge">Calendar.YEAR</code>存的值为<code class="language-plaintext highlighter-rouge">3</code>，并不代表它就是记录月份，而是用于方法中识别的。其他成员常量也同理。</p></blockquote>
+<blockquote><p>西方星期开始为周日，月份表示为$0-11$。</p></blockquote>
+<p>根据<code class="language-plaintext highlighter-rouge">Calendar</code>类的API文档，常用方法有：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public int get(int field)</code>：给定日历字段<code class="language-plaintext highlighter-rouge">field</code>，让其返回该字段含义的值。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Calendar</span> <span class="n">cal</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">curyear</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">YEAR</span><span class="o">);</span> 
+<span class="c1">//我传入一个参数Calendar.YEAR，方法get()就会知道我要查询当前年份的值</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public void set(int field, int value)</code>：给定日历字段<code class="language-plaintext highlighter-rouge">field</code>，要其字段对应含义的值修改为<code class="language-plaintext highlighter-rouge">value</code>。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Calendar</span> <span class="n">cal</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+<span class="n">cal</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">YEAR</span><span class="o">,</span> <span class="mi">2020</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public abstract void add(int field, int amount)</code>：根据日历规则，为给定的日历字段添加或减去指定的时间量<code class="language-plaintext highlighter-rouge">amount</code>。若<code class="language-plaintext highlighter-rouge">amount</code>为负数，则说明减去偏移量；反之，为加。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Calendar</span> <span class="n">cal</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span> <span class="c1">//2020年10月30日</span>
+<span class="n">cal</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">DAY_OF_MONTH</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span> <span class="c1">//加2天</span>
+<span class="n">cal</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">MONTH</span><span class="o">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">);</span> <span class="c1">//减三个月</span>
+<span class="kt">int</span> <span class="n">mon</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">MONTH</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">day</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">DAY_OF_MONTH</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mon</span><span class="o">+</span><span class="s">"月"</span><span class="o">+</span><span class="n">day</span><span class="o">+</span><span class="s">"日"</span><span class="o">);</span> <span class="c1">//7月1日</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public Date getTime()</code>：返回一个表示此<code class="language-plaintext highlighter-rouge">Calendar</code>时间值（从 <em>纪元</em> 到现在的毫秒数）的<code class="language-plaintext highlighter-rouge">Date</code>对象。（不同于<code class="language-plaintext highlighter-rouge">Date</code>类的<code class="language-plaintext highlighter-rouge">getTime()</code>方法！）</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Calendar</span> <span class="n">cal</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+<span class="nc">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="na">getTime</span><span class="o">();</span><span class="c1">//Fri Oct 30 00:40:00 CST 2020</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h2 id="414-system-类">4.14 System 类</h2>
+<p><code class="language-plaintext highlighter-rouge">java.lang.System</code> 类中提供大量静态方法，可获取与系统相关的信息或系统级操作。常用方法有：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">public static long currentTimeMillis()</code>：获取当前系统时间与 1970 年 01 月 01 日 00:00 点之间的毫秒差值</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">st</span> <span class="o">=</span> <span class="n">currentTimeMillis</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="o">;</span> <span class="n">i</span><span class="o">++){}</span>
+        <span class="kt">long</span> <span class="n">ed</span> <span class="o">=</span> <span class="n">currentTimeMillis</span><span class="o">();</span>
+        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">ed</span> <span class="o">-</span> <span class="n">st</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">diff</span><span class="o">);</span> <span class="c1">//4ms.........</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</code>：将数组中指定的数据拷贝到另一个数组中。</p></li>
+</ul>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/javase/" class="post-tag no-text-decoration">JavaSE</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/&amp;title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%8D%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%8D%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%8D%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%8D%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%8D%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/%E5%BC%80%E5%8F%91%E5%89%8D%E8%A8%80%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><div class="card-body"> <span class="timeago small"> Oct 18, 2020 <i class="unloaded">2020-10-18T22:20:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记01」开发前言与环境搭建、基础语法</h3>
+<div class="text-muted small"><p> 本蒟蒻学习过C/C++的语法，故在学习Java的过程中，会关注于C++与Java的区别。开发前言部分，看了苏星河教程中的操作步骤。而后，主要阅读了《Java核心技术 卷1 基础知识》(第8版)，本篇笔记的诞生与这本书有很大的关系。<img class="emoji" title=":smile_cat:" alt=":smile_cat:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f638.png" height="20" width="20"> “程序设计语言的成功，更多地取决于其支撑系统的能力，而不是优美的语法。” Chapter 1. 开发前言 1.0 错误总结 ...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E7%BB%A7%E6%89%BF-%E6%8E%A5%E5%8F%A3-%E5%A4%9A%E6%80%81-%E5%86%85%E9%83%A8%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 25, 2020 <i class="unloaded">2020-10-25T22:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记03」继承、接口、多态、内部类</h3>
+<div class="text-muted small"><p> Chapter5. 继承 继承作为面向对象的三大特征之一，它是多态的前提。它主要解决的问题是共性抽取。 Java中的继承，是单继承、多级继承的。 已存在的类，被称为超类、基类、父类(parent class)；新类，被称为子类(subclass)、派生类。 每一个子类的直接父亲是唯一的，但一个父亲可拥有多个子类。子类比父类拥有的功能更加丰富。 5.1 继承的格式 定义父类的格式（...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E5%BC%82%E5%B8%B8/"><div class="card-body"> <span class="timeago small"> Oct 31, 2020 <i class="unloaded">2020-10-31T22:39:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记04」异常</h3>
+<div class="text-muted small"><p> Chapter 9 异常 异常：指程序在执行过程中，出现的非正常的情况，最终导致JVM非正常停止。 在Java等面向对象的编程语言中，异常是一个类，所有异常都是发生在运行阶段的（因为也只有程序运行阶段方可new 对象），产生异常其实就是创建异常对象。而Java处理异常的方式为中断处理。 9.1 异常体系 如下的UML图关于异常的继承结构，异常的根类为java.lang.Throwab...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/%E5%BC%80%E5%8F%91%E5%89%8D%E8%A8%80%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="btn btn-outline-primary" prompt="&lt; Older"><p>「JavaSE学习笔记01」开发前言与环境搭建、基础语法</p></a> <a href="/posts/%E7%BB%A7%E6%89%BF-%E6%8E%A5%E5%8F%A3-%E5%A4%9A%E6%80%81-%E5%86%85%E9%83%A8%E7%B1%BB/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>「JavaSE学习笔记03」继承、接口、多态、内部类</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

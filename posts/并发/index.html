@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「JavaSE学习笔记06」并发" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="Chapter 12. 并发" /><meta property="og:description" content="Chapter 12. 并发" /><link rel="canonical" href="https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" /><meta property="og:url" content="https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-11-12T17:02:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「JavaSE学习笔记06」并发" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"Chapter 12. 并发","url":"https://joydee.top/posts/%E5%B9%B6%E5%8F%91/","@type":"BlogPosting","headline":"「JavaSE学习笔记06」并发","dateModified":"2021-01-21T13:06:43+08:00","datePublished":"2020-11-12T17:02:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/%E5%B9%B6%E5%8F%91/"},"@context":"https://schema.org"}</script><title>「JavaSE学习笔记06」并发 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「JavaSE学习笔记06」并发</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<h1 data-toc-skip>「JavaSE学习笔记06」并发</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Thu, Nov 12, 2020, 5:02 PM +0800"> Nov 12, 2020 <i class="unloaded">2020-11-12T17:02:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Thu, Jan 21, 2021, 1:06 PM +0800"> Jan 21 <i class="unloaded">2021-01-21T13:06:43+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="1998 words">22 min</span> <span id="/posts/%E5%B9%B6%E5%8F%91/" class="leancloud_visitors" data-flag-title="「JavaSE学习笔记06」并发"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<h1 id="chapter-12-并发">Chapter 12. 并发</h1>
+<h2 id="121-并发与并行">12.1 并发与并行</h2>
+<ul>
+<li>并发：指两个或多个事件在<strong>同一个时间段</strong>内发生。</li>
+<li>并行：指两个或多个事件在<strong>同一时刻</strong>发生（同时发生）。</li>
+</ul>
+<p>在操作系统中，并发指的是在一段时间内宏观上有多个程序同时运行。</p>
+<p>在单 CPU 系统中，每一时刻只能有一道程序执行，即微观上这些程序是分时的交替运行，而这个分时交替运行的时间是非常短的。</p>
+<blockquote><p>注意：单核处理器的计算机肯定是不能并行的处理多个任务的，只能是多个任务在单个CPU上并发运行。同理,线程也是一样的，从宏观角度上理解线程是并行运行的，但是从微观角度上分析却是串行运行的，即一个线程一个线程的去运行，当系统只有一个CPU时，线程会以某种顺序执行多个线程，我们把这种情况称之为<strong>线程调度</strong>。</p></blockquote>
+<p>在多个 CPU 系统中，则这些<strong>可以并发执行</strong>的程序便可以分配到多个处理器上（CPU），实现多任务并行执行，即利用每个处理器来处理一个可以并发执行的程序，这样多个程序便可以同时执行。多核处理器，核 越多，并行处理的程序越多，能大大的提高电脑运行的效率。</p>
+<h2 id="122-线程与进程">12.2 线程与进程</h2>
+<ul>
+<li>
+<p><strong>进程</strong>：是指一个内存中运行的应用程序，每个进程都有一个<strong>独立的内存空间</strong>，一个应用程序可以同时运行多个进程（即<strong>一个程序运行后至少有一个进程</strong>）；进程也是程序的一次执行过程，是系统运行程序的基本单位。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201112165830.png" width="400"></p>
+</li>
+<li>
+<p><strong>线程</strong>：线程是进程中的一个<strong>执行单元</strong>，负责当前进程中程序的执行。一个进程中是可以有多个线程的（即<strong>一个进程中至少有一个线程</strong>），这个应用程序也可以称之为多线程程序。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201112165716.png" width="400"></p>
+<blockquote><p>同一进程中的线程<strong>共享</strong>其进程中的内存（堆内存、方法区内存，但栈内存不共享，因为一个线程一个栈）和资源。</p></blockquote>
+</li>
+</ul>
+<p><strong>线程调度</strong>：</p>
+<ul>
+<li>
+<p>分时调度</p>
+<p>所有线程轮流使用 CPU 的使用权，平均分配每个线程占用 CPU 的时间。</p>
+</li>
+<li>
+<p>抢占式调度</p>
+<p>优先让优先级高的线程使用 CPU ，如果线程的优先级相同，那么会随机选择一个线程（体现出<strong>线程随机性</strong>），Java使用的是抢占式调度。大部分操作系统都支持多进程并发运行，几乎都支持同时运行多个程序。但实际上，CPU使用抢占式调度模式在多个线程间进行着高速的切换，对于CPU一个核而言，某个时刻只能指向一个线程，而CPU的在多个线程间切换速度十分块。</p>
+</li>
+</ul>
+<h2 id="123-创建线程">12.3 创建线程</h2>
+<h3 id="1231-继承thread类以创建线程">12.3.1 继承Thread类以创建线程</h3>
+<p>Java使用 <code class="language-plaintext highlighter-rouge">java.lang.Thread</code> 类代表<strong>线程</strong>，所有线程对象都必须是<code class="language-plaintext highlighter-rouge">Thread</code>类或其子类的实例。每个线程实际上就是顺序执行一段代码。Java使用线程执行体来代表这段程序流，如下创建并启动多线程：</p>
+<p>一、定义子类，覆写方法：</p>
+<p>定义<code class="language-plaintext highlighter-rouge">Thread</code>类的子类，并覆写该类的<code class="language-plaintext highlighter-rouge">run()</code>方法（它代表线程需完成的任务，故称之为<strong>线程执行体</strong>）。</p>
+<p>对于<code class="language-plaintext highlighter-rouge">Thread</code>类，其构造方法有：</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">public Thread()</code></li>
+<li>
+<code class="language-plaintext highlighter-rouge">public Thread(String name)</code>：以指定名字<code class="language-plaintext highlighter-rouge">name</code>创建新的线程对象</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public Thread(Runnable target)</code>：带有指定目标<code class="language-plaintext highlighter-rouge">target</code>创建新的线程对象</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public Thread(Runnable target, String name)</code>：创建一个带有指定目标<code class="language-plaintext highlighter-rouge">target</code>且指定名字为<code class="language-plaintext highlighter-rouge">name</code>的线程对象。</li>
+</ul>
+<p>自定义线程类举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">extends</span> <span class="nc">Thread</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">MyThread</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span> <span class="c1">//构造方法，指定线程名称</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">);</span> <span class="c1">//需要调用父类Thread的String参数的构造方法，以指定线程名称</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="c1">//覆写run方法，完成该线程执行的逻辑</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>二、创建实例，启动线程：</p>
+<p>创建线程，即创建了线程对象。接着调用线程对象的<code class="language-plaintext highlighter-rouge">start</code>方法以启动该线程。</p>
+<p>对于<code class="language-plaintext highlighter-rouge">Thread</code>类，其常用方法有：</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">public String getName()</code>：获取当前线程名称。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public void start()</code>：使该线程开始执行，JVM调用此线程的<code class="language-plaintext highlighter-rouge">run</code>方法。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public void run()</code>：此线程要执行的任务在此处定义。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public static void sleep(long millis)</code>：使当前正在执行的线程以执行毫秒数<code class="language-plaintext highlighter-rouge">millis</code>暂停（暂时停止执行）。</li>
+<li>
+<strong><code class="language-plaintext highlighter-rouge">public static Thread currentThread()</code></strong>：返回对当前正在执行的线程对象的引用。</li>
+</ul>
+<p>测试类举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"这里是main线程"</span><span class="o">);</span>
+        <span class="nc">MyThread</span> <span class="n">mt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyThread</span><span class="o">(</span><span class="s">"另一条新线程"</span><span class="o">);</span> <span class="c1">//创建自定义线程对象</span>
+        <span class="n">mt</span><span class="o">.</span><span class="na">start</span><span class="o">();</span> <span class="c1">//开启新线程</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main线程："</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201112192746.png"></p>
+<blockquote><p>Java中，每个程序运行至少启动2个线程（<code class="language-plaintext highlighter-rouge">main</code>线程，及垃圾收集线程）。</p></blockquote>
+<h3 id="1232-实现runnable接口以创建线程">12.3.2 实现Runnable接口以创建线程</h3>
+<p>对于<code class="language-plaintext highlighter-rouge">java.lang.Runnable</code>，我们只需覆写其<code class="language-plaintext highlighter-rouge">run</code>方法即可。</p>
+<p>一、定义实现类，覆写方法：</p>
+<p>定义<code class="language-plaintext highlighter-rouge">Runnable</code>接口的实现类，并覆写该接口的<code class="language-plaintext highlighter-rouge">run</code>方法（该方法体同样为该线程的线程执行体）</p>
+<p>举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyRunnable</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>二、创建实例，启动线程</p>
+<p>创建<code class="language-plaintext highlighter-rouge">Runnable</code>实现类的实例，并以此实例作为<code class="language-plaintext highlighter-rouge">Thread</code>的<code class="language-plaintext highlighter-rouge">target</code>来创建<code class="language-plaintext highlighter-rouge">Thread</code>对象（对应于<code class="language-plaintext highlighter-rouge">Thread</code>的构造方法<code class="language-plaintext highlighter-rouge">Thread(Runnable target)</code>），注意，该<code class="language-plaintext highlighter-rouge">Thread</code>对象才是真正的线程对象。接着，调用线程对象的<code class="language-plaintext highlighter-rouge">start()</code>来启动线程。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">MyRunnable</span> <span class="n">mr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyRunnable</span><span class="o">();</span>
+        <span class="nc">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="n">mr</span><span class="o">,</span> <span class="s">"另一线程"</span><span class="o">);</span>
+        <span class="n">t</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"主线程"</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p><code class="language-plaintext highlighter-rouge">Runnable</code>对象仅作为<code class="language-plaintext highlighter-rouge">Thread</code>对象的<code class="language-plaintext highlighter-rouge">target</code>，<code class="language-plaintext highlighter-rouge">Runnable</code>实现类包含的<code class="language-plaintext highlighter-rouge">run</code>方法仅作为线程执行体，而实际的线程对象仍是<code class="language-plaintext highlighter-rouge">Thread</code>实例，只是该<code class="language-plaintext highlighter-rouge">Thread</code>线程负责执行其<code class="language-plaintext highlighter-rouge">target</code>的<code class="language-plaintext highlighter-rouge">run()</code>方法。</p></blockquote>
+<p>相比于直接继承<code class="language-plaintext highlighter-rouge">Thread</code>类，实现<code class="language-plaintext highlighter-rouge">Runnable</code>接口所具有的优势：</p>
+<ol>
+<li>多个相同的程序代码的线程能够共享同一资源；</li>
+<li>避免Java中的单继承的局限性；</li>
+<li>增加程序的健壮性，实现解耦操作，代码能被多个线程共享，代码与线程独立；</li>
+<li>线程池只能放入实现<code class="language-plaintext highlighter-rouge">Runnable</code>或<code class="language-plaintext highlighter-rouge">Callable</code>类线程，不能放入直接继承<code class="language-plaintext highlighter-rouge">Thread</code>的类；</li>
+</ol>
+<h3 id="1233-匿名内部类方式-创建线程">12.3.3 匿名内部类方式 创建线程</h3>
+<p>使用匿名内部类的方式实现<code class="language-plaintext highlighter-rouge">Runnable</code>接口，覆写<code class="language-plaintext highlighter-rouge">Runnable</code>接口中的<code class="language-plaintext highlighter-rouge">run</code>方法，举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JustTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"另一线程:"</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">r</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main线程:"</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>多线程这一模块的知识，暂时先学到这，咕一咕。🤪</p>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/javase/" class="post-tag no-text-decoration">JavaSE</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/%E5%B9%B6%E5%8F%91/&amp;title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006%E3%80%8D%E5%B9%B6%E5%8F%91%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006%E3%80%8D%E5%B9%B6%E5%8F%91%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006%E3%80%8D%E5%B9%B6%E5%8F%91%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006%E3%80%8D%E5%B9%B6%E5%8F%91%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006%E3%80%8D%E5%B9%B6%E5%8F%91%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E5%B9%B6%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/%E5%BC%80%E5%8F%91%E5%89%8D%E8%A8%80%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><div class="card-body"> <span class="timeago small"> Oct 18, 2020 <i class="unloaded">2020-10-18T22:20:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记01」开发前言与环境搭建、基础语法</h3>
+<div class="text-muted small"><p> 本蒟蒻学习过C/C++的语法，故在学习Java的过程中，会关注于C++与Java的区别。开发前言部分，看了苏星河教程中的操作步骤。而后，主要阅读了《Java核心技术 卷1 基础知识》(第8版)，本篇笔记的诞生与这本书有很大的关系。<img class="emoji" title=":smile_cat:" alt=":smile_cat:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f638.png" height="20" width="20"> “程序设计语言的成功，更多地取决于其支撑系统的能力，而不是优美的语法。” Chapter 1. 开发前言 1.0 错误总结 ...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 23, 2020 <i class="unloaded">2020-10-23T22:27:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记02」对象与类</h3>
+<div class="text-muted small"><p> Chapter 4. 对象与类 4.1 面向对象程序设计概述 面向对象程序设计（简称OOP），是当今主流程序设计范型。面向对象的程序是由对象组成的，每个对象（来自于标准库或自定义的）包含对用户公开的特定功能和隐藏的实现部分。在OOP中，不必关心对象的具体实现，只要能够满足用户的需求即可。面向对象的语言中，包含了三大基本特征：封装、继承、多态。 4.1.1 类 类(class)，是构造...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E7%BB%A7%E6%89%BF-%E6%8E%A5%E5%8F%A3-%E5%A4%9A%E6%80%81-%E5%86%85%E9%83%A8%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 25, 2020 <i class="unloaded">2020-10-25T22:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记03」继承、接口、多态、内部类</h3>
+<div class="text-muted small"><p> Chapter5. 继承 继承作为面向对象的三大特征之一，它是多态的前提。它主要解决的问题是共性抽取。 Java中的继承，是单继承、多级继承的。 已存在的类，被称为超类、基类、父类(parent class)；新类，被称为子类(subclass)、派生类。 每一个子类的直接父亲是唯一的，但一个父亲可拥有多个子类。子类比父类拥有的功能更加丰富。 5.1 继承的格式 定义父类的格式（...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/15thCSUST-ACM/" class="btn btn-outline-primary" prompt="&lt; Older"><p>第15届CSUST-ACM程序大赛游记</p></a> <a href="/posts/IO%E6%B5%81/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>「JavaSE学习笔记07」IO流</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

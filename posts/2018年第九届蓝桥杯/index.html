@@ -1,0 +1,619 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="B. 明码 #STL" /><meta property="og:description" content="B. 明码 #STL" /><link rel="canonical" href="https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" /><meta property="og:url" content="https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-10-14T13:14:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"B. 明码 #STL","url":"https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/","@type":"BlogPosting","headline":"2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解","dateModified":"2021-01-23T14:23:45+08:00","datePublished":"2020-10-14T13:14:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/"},"@context":"https://schema.org"}</script><title>2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">JoyDee's Blog</a></div><div class="site-subtitle font-italic">Cause I have a dream.</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a><li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a><li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a><li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a><li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a><li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['422148166','qq.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/online-judge/'>Online Judge</a>, <a href='/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/'>蓝桥杯</a></div><h1 data-toc-skip>2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解</h1><div class="post-meta text-muted d-flex flex-column"><div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Wed, Oct 14, 2020, 1:14 PM +0800" > Oct 14, 2020 <i class="unloaded">2020-10-14T13:14:00+08:00</i> </span> by <span class="author"> JoyDee </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sat, Jan 23, 2021, 2:23 PM +0800" > Jan 23 <i class="unloaded">2021-01-23T14:23:45+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3248 words">36 min</span> <span id="/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" class="leancloud_visitors" data-flag-title="2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span></div></div><div class="post-content"><h1 id="b-明码-stl">B. 明码 #STL</h1><h2 id="题意">题意</h2><p>把每个字节转为<code class="language-plaintext highlighter-rouge">2</code>进制表示，<code class="language-plaintext highlighter-rouge">1</code>表示墨迹，<code class="language-plaintext highlighter-rouge">0</code>表示底色。每行2个字节，一共16行，布局是：</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="err">第</span><span class="mi">1</span><span class="err">字节，第</span><span class="mi">2</span><span class="err">字节</span>
+<span class="err">第</span><span class="mi">3</span><span class="err">字节，第</span><span class="mi">4</span><span class="err">字节</span>
+<span class="p">....</span>
+<span class="err">第</span><span class="mi">31</span><span class="err">字节</span><span class="p">,</span> <span class="err">第</span><span class="mi">32</span><span class="err">字节</span>
+</pre></table></code></div></div><p>给定一段由多个汉字组成的信息，每个汉字用$32$个字节表示，这里给出了字节作为<strong>有符号</strong>整数的值。题目的要求隐藏在这些信息中。你的任务是复原这些汉字的字形，从中看出题目要求，并根据要求填写答案。</p><h2 id="分析">分析</h2><p>注意题目中说明是有符号二进制，也就说如果某个十进制数为负数，则它的二进制为补码（对于负数的补码，最高位为符号位，要取<code class="language-plaintext highlighter-rouge">1</code>，对原码取反再加一）。</p><p>题目简而言之，即为每一行有$32$个数字，每两个数字组成一行的布局。比如</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="err">第一行：</span><span class="mi">4</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">32</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">16</span> <span class="mi">4</span> <span class="mi">32</span> <span class="mi">4</span> <span class="mi">32</span> <span class="mi">4</span> <span class="mi">32</span> <span class="mi">4</span> <span class="mi">32</span> <span class="mi">4</span> <span class="mi">32</span> <span class="mi">8</span> <span class="mi">32</span> <span class="mi">8</span> <span class="mi">32</span> <span class="mi">16</span> <span class="mi">34</span> <span class="mi">16</span> <span class="mi">34</span> <span class="mi">32</span> <span class="mi">30</span> <span class="o">-</span><span class="mi">64</span> <span class="mi">0</span> 
+<span class="err">则每两个作为一行，并换算成二进制：</span>
+<span class="mo">00000100</span> <span class="mo">00000000</span>
+<span class="mo">00000100</span> <span class="mo">00000000</span>
+<span class="mo">00000100</span> <span class="mo">00000000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mi">11111111</span> <span class="mi">11110000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mo">00000100</span> <span class="mo">00100000</span>
+<span class="mo">00001000</span> <span class="mo">00100000</span>
+<span class="mo">00001000</span> <span class="mo">00100000</span>
+<span class="mo">00010000</span> <span class="mo">00100010</span>
+<span class="mo">00010000</span> <span class="mo">00100010</span>
+<span class="mo">00100000</span> <span class="mo">00011110</span>
+<span class="mi">11000000</span> <span class="mo">00000000</span>
+<span class="err">每个</span><span class="mi">1</span><span class="err">组成汉字的笔画，所以这一行的字为“九”</span>
+</pre></table></code></div></div><p>关于十进制对二进制的转换，可以使用STL的<code class="language-plaintext highlighter-rouge">bitset</code>数据结构，十分方便，初始时定义为8位的二进制串，每次输入一个十进制，它就能将该数值转换为二进制串，同时还能将这个二进制串输出来！</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//打印出来</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">16</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">a</span><span class="o">++</span><span class="p">){</span>
+                <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
+                <span class="n">bitset</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">&gt;</span> <span class="n">mybit</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">mybit</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"----------------"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> 
+    <span class="c1">//cout &lt;&lt; "九的九次方等于多少？" &lt;&lt; endl;</span>
+    <span class="c1">//cout &lt;&lt; "387420489" &lt;&lt; endl; //最终结果</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h1 id="c-乘积尾零-因数分解">C. 乘积尾零 #因数分解</h1><h2 id="题意-1">题意</h2><p>如下的10行数据，每行有10个整数，请你求出它们的乘积的<strong>末尾</strong>有<strong>多少个</strong>零？</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="mi">5650</span> <span class="mi">4542</span> <span class="mi">3554</span> <span class="mi">473</span> <span class="mi">946</span> <span class="mi">4114</span> <span class="mi">3871</span> <span class="mi">9073</span> <span class="mi">90</span> <span class="mi">4329</span> 
+<span class="mi">2758</span> <span class="mi">7949</span> <span class="mi">6113</span> <span class="mi">5659</span> <span class="mi">5245</span> <span class="mi">7432</span> <span class="mi">3051</span> <span class="mi">4434</span> <span class="mi">6704</span> <span class="mi">3594</span> 
+<span class="mi">9937</span> <span class="mi">1173</span> <span class="mi">6866</span> <span class="mi">3397</span> <span class="mi">4759</span> <span class="mi">7557</span> <span class="mi">3070</span> <span class="mi">2287</span> <span class="mi">1453</span> <span class="mi">9899</span> 
+<span class="mi">1486</span> <span class="mi">5722</span> <span class="mi">3135</span> <span class="mi">1170</span> <span class="mi">4014</span> <span class="mi">5510</span> <span class="mi">5120</span> <span class="mi">729</span> <span class="mi">2880</span> <span class="mi">9019</span> 
+<span class="mi">2049</span> <span class="mi">698</span> <span class="mi">4582</span> <span class="mi">4346</span> <span class="mi">4427</span> <span class="mi">646</span> <span class="mi">9742</span> <span class="mi">7340</span> <span class="mi">1230</span> <span class="mi">7683</span> 
+<span class="mi">5693</span> <span class="mi">7015</span> <span class="mi">6887</span> <span class="mi">7381</span> <span class="mi">4172</span> <span class="mi">4341</span> <span class="mi">2909</span> <span class="mi">2027</span> <span class="mi">7355</span> <span class="mi">5649</span> 
+<span class="mi">6701</span> <span class="mi">6645</span> <span class="mi">1671</span> <span class="mi">5978</span> <span class="mi">2704</span> <span class="mi">9926</span> <span class="mi">295</span> <span class="mi">3125</span> <span class="mi">3878</span> <span class="mi">6785</span> 
+<span class="mi">2066</span> <span class="mi">4247</span> <span class="mi">4800</span> <span class="mi">1578</span> <span class="mi">6652</span> <span class="mi">4616</span> <span class="mi">1113</span> <span class="mi">6205</span> <span class="mi">3264</span> <span class="mi">2915</span> 
+<span class="mi">3966</span> <span class="mi">5291</span> <span class="mi">2904</span> <span class="mi">1285</span> <span class="mi">2193</span> <span class="mi">1428</span> <span class="mi">2265</span> <span class="mi">8730</span> <span class="mi">9436</span> <span class="mi">7074</span> 
+<span class="mi">689</span> <span class="mi">5510</span> <span class="mi">8243</span> <span class="mi">6114</span> <span class="mi">337</span> <span class="mi">4096</span> <span class="mi">8199</span> <span class="mi">7313</span> <span class="mi">3685</span> <span class="mi">211</span> 
+</pre></table></code></div></div><h2 id="分析-1">分析</h2><p>注意审题，题目要求的是乘积结果的<strong>尾部</strong>，也就说它并不是问你乘积结果整个数字含有多少个零！（如果是求这个的话，难度++）</p><p>观察到，乘积结果的尾部有$x$个$0$，说明该乘积结果含有$x$个因子$10$，也就说<strong>至少</strong>含有$x$个因子$5$和$x$个因子$2$（多余的因子成单，没有与之对应的因子进行配对），由此我们可以将所有数中的因子$5$和$2$分解出来，统计含$2$和$5$的因子数量并取两者最少值，即能推出乘积结果尾部$0$的数量。</p><p>举个栗子，对于$1050=2\times3\times7\times5\times5$（含两个$5$，一个$2$），而$180=9\times2\times2\times5$（含一个$5$，两个$2$），则他们的乘积为$1050\times180=189000=(9\times3\times7)\times(5\times2)\times(5\times2)\times(5\times2)$（即三对$5\times2$构成尾部的三个$0$）</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">ResoluteNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//统计数cur中含有多少个base因子</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">cur</span> <span class="o">%</span> <span class="n">base</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">res</span> <span class="o">++</span><span class="p">;</span>
+        <span class="n">cur</span> <span class="o">/=</span> <span class="n">base</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">num_2</span><span class="p">,</span> <span class="n">num_5</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">freopen</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Learning</span><span class="se">\\</span><span class="s">data.in"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
+        <span class="n">num_2</span> <span class="o">+=</span> <span class="n">ResoluteNumber</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">//统计tmp含有多少个2因子</span>
+        <span class="n">num_5</span> <span class="o">+=</span> <span class="n">ResoluteNumber</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">//统计tmp含有多少个5因子</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">num_2</span><span class="p">,</span> <span class="n">num_5</span><span class="p">));</span>
+    <span class="c1">//printf("31\n"); //最终结果</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h1 id="d-测试次数-记忆化搜索-动态规划">D. 测试次数 #记忆化搜索 #动态规划</h1><p>迟一点再更</p><p><a href="https://leetcode-cn.com/problems/super-egg-drop/submissions/">鸡蛋掉落</a></p><p>普通记忆化搜索</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1005</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">floor</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">floor</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">floor</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">floor</span><span class="p">][</span><span class="n">num</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">INF</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">floor</span><span class="p">][</span><span class="n">num</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">floor</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">badcase</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">DFS</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">DFS</span><span class="p">(</span><span class="n">floor</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span><span class="p">));</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">badcase</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">floor</span><span class="p">][</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mh">0x3f</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">DFS</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>记忆化搜索+二分思想+哈希表 过大数据</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">ll</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">floor</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">floor</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">floor</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1LL</span> <span class="o">*</span> <span class="n">floor</span> <span class="o">*</span> <span class="mi">10005</span> <span class="o">+</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">num</span><span class="p">)</span> <span class="o">!=</span> <span class="n">dp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1LL</span> <span class="o">*</span> <span class="n">floor</span> <span class="o">*</span> <span class="mi">10005</span> <span class="o">+</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">num</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">,</span> <span class="n">lo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">floor</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">rev_1</span> <span class="o">=</span> <span class="n">DFS</span><span class="p">(</span><span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">rev_2</span> <span class="o">=</span> <span class="n">DFS</span><span class="p">(</span><span class="n">floor</span> <span class="o">-</span> <span class="n">mid</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">rev_1</span> <span class="o">&lt;</span> <span class="n">rev_2</span><span class="p">)</span> <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">badcase_1</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">DFS</span><span class="p">(</span><span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">DFS</span><span class="p">(</span><span class="n">floor</span> <span class="o">-</span> <span class="n">lo</span><span class="p">,</span> <span class="n">num</span><span class="p">));</span>
+        <span class="kt">int</span> <span class="n">badcase_2</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">DFS</span><span class="p">(</span><span class="n">hi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">DFS</span><span class="p">(</span><span class="n">floor</span> <span class="o">-</span> <span class="n">hi</span><span class="p">,</span> <span class="n">num</span><span class="p">));</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">min</span><span class="p">(</span><span class="n">badcase_1</span><span class="p">,</span> <span class="n">badcase_2</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1LL</span> <span class="o">*</span> <span class="n">floor</span> <span class="o">*</span> <span class="mi">10005</span> <span class="o">+</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">DFS</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h1 id="f-递增三元组-二分思想-前缀和">F. 递增三元组 #二分思想 #前缀和</h1><h2 id="题意-2">题意</h2><p>给定三个整数数组<code class="language-plaintext highlighter-rouge">A = [A1, A2, ... AN]</code>, <code class="language-plaintext highlighter-rouge">B = [B1, B2, ... BN]</code>, <code class="language-plaintext highlighter-rouge">C = [C1, C2, ... CN]</code>（$N\leq1e5$），请你统计有多少个三元组$(i, j, k) $同时满足：</p><ul><li><p>$1 \leq i, j, k \leq N$</p><li><p>$A_i &lt; B_j &lt; C_k$</p></ul><h2 id="分析-2">分析</h2><p>不妨对这三个整数数组先升序排序，我们知道，要确定一个三元组$(i,j,k)$，那么可以先从$A$中取一个元素$a_i$，再从$B$中找出第一个大于等于$a_i$的元素$b_j$，同理再从$C$中找出第一个大于等于$b_j$的元素$c_k$。但如果这样直接枚举每个$i,j,k$一定会超时。</p><p>我们枚举每个$b_j$，通过二分确定了第一个$c_k$的位置$pos$，可以知道有$(n-pos)$个C数组元素，大于等于$b_j$。我们在枚举$b_j$并确定$pos$的过程中，同时用前缀和维护前$j$个元素$b_j$，有<strong>多少个</strong>小于C数组的元素($sum[j]=\sum_{1}^j{n-pos}$)。</p><p>接着，枚举每个$ a_i$，通过二分确定了第一个$b_j$的位置$posB$，查询$sum[n]-sum[posB]$，可以知道满足题目要求的三元组个数。</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="n">ll</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sumFromB</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span> <span class="c1">//sumFromB[i]表示，对于B数组中第i个元素bi，在C数组中大于等于它的元素数量。</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span> <span class="n">sort</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span> <span class="n">sort</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">posC</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">c</span><span class="p">;</span> <span class="c1">//通过二分，从C数组中找到第一个大于等于bi的元素位置pos</span>
+        <span class="n">sumFromB</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">posC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//说明C数组中[pos, n]的元素，都满足大于等于bi。</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sumFromB</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">//前缀和，对于B数组前i个元素，统计大于等于它们的C数组元素个数</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">posB</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span><span class="c1">//通过二分，从C数组中找到第一个大于等于ai的元素位置posB</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">posB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span> <span class="c1">//利用前缀和，求出[posB,n]中满足三元组的个数</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h1 id="g-螺旋折线-性质观察-等差数列">G. 螺旋折线 #性质观察 #等差数列</h1><h2 id="题意-3">题意</h2><p>如下图所示的螺旋折线经过平面上所有整点恰好一次，对于整数点$(x,y)$（$-1e9\leq x, y\leq 1e9$），定义它到原点的距离：$dix(x,y)$，为从原点到$(x, y)$的螺旋折线段的长度。</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/p223231.png" alt="p223231" /></p><h2 id="分析-3">分析</h2><p>一开始我按路径递增去模拟，只要转向次数为偶数次，就对前进长度+1，但还是超时，下面就是我的75分qaq。</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="n">ll</span> <span class="n">dx</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>
+<span class="n">ll</span> <span class="n">dy</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ll</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ll</span> <span class="n">cur_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cur_y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ll</span> <span class="n">des_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">des_y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">des_x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">des_y</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">t</span><span class="o">++</span><span class="p">;</span> <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="n">ll</span> <span class="n">step</span> <span class="o">=</span> <span class="n">len</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">des_y</span> <span class="o">-</span> <span class="n">cur_y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">cur_x</span> <span class="o">&lt;</span> <span class="n">des_x</span> <span class="o">&amp;&amp;</span> <span class="n">des_x</span> <span class="o">&lt;</span> <span class="n">cur_x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dx</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">||</span> 
+               <span class="p">(</span><span class="n">cur_x</span> <span class="o">&gt;</span> <span class="n">des_x</span> <span class="o">&amp;&amp;</span> <span class="n">des_x</span> <span class="o">&gt;</span> <span class="n">cur_x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dx</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="p">)</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">abs</span><span class="p">(</span><span class="n">des_x</span> <span class="o">-</span> <span class="n">cur_x</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">des_x</span> <span class="o">-</span> <span class="n">cur_x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">cur_y</span> <span class="o">&lt;</span> <span class="n">des_y</span> <span class="o">&amp;&amp;</span> <span class="n">des_y</span> <span class="o">&lt;</span> <span class="n">cur_y</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dy</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">||</span>
+                <span class="p">(</span><span class="n">cur_y</span> <span class="o">&gt;</span> <span class="n">des_y</span> <span class="o">&amp;&amp;</span> <span class="n">des_y</span> <span class="o">&gt;</span> <span class="n">cur_y</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dy</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">abs</span><span class="p">(</span><span class="n">des_y</span> <span class="o">-</span> <span class="n">cur_y</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="n">cur_x</span> <span class="o">+=</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dx</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+        <span class="n">cur_y</span> <span class="o">+=</span> <span class="n">step</span> <span class="o">*</span> <span class="n">dy</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">step</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">cur_x</span> <span class="o">==</span> <span class="n">des_x</span> <span class="o">&amp;&amp;</span> <span class="n">cur_y</span> <span class="o">==</span> <span class="n">des_y</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>参考了<a href="https://www.cnblogs.com/tigerlion/p/11190912.html">@虎老狮的思路</a>。我们可以将折线每一行的左下角长度为$1$的线段顺时针旋转90度（见下图），于是螺旋折线就变成长度易求的正方形环条了。于是点在螺旋折线上的移动就转化为一个点从每一个正方形环的左下角作为起点，顺时针移动，移动整一个环后，便直接跳到下一个更长的正方形环的左下角起点，…. 。容易观察到每一条正方形环的周长组成了以0为首项（即第一个正方形环是空的），以<strong>8为公差</strong>的等差数列。</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/image-20201014125742410.png" alt="image-20201014125742410" /></p><p>如上图，我们假设点A$(x_i,y_i)$在该正方形对角线上侧，那么题目要求的$dis(x_i, y_i)$，实际上就是（第三条边左下角起点出发到达点$(x_i,y_i)$的距离）+（不包括第三条边的<strong>内部</strong>正方形的周长之和）。由等差数列求和公式，内部边的长度之和就是$S_i = \frac{(0 + (i-1)\times8)\times(i-1)}{2}$。第三条边左下角起点出发到达点$(x_i,y_i)$的距离，就是$(i+x_i)+(i+y_i)$。如果是位于正方形对角线下侧的点B$(x_j,y_j)$，它需要用第三条边的周长减去$(j+x_j)+(j+y_j)$</p><div class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre><td class="rouge-code"><pre><span class="cp">#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;bitset&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="n">ll</span> <span class="n">des_x</span><span class="p">,</span> <span class="n">des_y</span><span class="p">,</span> <span class="n">ans</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">des_x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">des_y</span><span class="p">);</span>
+    <span class="n">ll</span> <span class="n">n</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">des_x</span><span class="p">),</span> <span class="n">abs</span><span class="p">(</span><span class="n">des_y</span><span class="p">));</span>
+    <span class="n">ll</span> <span class="n">innerSqure</span> <span class="o">=</span>  <span class="mi">4</span> <span class="o">*</span> <span class="mi">1LL</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span><span class="c1">// = (0 + (n - 1) * 8) * (n - 1) / 2;</span>
+    <span class="n">ll</span> <span class="n">dis_x</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">des_x</span><span class="p">,</span> <span class="n">dis_y</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">des_y</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">des_y</span> <span class="o">&gt;=</span> <span class="n">des_x</span><span class="p">)</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="p">(</span><span class="n">dis_x</span> <span class="o">+</span> <span class="n">dis_y</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">ans</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">1LL</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="n">dis_x</span> <span class="o">-</span> <span class="n">dis_y</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ans</span> <span class="o">+</span> <span class="n">innerSqure</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/online-judge/'>Online Judge</a>, <a href='/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/'>蓝桥杯</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/cpp/" class="post-tag no-text-decoration" >Cpp</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/" class="post-tag no-text-decoration" >算法-深搜</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E6%9E%9A%E4%B8%BE/" class="post-tag no-text-decoration" >算法-枚举</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/" class="post-tag no-text-decoration" >算法-完全背包</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/" class="post-tag no-text-decoration" >算法-暴力</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B/" class="post-tag no-text-decoration" >算法-不定方程</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/&title=2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 - JoyDee's Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 - JoyDee's Blog&url=https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 - JoyDee's Blog&url=https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 - JoyDee's Blog&u=https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=2018年第九届蓝桥杯【C++省赛B组】B、C、D、F、G 题解 - JoyDee's Blog&url=https://joydee.top/posts/2018%E5%B9%B4%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>&nbsp;&nbsp;最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a><li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a><li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a><li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a><li><a href="/posts/LearningHTML/">HTML5知识提炼</a></ul></div><div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>&nbsp;&nbsp;热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>&nbsp;&nbsp;文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/2017%E5%B9%B4%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/"><div class="card-body"> <span class="timeago small" > Oct 14, 2020 <i class="unloaded">2020-10-14T00:33:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>2017年第八届蓝桥杯【C++省赛B组】D、E、G、H、I题解</h3><div class="text-muted small"><p> 可能因为我使用暴力思维比较少，这场感觉难度不低。 B. 等差素数列 #暴力 #枚举 题意 类似：$7,37,67,97,127,157$ 这样完全由素数组成的等差数列，叫等差素数数列。 上边的数列公差为$30$，长度为$6$。现要你求长度为$10$的等差素数列，其公差最小值是多少？ 分析 先将一定区间的整数筛出合数和质数来（这里用了欧拉筛法），接下来for循环中外层枚举这个公差，内...</p></div></div></a></div><div class="card"> <a href="/posts/2016%E5%B9%B4%E7%AC%AC%E4%B8%83%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/"><div class="card-body"> <span class="timeago small" > Oct 16, 2020 <i class="unloaded">2020-10-16T11:37:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>2016年第七届蓝桥杯【C++省赛B组】D、E、G、H、I题解</h3><div class="text-muted small"><p> F. 方格填数 #深搜 题意 有$10$个格子，填入0~9的数字。要求：连续的两个数字不能相邻。（左右、上下、对角都算相邻），求可能的填数方案数。 1 2 3 4 5 6 7 +--+--+--+ | | | | +--+--+--+--+ | | | | | +--+--+--+--+ | | | | +--+--+--+ 分析 题目有点表述...</p></div></div></a></div><div class="card"> <a href="/posts/2019%E5%B9%B4%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/"><div class="card-body"> <span class="timeago small" > Oct 9, 2020 <i class="unloaded">2020-10-09T00:56:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>2019年第十届蓝桥杯【C++省赛B组】D、E、G、H、I题解</h3><div class="text-muted small"><p> 这场有几道题目思路，在之前比赛中遇到过 D. 数的分解 #枚举 题意 将$2019$分解成$3$个各不相同的正整数之和，并且每个正整数都不包含数字$2$和$4$，一共有多少种分解方法？注意，$1000+1001+18$和$1001+1000+18$被视为同一种 分析 由于三个正整数均不相同，也就说这三个正整数存在偏序关系，不妨设i&lt;j&lt;k，枚举i,j两个变量，推出k，判...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/2017%E5%B9%B4%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" class="btn btn-outline-primary" prompt="< Older"><p>2017年第八届蓝桥杯【C++省赛B组】D、E、G、H、I题解</p></a> <a href="/posts/2016%E5%B9%B4%E7%AC%AC%E4%B8%83%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF/" class="btn btn-outline-primary" prompt="Newer >"><p>2016年第七届蓝桥杯【C++省赛B组】D、E、G、H、I题解</p></a></div><div id="comments" class="pt-2 pb-4"></div><script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">热门标签 / Trending Tags</h4><a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

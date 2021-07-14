@@ -1,0 +1,914 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「CSS知识精炼01」简介、样式表、选择器" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="CSS（Cascading Style Sheets）代表 层叠样式表。其中，样式定义为如何显示HTML元素，它通常储存在样式表，将样式添加到HTML中，能够解决内容与表现分离的问题。由于网页是多层结构，通过CSS可分别为网页的每一层设置样式，而多个样式定义可层叠为一个。" /><meta property="og:description" content="CSS（Cascading Style Sheets）代表 层叠样式表。其中，样式定义为如何显示HTML元素，它通常储存在样式表，将样式添加到HTML中，能够解决内容与表现分离的问题。由于网页是多层结构，通过CSS可分别为网页的每一层设置样式，而多个样式定义可层叠为一个。" /><link rel="canonical" href="https://joydee.top/posts/LearningCSS-01/" /><meta property="og:url" content="https://joydee.top/posts/LearningCSS-01/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-07-20T14:04:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「CSS知识精炼01」简介、样式表、选择器" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"CSS（Cascading Style Sheets）代表 层叠样式表。其中，样式定义为如何显示HTML元素，它通常储存在样式表，将样式添加到HTML中，能够解决内容与表现分离的问题。由于网页是多层结构，通过CSS可分别为网页的每一层设置样式，而多个样式定义可层叠为一个。","url":"https://joydee.top/posts/LearningCSS-01/","@type":"BlogPosting","headline":"「CSS知识精炼01」简介、样式表、选择器","dateModified":"2021-05-27T11:45:13+08:00","datePublished":"2020-07-20T14:04:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/LearningCSS-01/"},"@context":"https://schema.org"}</script><title>「CSS知识精炼01」简介、样式表、选择器 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「CSS知识精炼01」简介、样式表、选择器</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/web%E5%89%8D%E7%AB%AF/">Web前端</a>, <a href="/categories/html%E4%B8%8Ecss/">HTML与CSS</a>
+</div>
+<h1 data-toc-skip>「CSS知识精炼01」简介、样式表、选择器</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Mon, Jul 20, 2020, 2:04 PM +0800"> Jul 20, 2020 <i class="unloaded">2020-07-20T14:04:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Thu, May 27, 2021, 11:45 AM +0800"> May 27 <i class="unloaded">2021-05-27T11:45:13+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="4348 words">48 min</span> <span id="/posts/LearningCSS-01/" class="leancloud_visitors" data-flag-title="「CSS知识精炼01」简介、样式表、选择器"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<p>CSS（<code class="language-plaintext highlighter-rouge">Cascading Style Sheets</code>）代表 <strong>层叠样式表</strong>。其中，<strong>样式</strong>定义为如何显示HTML元素，它通常储存在<strong>样式表</strong>，将样式添加到HTML中，能够解决<strong>内容与表现分离</strong>的问题。由于网页是多层结构，通过CSS可分别为网页的每一层设置样式，而多个样式定义可层叠为一个。</p>
+<h1 id="chapter-1-样式表的引入">Chapter 1. 样式表的引入</h1>
+<h2 id="10-css属性书写顺序">1.0 CSS属性书写顺序</h2>
+<ol>
+<li>布局定位属性：<code class="language-plaintext highlighter-rouge">display</code>（首个）/<code class="language-plaintext highlighter-rouge">position</code>/<code class="language-plaintext highlighter-rouge">float</code>/<code class="language-plaintext highlighter-rouge">clear</code>/<code class="language-plaintext highlighter-rouge">visibility</code>/<code class="language-plaintext highlighter-rouge">overflow</code>
+</li>
+<li>自身属性：<code class="language-plaintext highlighter-rouge">width</code>/<code class="language-plaintext highlighter-rouge">height</code>/<code class="language-plaintext highlighter-rouge">margin</code>/<code class="language-plaintext highlighter-rouge">padding</code>/<code class="language-plaintext highlighter-rouge">border</code>/<code class="language-plaintext highlighter-rouge">background</code>
+</li>
+<li>文本属性：<code class="language-plaintext highlighter-rouge">color</code>/<code class="language-plaintext highlighter-rouge">font</code>/<code class="language-plaintext highlighter-rouge">text-decoration</code>/<code class="language-plaintext highlighter-rouge">text-align</code>/<code class="language-plaintext highlighter-rouge">vertical-align</code>/ <code class="language-plaintext highlighter-rouge">white-space</code> / <code class="language-plaintext highlighter-rouge">break-word</code>
+</li>
+<li>其他属性（CSS3）：<code class="language-plaintext highlighter-rouge">content</code>/<code class="language-plaintext highlighter-rouge">cursor</code>/<code class="language-plaintext highlighter-rouge">border-radius</code>/<code class="language-plaintext highlighter-rouge">box-shadow</code>/<code class="language-plaintext highlighter-rouge">text-shadow</code>/<code class="language-plaintext highlighter-rouge">background:linear-gradient</code>
+</li>
+</ol>
+<h2 id="11-内联样式行内样式不推荐">1.1 内联样式（行内样式）（不推荐！）</h2>
+<p>在标签内部通过style属性来设置元素的样式，而样式只能对一个标签生效，维护不方便，开发不推荐大量使用内联样式。</p>
+<p>其 <code class="language-plaintext highlighter-rouge">style</code> 即为标签的属性，在双引号中间，写法要符合 CSS 规范。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">"color:red; font-size:60px;"</span><span class="nt">&gt;</span> … <span class="nt">&lt;/p&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="12-内部样式表">1.2 内部样式表</h2>
+<p>将样式编写到<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>内部的<code class="language-plaintext highlighter-rouge">&lt;style&gt;</code>标签里，通过CSS的<strong>选择器</strong>来选中元素并为其设置样式。另外，在<code class="language-plaintext highlighter-rouge">style</code>标签内部的内容不属于HTML，它属于CSS，因此需要遵循CSS的规范。</p>
+<p>对于方案二，内部样式表的局限性在于，只能对<strong>一个网页</strong>起作用，不能跨页面进行复用。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;style&gt;</span>
+<span class="nt">p</span><span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span><span class="m">50px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="13-外部样式表最佳方案">1.3 外部样式表（最佳方案）</h2>
+<p>可以将CSS样式编写到一个外部的CSS文件(其拓展名为<code class="language-plaintext highlighter-rouge">.CSS</code>)，然后在多个HTML文件中通过标签<code class="language-plaintext highlighter-rouge">&lt;link&gt;</code>来引入外部的CSS文件，从而使得样式可在不同页面之间进行复用。</p>
+<p>此外，将样式编写到外部的CSS文件中，可以使用到浏览器的缓存机制，加快网页的加载速度，提高用户的体验</p>
+<ul>
+<li>
+<p>对于HTML文件：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="o">&lt;</span><span class="nt">head</span><span class="o">&gt;</span> 
+	<span class="err">…</span>
+	<span class="o">&lt;</span><span class="nt">link</span> <span class="nt">rel</span> <span class="o">=</span> <span class="s1">"stylesheet"</span> <span class="nt">href</span> <span class="o">=</span> <span class="s1">"./style.css"</span><span class="o">&gt;</span>
+	<span class="err">…</span>
+<span class="o">&lt;/</span><span class="nt">head</span><span class="o">&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>其中 <code class="language-plaintext highlighter-rouge">rel</code> 定义当前文档与被链接文档之间的关系，此处指定为 <code class="language-plaintext highlighter-rouge">stylesheet</code>，表示被链接的文档是一个样式表文件。</p></blockquote>
+<p>或者这样引入：</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;head&gt;</span>
+    ...
+    <span class="nt">&lt;style&gt;</span>
+        <span class="k">@import</span> <span class="s1">"css/mycss.css"</span><span class="p">;</span>
+    <span class="nt">&lt;/style&gt;</span>
+    ...
+<span class="nt">&lt;/head&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>对于CSS文件：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="c">/*没错，直接来*/</span>
+<span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span><span class="m">50px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>TIPS：CSS的注释为<code class="language-plaintext highlighter-rouge">/* ... */</code>（<del>C++党狂喜</del>）</p></blockquote>
+</li>
+</ul>
+<h1 id="chapter2-选择器">Chapter2. 选择器</h1>
+<p>CSS规则由两个主要部分组成：<strong>选择器</strong>，<strong>声明块</strong>（一条/多条的声明）。其中，选择器可以选中页面中的指定（你需要改变样式的）元素。对于声明块的每条声明，它由一个样式属性和一个值组成，每一条声明<strong>总是以分号<code class="language-plaintext highlighter-rouge">;</code>结束。</strong></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200817221224.png" alt=""></p>
+<h2 id="21-常用选择器">2.1 常用选择器</h2>
+<ul>
+<li>
+<p><strong>元素选择器</strong>：根据标签名来选中指定的元素</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">标签名{...}</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">p</span><span class="p">{</span> <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span> <span class="p">}</span><span class="o">;</span> <span class="nt">h1</span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="o">;</span> <span class="nt">div</span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><strong><code class="language-plaintext highlighter-rouge">id</code>选择器</strong>：根据元素的id属性值选中一个元素，一个id值尽量不重复使用</p>
+<p>语法：对于CSS，<code class="language-plaintext highlighter-rouge">#id属性值{...}</code>；相对应地，HTML中的<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>内，<code class="language-plaintext highlighter-rouge">&lt;选中元素 id="…"&gt;</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="c">/*对于CSS*/</span>
+<span class="nf">#abc</span><span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="c">&lt;!--对于HTML--&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">id = </span><span class="s">"abc"</span><span class="nt">&gt;</span> 6666 <span class="nt">&lt;/p&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><strong>类选择器</strong>：根据元素的class属性值选中一组元素，不同于<code class="language-plaintext highlighter-rouge">id</code>选择器，它可<strong>重复</strong>地使用，类选择器可以为<strong>一个元素指定多个</strong>class属性。</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">.class属性值{ … }</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="c">/*对于CSS*/</span>
+<span class="nc">.blue</span><span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span> <span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="c">&lt;!--对于HTML--&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">class = </span><span class="s">"blue"</span><span class="nt">&gt;</span> HELLO <span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class = </span><span class="s">"blue"</span><span class="nt">&gt;</span> 6666 <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span> ... <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class = </span><span class="s">"blue"</span><span class="nt">&gt;</span> 23333 <span class="nt">&lt;/p&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><strong>通配选择器</strong>：选中页面中的所有元素</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">*{ … }</code> 例子略。</p>
+</li>
+</ul>
+<h2 id="22-复合选择器">2.2 复合选择器</h2>
+<ul>
+<li>
+<p><strong>交集选择器</strong>：选中<strong>同时</strong>复合多个条件的元素。如果交集选择器存在元素选择器，必须使用<strong>元素选择器开头</strong>。</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">选择器1选择器2选择器3…选择器n { … }</code></p>
+<p>例子：</p>
+<p>对于CSS</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">div</span><span class="nc">.red</span><span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span><span class="m">30px</span><span class="p">;</span> <span class="p">}</span> 
+<span class="c">/* 将class为red且为div的元素的字体大小设置为30px。即 元素选择器.类选择器 */</span>
+<span class="nc">.a.b.c</span><span class="p">{</span> <span class="nl">color</span><span class="p">:</span><span class="no">blue</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">div</span><span class="nf">#box1</span><span class="p">{</span> <span class="err">...</span> <span class="p">}</span> <span class="c">/*虽然开发时不会这样用*/</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>对于HTML</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;div</span> <span class="na">class = </span><span class="s">"red2 a b c grey"</span><span class="nt">&gt;</span> 我变蓝了 <span class="nt">&lt;/div&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>结果，“我变蓝了”真的变为蓝色</p>
+</li>
+<li>
+<p><strong>选择器分组(并集选择器)</strong>：选择多种选择器对应的元素，注意到多个选择器用<code class="language-plaintext highlighter-rouge">,</code>分隔。</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">选择器1,选择器2,选择器n{ ... }</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nf">#a2</span><span class="o">,</span> <span class="nc">.pp</span><span class="o">,</span> <span class="nt">h1</span><span class="o">,</span> <span class="nt">span</span><span class="o">,</span> <span class="nt">div</span><span class="nc">.red</span><span class="p">{</span>
+	<span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h2 id="23-关系选择器">2.3 关系选择器</h2>
+<ul>
+<li>
+<p><strong>子元素选择器</strong>：选中指定父元素的指定<strong>子</strong>元素，注意它只要满足该关系即可选择，eg:存在多个div &gt; span，都会被选上</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">父元素 &gt; 子元素 &gt; 子元素的子元素 &gt; … { ... }</code></p>
+<p>举例：</p>
+<p>对于CSS</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">div</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="p">{</span> <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>对于HTML</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;span&gt;</span> span1 <span class="nt">&lt;/span&gt;</span> <span class="c">&lt;!--不是div的子元素，不会变色--&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;span&gt;</span> span2 <span class="nt">&lt;/span&gt;</span> <span class="c">&lt;!--变红--&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>TIPS：$VSCode$中输入<code class="language-plaintext highlighter-rouge">ul &gt; li * 3</code> 再按tab，就能得到下方的代码</p></blockquote>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span> <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><strong>后代元素选择器</strong>：选中指定元素内的指定所有<strong>后代</strong>元素</p>
+<p>语法： <code class="language-plaintext highlighter-rouge">祖先 后代</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">div</span> <span class="nt">span</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span><span class="no">skyblue</span><span class="p">;</span> <span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><strong>选择下一个兄弟</strong></p>
+<p>语法：<code class="language-plaintext highlighter-rouge">前一个+下一个</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">plate</span> <span class="o">+</span> <span class="nt">apple</span> <span class="p">{</span> <span class="err">...</span> <span class="p">}</span> <span class="c">/*于是选中了碟子挨着的apple*/</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818203745.png" alt=""></p>
+</li>
+<li>
+<p>选择下面所有兄弟</p>
+<p>语法：<code class="language-plaintext highlighter-rouge">兄 ~ 弟</code></p>
+<p>例子：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">bento</span> <span class="o">~</span> <span class="nt">pickle</span> <span class="p">{</span> <span class="err">...</span> <span class="p">}</span> <span class="c">/*于是选中了bento后面的两个pickle*/</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818203807.png" alt=""></p>
+</li>
+</ul>
+<h2 id="24-属性选择器">2.4 属性选择器</h2>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">语法</th>
+<th style="text-align: center">作用</th>
+<th style="text-align: center">举例</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">元素名[属性名] {…}</code></td>
+<td style="text-align: center">选择含有指定属性<strong>名</strong>的元素，如果不写元素名，相当于通配</td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">p[hello]{ ...}</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">元素名[属性名 = 属性值] {…}</code></td>
+<td style="text-align: center">选择含有指定属性<strong>名</strong>和属性<strong>值</strong>的元素</td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">p[title = hello]{...}</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">元素名[属性名^=属性值] {…}</code></td>
+<td style="text-align: center">选择属性值以指定值<strong>开头</strong>的元素</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">元素名[属性名$=属性值] {…}</code></td>
+<td style="text-align: center">选择属性值以指定值<strong>结尾</strong>的元素</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">元素名[属性名*=属性值] {…}</code></td>
+<td style="text-align: center">选择属性值中<strong>含有某值</strong>的元素</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+</tbody>
+</table></div>
+<ul><li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818203829.png" alt=""></li></ul>
+<h2 id="25-伪类选择器">2.5 伪类选择器</h2>
+<p>伪类一般用 <code class="language-plaintext highlighter-rouge">:</code> 开头，通常用于描述一个元素的特殊状态，如第二个子元素，被点击的元素，鼠标移入的元素，…</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">语法</th>
+<th style="text-align: center">作用</th>
+<th style="text-align: center">举例</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:first-child</code></td>
+<td style="text-align: center">选择第一个子元素</td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">ul &gt; li : first-child{ ... }</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:last-child</code></td>
+<td style="text-align: center">选择最后一个子元素</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:nth-child(x)</code></td>
+<td style="text-align: center">选择第x个子元素，其中x为特殊值</td>
+<td style="text-align: center">
+<code class="language-plaintext highlighter-rouge">ul &gt; li:nth-child(2n) {...}</code> 或者 <code class="language-plaintext highlighter-rouge">ul &gt; li :nth-child(even)</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>再举例：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">plate</span> <span class="o">&gt;</span> <span class="nt">orange</span><span class="o">:</span> <span class="nt">first</span> <span class="nt">-</span> <span class="nt">child</span> <span class="p">{</span> <span class="err">...</span> <span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818210020.png" alt=""></p>
+<p>注意，以上这些伪类是根据当前<strong>所有</strong>子元素进行排序的，比如</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">ul</span> <span class="o">&gt;</span> <span class="nt">li</span> <span class="o">:</span> <span class="nt">first</span> <span class="nt">-</span> <span class="nt">child</span><span class="p">{</span>
+     <span class="err">...</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;span&gt;</span> .. <span class="nt">&lt;/span&gt;</span> <span class="c">&lt;!--由于&lt;ul&gt;的第一个元素是&lt;span&gt;--&gt;</span>
+    <span class="nt">&lt;li&gt;</span> ... <span class="nt">&lt;/li&gt;</span> <span class="c">&lt;!--作为第二个元素的&lt;li&gt;不受CSS的作用--&gt;</span>
+    ...
+<span class="nt">&lt;/ul&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>下面<strong>三个</strong>的伪类选择器，与上面的选择器作用基本一致，唯一区别在于，它们是在<strong>同类型</strong>元素中进行排序的</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">语法</th>
+<th style="text-align: center">作用</th>
+<th style="text-align: center">举例</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:first-of-type</code></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:last-of-type</code></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:nth-of-type</code></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:not</code></td>
+<td style="text-align: center">否定伪类，将符合条件的元素从选择器中去除</td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">ul &gt; li:not(:nth-child(3)){...} /除了ul的第三个元素以外都是如此样式/</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="附关于超链接的伪类状态">[附]：关于超链接的伪类（状态）</h3>
+<p>前两个伪类，为超链接独有，而后两个状态可适用于所有元素。</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">语法</th>
+<th style="text-align: center">作用</th>
+<th style="text-align: center">举例</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:link</code></td>
+<td style="text-align: center">表示<strong>未</strong>访问过的链接(正常的链接)</td>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">a:link{ color : red; }</code></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:visited</code></td>
+<td style="text-align: center">表示访问<strong>过</strong>的链接，但由于隐私原因，该伪类只能修改链接的颜色</td>
+<td style="text-align: center"> </td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:active</code></td>
+<td style="text-align: center">表示鼠标点击的状态</td>
+<td style="text-align: center"> </td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">:hover</code></td>
+<td style="text-align: center">表示鼠标移入的状态</td>
+<td style="text-align: center"> </td>
+</tr>
+</tbody>
+</table></div>
+<p>如图，设置该链接元素的父元素设置:hover，就能实现鼠标移到该栏时显示不同的颜色。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818213603.png" alt=""></p>
+<h2 id="26-伪元素选择器">2.6 伪元素选择器</h2>
+<p>伪元素一般使用<code class="language-plaintext highlighter-rouge">::</code>作开头，表示页面中某些元素的<strong>特殊位置</strong>，如：首字母、第二行。</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center">语法</th>
+<th style="text-align: center">作用</th>
+<th style="text-align: center">举例</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">::frist-letter</code></td>
+<td style="text-align: center">选择第一个字母</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">::first-line</code></td>
+<td style="text-align: center">选择第一行</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">::selection</code></td>
+<td style="text-align: center">表示<strong>鼠标</strong>选中的内容，比如网页选中一段的效果</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">::before</code></td>
+<td style="text-align: center">元素的开始，必须结合<code class="language-plaintext highlighter-rouge">content</code>属性使用，从而凭借CSS为原来的HTML添加内容，可以搭配HTML的<code class="language-plaintext highlighter-rouge">&lt;p&gt;</code>使用</td>
+<td style="text-align: center">见下</td>
+</tr>
+<tr>
+<td style="text-align: center"><code class="language-plaintext highlighter-rouge">::after</code></td>
+<td style="text-align: center">元素的结束，与上同理</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+</tbody>
+</table></div>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">div</span><span class="nd">::before</span><span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s2">'abc'</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">21</span><span class="p">,</span> <span class="m">94</span><span class="p">,</span> <span class="m">230</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>显示效果为，前面的”abc”是在CSS添加的，且<strong>无法被选中</strong>。而后面的”Hello, World”来自于HTML中。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20200818213009.png" alt=""></p>
+<h1 id="chapter-3-样式的继承与冲突">Chapter 3. 样式的继承与冲突</h1>
+<h2 id="31-样式表的层叠">3.1 样式表的层叠</h2>
+<p>当应用两条同级别的规则到一个元素时，写在后面的规则就是实际执行的规则，如下：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">h1</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c">/* 实际执行的下面这个选择器 */</span>
+<span class="nt">h1</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="32-样式的继承">3.2 样式的继承</h2>
+<p>为一个元素设置的样式同时也会应用到它的<strong>后代</strong>元素上。继承是发生在祖先后代之间的，利用继承，我们可将一些通用的样式统一设置到共同的祖先元素上。</p>
+<blockquote><p>注意，并不是所有样式都会被继承，如背景相关、布局相关的样式不会被继承。</p></blockquote>
+<p>CSS 为控制继承提供四个特殊的通用属性值：</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">inherit</code>： “开启继承”，使子元素属性和父元素相同</li>
+<li>
+<code class="language-plaintext highlighter-rouge">initial</code>：设置属性值和浏览器默认样式相同，若浏览器默认样式中未设置且该属性是自然继承的，那么会设置为 <code class="language-plaintext highlighter-rouge">inherit</code>
+</li>
+<li>
+<code class="language-plaintext highlighter-rouge">unset</code>：将属性重置为自然值，也就是如果属性是自然继承那么就是 <code class="language-plaintext highlighter-rouge">inherit</code>，否则和 <code class="language-plaintext highlighter-rouge">initial</code> 一样。</li>
+</ul>
+<h2 id="33-多重样式优先级">3.3 多重样式优先级：</h2>
+<p><strong>样式的冲突</strong>：当我们通过不同的选择器，选中相同的元素，并且为相同的样式设置不同的值，此时发生样式的冲突，此时用哪个样式是由选择器的<strong>权重</strong>决定(权重大，优先级更高，优先显示)</p>
+<p>CSS 的优先级就是分配给指定的CSS声明的一个权重，它是浏览器是通过判断哪些属性值与元素最相关以决定并应用到该元素上的。</p>
+<p>以下为<strong>优先级递减</strong>的选择器列表：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th style="text-align: center"> </th>
+<th style="text-align: center">权重</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center">继承的样式</td>
+<td style="text-align: center">没有优先级</td>
+</tr>
+<tr>
+<td style="text-align: center">通用选择器（<code class="language-plaintext highlighter-rouge">*</code>）</td>
+<td style="text-align: center">$0,0,0,0$</td>
+</tr>
+<tr>
+<td style="text-align: center">元素(类型)选择器</td>
+<td style="text-align: center">$0,0,0,1$</td>
+</tr>
+<tr>
+<td style="text-align: center">类选择器</td>
+<td style="text-align: center">$0,0,1,0$</td>
+</tr>
+<tr>
+<td style="text-align: center">属性选择器</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center">伪类</td>
+<td style="text-align: center"><img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></td>
+</tr>
+<tr>
+<td style="text-align: center">ID 选择器</td>
+<td style="text-align: center">$0,1,0,0$</td>
+</tr>
+<tr>
+<td style="text-align: center">内联样式</td>
+<td style="text-align: center">$1,0,0,0$</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>优先级法则</strong>：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">!important </code>规则被应用在一个样式声明中时,该样式声明会覆盖CSS中<strong>任何</strong>其他的声明, 无论它处在声明列表中的哪里（开发慎用emmmm）</p></li>
+<li><p>当权值相等时，后出现的样式表设置要优于先出现的样式表设置；</p></li>
+<li><p>创作者的规则高于浏览者：即网页编写者设置的CSS 样式的优先权高于浏览器所设置的样式，即<strong>内联样式</strong>($Inline\ style$) &gt; 内部样式表（$Internal\ style\ sheet$） &gt; 外部样式表（$External\ style\ sheet$） &gt; 浏览器默认样式</p></li>
+<li>
+<p>对于复合选择器，其权重是由组成的选择器的权重相加得到的；</p>
+<p>对于分组选择器，其权重是内部的选择器各自计算的；</p>
+<p>注意，选择器的累加<strong>不会超过</strong>该选择器的最大的数量级，如类选择器的累加结果再高，也不会超过id选择器</p>
+</li>
+</ul>
+<h1 id="chapter-4-字体">Chapter 4. 字体</h1>
+<h2 id="41-字体的大小">4.1 字体的大小</h2>
+<p>调整字体大小时，最常用的单位是：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">px</code>（像素）：将像素的值赋予给文本。由于是绝对单位，因而在任何情况下页面上文本所计算出来的像素值是一样的。</p>
+<blockquote><p>浏览器的 <code class="language-plaintext highlighter-rouge">font-size</code> 标准设置的值为 16 px。</p></blockquote>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">em</code>：<code class="language-plaintext highlighter-rouge">1em</code> = 当前元素的父元素上设置的字体大小</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">rem</code>：单位的效果与 <code class="language-plaintext highlighter-rouge">em</code> 类似，但 <code class="language-plaintext highlighter-rouge">1rem</code> = HTML 中的根元素（<code class="language-plaintext highlighter-rouge">&lt;html&gt;</code>）的字体大小，而不是父元素。</p></li>
+</ul>
+<h2 id="42-字体的属性">4.2 字体的属性</h2>
+<blockquote>
+<p><strong>字体的简写属性</strong>：大部分元素中的<code class="language-plaintext highlighter-rouge">font</code>属性可以设置字体相关的所有属性，其中行高如果省略不写，就会使用默认值，其语法：<code class="language-plaintext highlighter-rouge">font: 其他属性 字体大小/行高 字体族 </code> ，其中后两个属性的位置必须在倒数二个，代码举例如下：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">div</span><span class="p">{</span>
+    <span class="nl">font</span><span class="p">:</span><span class="nb">italic</span><span class="c">/*font-style*/</span> <span class="nb">bold</span><span class="c">/*字重font-weight*/</span>  <span class="m">50px</span><span class="p">/</span><span class="m">2</span> <span class="s2">'Consolas'</span><span class="p">,</span> <span class="n">Times</span><span class="p">,</span> <span class="nb">serif</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</blockquote>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">font-weight</code>：用于设置文本字体的粗细。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">color</code>：用于设置字体颜色</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">font-family</code>：字体族，浏览器会自动使用下面类别的字体</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">serif</code>：衬线字体</li>
+<li>
+<code class="language-plaintext highlighter-rouge">sans-serif</code>：非衬线字体</li>
+<li>
+<code class="language-plaintext highlighter-rouge">monospace</code>：等宽字体</li>
+</ul>
+<p>字体名内部有空格时需在外部加 <code class="language-plaintext highlighter-rouge">''</code> ，<code class="language-plaintext highlighter-rouge">font-family</code>可同时指定多个字体，多个字体间用 <code class="language-plaintext highlighter-rouge">,</code> 分隔，字体生效时优先使用第一种字体，若第一种无法使用则使用第二种，以此类推。</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">p</span><span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span><span class="m">40px</span><span class="p">;</span>
+    <span class="nl">font-family</span><span class="p">:</span><span class="s2">'Courier New'</span><span class="p">,</span> <span class="n">Consolas</span><span class="p">,</span> <span class="nb">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">@font-face</code>：可将服务器中的字体直接提供给用户去使用，代码示例如下：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="k">@font-face</span><span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span><span class="s2">'myfont'</span><span class="p">;</span><span class="c">/*指定字体的名字*/</span>
+    <span class="nl">src</span><span class="p">:</span><span class="sx">url()</span><span class="p">;</span> <span class="c">/*服务器字体的路径*/</span>
+<span class="p">}</span>
+<span class="c">/*在某个元素中*/</span>
+<span class="nt">p</span><span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span><span class="n">myfont</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h2 id="43-行高">4.3 行高</h2>
+<blockquote><p><strong>字体框</strong>：可理解为字体存在的格子，设置<code class="language-plaintext highlighter-rouge">font-size</code>实际上设置字体框的高度</p></blockquote>
+<p>行高(<code class="language-plaintext highlighter-rouge">line-height</code>)指的是文字占有的实际高度，会在字体框上下平均分配（无论行高设置多大，字体始终在其中间）。</p>
+<p>可以通过<code class="language-plaintext highlighter-rouge">line-height</code>属性来设置行高，属性值*的单位为<code class="language-plaintext highlighter-rouge">px</code>或<code class="language-plaintext highlighter-rouge">em</code>，或者 整数（代表字体的指定倍数）。</p>
+<p><strong>行间距</strong> = 行高(<code class="language-plaintext highlighter-rouge">line-height</code>) <strong>-</strong> 字体大小(<code class="language-plaintext highlighter-rouge">font-size</code>)，如下图：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210402181216.png" style="zoom: 67%;"></p>
+<blockquote><p>当行高（<code class="language-plaintext highlighter-rouge">line-height</code>）等于文本高度（<code class="language-plaintext highlighter-rouge">height</code>）时，就能够使文本<strong>垂直居中</strong>！</p></blockquote>
+<h2 id="44-文本样式">4.4 文本样式</h2>
+<p><strong>文本的水平对齐</strong>(<code class="language-plaintext highlighter-rouge">text-align</code>)：</p>
+<ul><li>
+<code class="language-plaintext highlighter-rouge">left/right/center/justify</code>，其中 <code class="language-plaintext highlighter-rouge">justify</code> 为将文本展开，改变单词间的差距，使所有文本行的宽度相同。</li></ul>
+<p><strong>元素垂直对齐方式</strong>(<code class="language-plaintext highlighter-rouge">vertical-align</code>)：其可选值有：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">baseline</code> ：默认值 基线对齐</p>
+<blockquote><p>由于图片默认会与基线对齐，然而图片的基线并不是在边框最底部的，视觉上能看到缝隙，需要设置<strong>顶部对齐</strong>或<strong>底部对齐</strong></p></blockquote>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">top</code> ：顶部对齐(子元素的顶部和父元素的顶部对齐)</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">bottom</code> ：底部对齐</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">middle</code> ：居中对齐 (子元素的中线与父元素的<code class="language-plaintext highlighter-rouge">x</code>的中线对齐)</p></li>
+</ul>
+<p><strong>其他文本样式</strong>：</p>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">text-decoration</code> 设置文本修饰，可选值：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>属性值</th>
+<th>描述</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code class="language-plaintext highlighter-rouge">none</code></td>
+<td>默认，无装饰线</td>
+</tr>
+<tr>
+<td><code class="language-plaintext highlighter-rouge">underline</code></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code class="language-plaintext highlighter-rouge">line-through</code></td>
+<td>删除线</td>
+</tr>
+<tr>
+<td><code class="language-plaintext highlighter-rouge">overline</code></td>
+<td>上划线</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">white-space</code> 设置网页如何处理空白，可选值：</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">normal</code> ：正常</li>
+<li>
+<code class="language-plaintext highlighter-rouge">nowrap</code> ：不换行</li>
+<li>
+<code class="language-plaintext highlighter-rouge">pre</code>：保留空白（不会过滤空白符，保留原格式）</li>
+</ul>
+</li>
+</ul>
+<p><strong>实例</strong>：给长文本尾部带上<strong>省略号</strong>，下面样式缺一不可：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">.box2</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span> <span class="c">/*不换行*/</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span> <span class="c">/*裁剪*/</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span> <span class="c">/*文本溢出的样式，ellipsis省略号*/</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="E:\J-StrawHat.github.io\_posts\Web前端\2020-07-20-LearningCSS-01.assets\20200819165347.png" alt=""></p>
+<h2 id="45-图标字体iconfont">4.5 图标字体(iconfont)</h2>
+<p>通过使用字体的形式来使用图标（能如字体一般调整大小或颜色，因为它为矢量图故不易失真）。前往<code class="language-plaintext highlighter-rouge">fontawesome</code>网站下载相关文件，将<code class="language-plaintext highlighter-rouge">css</code>和<code class="language-plaintext highlighter-rouge">webfonts</code>文件移动到项目中且必须在同一级文件夹中，并将<code class="language-plaintext highlighter-rouge">all.css</code>引入到网页中：<code class="language-plaintext highlighter-rouge">&lt;link rel = "stylesheet" href = "路径" &gt;</code></p>
+<ul>
+<li>
+<p>通过<strong>类名</strong>来选择图标字体。</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;i class = "fab ..." style = "font-size:...."&gt;&lt;/i&gt;</code>和<code class="language-plaintext highlighter-rouge">&lt;i class = "fas ..."&gt;</code>，省略号为你所要选择的图标</p>
+</li>
+<li>
+<p>通过<strong>伪元素</strong>来设置图标字体。</p>
+<ol>
+<li>找到要设置图标的元素通过<code class="language-plaintext highlighter-rouge">before</code>或<code class="language-plaintext highlighter-rouge">after</code>选中<ol><li>在<code class="language-plaintext highlighter-rouge">content</code>中设置字体的编码(<code class="language-plaintext highlighter-rouge">‘fXXX’</code>)</li></ol>
+</li>
+<li>设置字体的样式（<code class="language-plaintext highlighter-rouge">font-family</code>,<code class="language-plaintext highlighter-rouge">font-weight</code>）</li>
+</ol>
+</li>
+</ul>
+<p>代码举例如下：在CSS文件中，</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">li</span><span class="nd">::before</span><span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s2">'\f368'</span><span class="p">;</span> <span class="c">/*打开文档查到该图标的编号*/</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Font Awesome 5 Brands'</span><span class="p">;</span> <span class="c">/*找到fab/fas对应的字体*/</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span> 
+    <span class="err">...</span>
+<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>在HTML文件中，</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span> 
+        <span class="nt">&lt;i</span> <span class="na">class = </span><span class="s">"fas"</span><span class="nt">&gt;</span> <span class="nt">&lt;/i&gt;</span>
+        HELLO WORLD!
+    <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/web%E5%89%8D%E7%AB%AF/">Web前端</a>, <a href="/categories/html%E4%B8%8Ecss/">HTML与CSS</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/css/" class="post-tag no-text-decoration">CSS</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/LearningCSS-01/&amp;title=%E3%80%8CCSS%E7%9F%A5%E8%AF%86%E7%B2%BE%E7%82%BC01%E3%80%8D%E7%AE%80%E4%BB%8B%E3%80%81%E6%A0%B7%E5%BC%8F%E8%A1%A8%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8CCSS%E7%9F%A5%E8%AF%86%E7%B2%BE%E7%82%BC01%E3%80%8D%E7%AE%80%E4%BB%8B%E3%80%81%E6%A0%B7%E5%BC%8F%E8%A1%A8%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/LearningCSS-01/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8CCSS%E7%9F%A5%E8%AF%86%E7%B2%BE%E7%82%BC01%E3%80%8D%E7%AE%80%E4%BB%8B%E3%80%81%E6%A0%B7%E5%BC%8F%E8%A1%A8%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/LearningCSS-01/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8CCSS%E7%9F%A5%E8%AF%86%E7%B2%BE%E7%82%BC01%E3%80%8D%E7%AE%80%E4%BB%8B%E3%80%81%E6%A0%B7%E5%BC%8F%E8%A1%A8%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/LearningCSS-01/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8CCSS%E7%9F%A5%E8%AF%86%E7%B2%BE%E7%82%BC01%E3%80%8D%E7%AE%80%E4%BB%8B%E3%80%81%E6%A0%B7%E5%BC%8F%E8%A1%A8%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/LearningCSS-01/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/LearningCSS-02/"><div class="card-body"> <span class="timeago small"> Jul 20, 2020 <i class="unloaded">2020-07-20T20:04:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「CSS知识精炼02」盒子模型、浮动、文档流、定位</h3>
+<div class="text-muted small"><p> 七、文档流 文档流(normal flow)——网页的基础(最底下的一层)，我们所创建的元素默认都是在文档流中进行排列。 对于元素有两个状态：在文档流 或 脱离文档流。 元素在文档流的特点： 块元素：会在页面中独占一行(自上向下垂直排列)，默认宽度为父元素的全部(撑满)，默认高度被(子元素)内容撑开。 行内元素：行内元素不会占页面的一行，只占自身的...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/LearningHTML/"><div class="card-body"> <span class="timeago small"> Jul 20, 2020 <i class="unloaded">2020-07-20T00:40:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>HTML5知识提炼</h3>
+<div class="text-muted small"><p> 笔记大多是我从老师的课堂讲授中记录的，同时参考了W3school提供的资料。当然，笔记主要是记录个人认为容易遗忘或者有价值的，因此记录时不一定能够将所有知识点覆盖，或出现遗漏，术语上不一定标准规范。更加详细的知识点，可以去W3school或一些文档中查阅。待时间充裕，我也会进一步校对与补充。如果能发现其中的错误，望指正。大佬轻喷qaq 一、网页的组成 伯纳斯李建立万维网联盟(W3C)——...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/LearningJQuery/"><div class="card-body"> <span class="timeago small"> Mar 1 <i class="unloaded">2021-03-01T11:42:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「jQuery 学习笔记01」选择器、DOM操作</h3>
+<div class="text-muted small"><p> Chapter 1. 概述 1.1 概念 jQuery 是一个快速、简洁的 JavaScript 框架，是继 Prototype 之后又一个优秀的 JavaScript 代码库。 它封装了 JavaScript 常用的功能代码，提供一种简便的 JavaScript 设计模式，优化 HTML 文档操作、事件处理、动画设计和 Ajax 交互。 1.2 快速入门 （下载并...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/LearningHTML/" class="btn btn-outline-primary" prompt="&lt; Older"><p>HTML5知识提炼</p></a> <a href="/posts/LearningCSS-02/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>「CSS知识精炼02」盒子模型、浮动、文档流、定位</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

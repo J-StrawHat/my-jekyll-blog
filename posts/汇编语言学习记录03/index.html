@@ -1,0 +1,725 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「汇编学习记录03」实验大作业-数值运算与数据输出" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="本篇文章，是我们大二的汇编语言实验课的考核作业，在此记录下我的三百行代码吧hhh" /><meta property="og:description" content="本篇文章，是我们大二的汇编语言实验课的考核作业，在此记录下我的三百行代码吧hhh" /><link rel="canonical" href="https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" /><meta property="og:url" content="https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-12-30T00:00:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「汇编学习记录03」实验大作业-数值运算与数据输出" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"本篇文章，是我们大二的汇编语言实验课的考核作业，在此记录下我的三百行代码吧hhh","url":"https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/","@type":"BlogPosting","headline":"「汇编学习记录03」实验大作业-数值运算与数据输出","dateModified":"2021-01-30T02:37:40+08:00","datePublished":"2020-12-30T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/"},"@context":"https://schema.org"}</script><title>「汇编学习记录03」实验大作业-数值运算与数据输出 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「汇编学习记录03」实验大作业-数值运算与数据输出</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/programming-languages/">Programming Languages</a>, <a href="/categories/assembly-language/">Assembly Language</a>
+</div>
+<h1 data-toc-skip>「汇编学习记录03」实验大作业-数值运算与数据输出</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Wed, Dec 30, 2020, 12:00 AM +0800"> Dec 30, 2020 <i class="unloaded">2020-12-30T00:00:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sat, Jan 30, 2021, 2:37 AM +0800"> Jan 30 <i class="unloaded">2021-01-30T02:37:40+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2712 words">30 min</span> <span id="/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" class="leancloud_visitors" data-flag-title="「汇编学习记录03」实验大作业-数值运算与数据输出"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<p>本篇文章，是我们大二的汇编语言实验课的考核作业，在此记录下我的三百行代码吧hhh</p>
+<h2 id="1实验目的">1、实验目的</h2>
+<p>掌握通过键盘输入接收字符串、乘法运算、2/16 进制数与ASCII 码之间相互转换以及数据显示输出的程序设计方法。</p>
+<h2 id="2实验内容">2、实验内容</h2>
+<p>从键盘输入2个 \(0–99\) 之间的整数，对其做乘法运算，在屏幕上显示出该乘积对应的二进制和十六进制数。</p>
+<h2 id="3实验要求">3、实验要求</h2>
+<ol>
+<li>在屏幕提示：<code class="language-plaintext highlighter-rouge">"please input the first number(0–99): "</code>后，输入一个0–99 之间的整数。若所输入的数不在此范围内，或输入其它字符，则屏幕提示：<code class="language-plaintext highlighter-rouge">"input an invalid number, input again!"</code>；</li>
+<li>在屏幕提示：<code class="language-plaintext highlighter-rouge">"please input the second number(0–99):"</code>后，输入一个0–99 之间的整数。若所输入的数不在此范围内，或输入其它字符，则屏幕提示：<code class="language-plaintext highlighter-rouge"> "input an invalid number, input again!" </code>。</li>
+<li>对 <code class="language-plaintext highlighter-rouge">2</code> 个整数做乘法运算。</li>
+<li>在屏幕上显示出乘积所对应的二进制和十六进制数；</li>
+<li>显示部分功能要求用子程序实现。</li>
+</ol>
+<p>我的思路：</p>
+<ul>
+<li><p>通过 <code class="language-plaintext highlighter-rouge">DOS</code> 的第 <code class="language-plaintext highlighter-rouge">0AH</code> 号功能，键盘输入缓冲区，能够保证读入的数字只能在两位或一位。然后对输入的数字的高位与低位分别判断其合法性（即判断它对应的ASCII码是否在<code class="language-plaintext highlighter-rouge">0</code>-<code class="language-plaintext highlighter-rouge">9</code>），若不合法，则要求用户重新输入，直到用户输入合法的数字为止。对合法的数字ASCII码，通过位运算，将其转换为数字并存放到预先定义的存储单元中。</p></li>
+<li><p>获取到两个合法数字之后，两者进行乘法运算，得到的乘积结果存放到寄存器中。接着，分解寄存器中数字的高八位及低八位，再将其分解成高4位及低4位，依次地从数字转换为16进制所对应的ASCII码，并一位一位地输出。</p></li>
+<li><p>对于二进制输出，通过掩码，判断特定位是否为1, 然后对其进行打印。循环过程，掩码不断右移一位（缩小），相应位的数字也会打印出来，直至掩码为0，循环终止。</p></li>
+<li><p>对于十进制输出，可以将原来得到的乘积结果不断地除10运算。将得到的余数存放到堆栈，将得到的商继续地进行除10运算。直到商为0时，再从堆栈中<code class="language-plaintext highlighter-rouge">pop</code>出之前存放的所有余数，由此便能够得到对应数字的十进制表示。</p></li>
+</ul>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+</pre></td>
+<td class="rouge-code"><pre><span class="nf">datasg</span> <span class="ow">seg</span><span class="nv">ment</span>
+    <span class="nf">outstr1</span> <span class="nv">db</span> <span class="mh">0dh</span><span class="p">,</span><span class="mh">0ah</span><span class="p">,</span><span class="err">'</span><span class="nv">please</span> <span class="nv">input</span> <span class="nv">the</span> <span class="nv">first</span> <span class="nv">number</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">99</span><span class="p">):</span><span class="s">',0dh,0ah,'</span><span class="kc">$</span><span class="s">'
+    outstr2 db 0dh,0ah,'</span><span class="nv">please</span> <span class="nv">input</span> <span class="nv">the</span> <span class="nv">second</span> <span class="nv">number</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">99</span><span class="p">):</span><span class="s">',0dh,0ah,'</span><span class="kc">$</span><span class="s">'
+    outstr3 db 0dh,0ah,'</span><span class="nv">input</span> <span class="nv">an</span> <span class="nv">invalid</span> <span class="nv">number</span><span class="p">,</span> <span class="nv">input</span> <span class="nv">again</span><span class="err">!</span><span class="s">',0dh,0ah,'</span><span class="kc">$</span><span class="err">'</span>
+    <span class="nf">endstr</span>  <span class="nv">db</span> <span class="mh">0dh</span><span class="p">,</span><span class="mh">0ah</span><span class="p">,</span><span class="s">'$'</span>
+    <span class="nf">instr1</span>  <span class="nv">db</span> <span class="mi">3</span> <span class="c1">;包括回车符</span>
+            <span class="kd">db</span> <span class="nv">?</span>
+            <span class="kd">db</span> <span class="mi">3</span> <span class="nv">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nf">instr2</span>  <span class="nv">db</span> <span class="mi">3</span> <span class="c1">;包括回车符</span>
+            <span class="kd">db</span> <span class="nv">?</span> <span class="c1">;不包括回车符</span>
+            <span class="kd">db</span> <span class="mi">3</span> <span class="nv">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nf">a</span>       <span class="nv">dw</span> <span class="nv">?</span> <span class="c1">;存放第一个操作数</span>
+    <span class="nf">b</span>       <span class="nv">dw</span> <span class="nv">?</span> <span class="c1">;存放第二个操作数</span>
+    <span class="nf">nozero</span>  <span class="nv">db</span> <span class="mi">0</span> <span class="c1">;nozero为0，说明当前最高位仍是0；nozero为1，说明当前最高位不是0</span>
+<span class="nf">datasg</span> <span class="nv">ends</span>
+    
+<span class="nf">stacks</span> <span class="ow">seg</span><span class="nv">ment</span>
+    <span class="kd">dw</span> <span class="mi">256</span> <span class="nv">dup</span><span class="p">(</span><span class="nv">?</span><span class="p">)</span>
+<span class="nf">stacks</span> <span class="nv">ends</span>
+
+<span class="nf">codesg</span> <span class="ow">seg</span><span class="nv">ment</span>
+    <span class="nf">assume</span> <span class="nb">cs</span><span class="p">:</span><span class="nv">codesg</span><span class="p">,</span> <span class="nb">ds</span><span class="p">:</span><span class="nv">datasg</span><span class="p">,</span> <span class="nb">ss</span><span class="p">:</span><span class="nv">stacks</span> <span class="c1">;告诉汇编程序，段地址将要存放在哪个段寄存器中</span>
+<span class="nl">start:</span>
+    <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="nv">stacks</span> <span class="c1">;装填段地址</span>
+    <span class="nf">mov</span> <span class="nb">ss</span><span class="p">,</span> <span class="nb">ax</span>
+    <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="nv">datasg</span>  
+    <span class="nf">mov</span> <span class="nb">ds</span><span class="p">,</span> <span class="nb">ax</span>
+    
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span> <span class="c1">;输出“输入第一个操作数”的提示语句</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">outstr1</span> 
+    <span class="nf">int</span> <span class="mh">21h</span> 
+<span class="nl">input1:</span> 
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0ah</span>  <span class="c1">;输入操作数</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr1</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr1</span>
+    <span class="nf">call</span> <span class="nv">judgeNum</span> <span class="c1">;判断是否合法数字</span>
+    <span class="nf">and</span> <span class="nb">dl</span><span class="p">,</span> <span class="nb">dl</span>
+    <span class="nf">jnz</span> <span class="nv">next1</span> <span class="c1">;zf=0，说明返回参数为true</span>
+
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">outstr3</span> <span class="c1">;输出“重新输入”的提示语句</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">jmp</span> <span class="nv">input1</span> <span class="c1">;跳转回原来的输入语句</span>
+<span class="nl">next1:</span> <span class="c1">;第一个操作数输入与第二个操作数输入的过渡部分</span>
+    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr1</span>
+    <span class="nf">call</span> <span class="nv">transToNum</span> <span class="c1">;ASCII转换为数字，并存到al中</span>
+    <span class="nf">mov</span> <span class="nv">a</span><span class="p">,</span> <span class="nb">ax</span> <span class="c1">;将转换的数字存放到a这个存储单元</span>
+
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">outstr2</span> <span class="c1">;输出“输入第二个操作数”的提示语句</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+<span class="nl">input2:</span> 
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">0ah</span> <span class="c1">;输入第二个操作数</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr2</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr2</span>
+    <span class="nf">call</span> <span class="nv">judgeNum</span>
+    <span class="nf">and</span> <span class="nb">dl</span><span class="p">,</span> <span class="nb">dl</span>
+    <span class="nf">jnz</span> <span class="nv">next2</span>
+
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">outstr3</span><span class="c1">;</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">jmp</span> <span class="nv">input2</span>
+<span class="nl">next2:</span>
+    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">instr2</span>
+    <span class="nf">call</span> <span class="nv">transToNum</span>
+    <span class="nf">mov</span> <span class="nv">b</span><span class="p">,</span> <span class="nb">ax</span><span class="c1">;将转换的数字存放到b这个存储单元</span>
+
+    <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="nv">a</span>
+    <span class="nf">mul</span> <span class="nv">b</span> <span class="c1">;ax=a*b</span>
+    
+    <span class="nf">push</span> <span class="nb">ax</span> <span class="c1">;保护ax</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">endstr</span><span class="c1">;先换行，不然会覆盖之前输入的字符</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span> 
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">pop</span> <span class="nb">ax</span>
+
+    <span class="nf">push</span> <span class="nb">ax</span><span class="c1">;暂存ax</span>
+    
+    <span class="nf">test</span> <span class="nb">ax</span><span class="p">,</span> <span class="nb">ax</span> <span class="c1">;如果ax为0，直接输出字符0即可</span>
+    <span class="nf">jnz</span> <span class="nv">printNormal</span> 
+    <span class="nf">push</span> <span class="nb">ax</span>  <span class="c1">;保护ax</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'0'</span> <span class="c1">;直接输出0</span>
+    <span class="nf">int</span> <span class="mh">21h</span> 
+    <span class="nf">pop</span> <span class="nb">ax</span>
+    <span class="nf">jmp</span> <span class="nv">next3</span>
+<span class="nl">printNormal:</span> <span class="c1">;正常输出数字</span>
+    <span class="nf">mov</span> <span class="nb">bx</span><span class="p">,</span> <span class="nb">ax</span> <span class="c1">;放到bx，对bx进行输出处理</span>
+    <span class="nf">mov</span> <span class="nb">cl</span><span class="p">,</span> <span class="mi">8</span>
+    <span class="nf">shr</span> <span class="nb">bx</span><span class="p">,</span> <span class="nb">cl</span>
+    <span class="nf">call</span> <span class="nv">printHex</span> <span class="c1">;先输出bx高8位</span>
+    <span class="nf">mov</span> <span class="nb">bx</span><span class="p">,</span> <span class="nb">ax</span>
+    <span class="nf">and</span> <span class="nb">bx</span><span class="p">,</span> <span class="mh">00ffh</span>
+    <span class="nf">call</span> <span class="nv">printHex</span> <span class="c1">;再输出bx低8位</span>
+<span class="nl">next3:</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'H'</span> <span class="c1">;打印'H'，表明16进制数打印成功</span>
+    <span class="nf">int</span> <span class="mh">21h</span>  
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">endstr</span> <span class="c1">;换行</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+    <span class="nf">mov</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;前导零重新初始化</span>
+    <span class="nf">pop</span> <span class="nb">ax</span> <span class="c1">;恢复ax的值</span>
+    <span class="nf">push</span> <span class="nb">ax</span> <span class="c1">;同时再次备份ax</span>
+
+    <span class="nf">test</span> <span class="nb">ax</span><span class="p">,</span> <span class="nb">ax</span>
+    <span class="nf">jnz</span> <span class="nv">printNormal2</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'0'</span> <span class="c1">;直接输出0</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">jmp</span> <span class="nv">next4</span>
+<span class="nl">printNormal2:</span>
+    <span class="nf">mov</span> <span class="nb">bx</span><span class="p">,</span> <span class="nb">ax</span>
+    <span class="nf">call</span> <span class="nv">printBin</span> <span class="c1">;输出数字的二进制表示</span>
+<span class="nl">next4:</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'B'</span> <span class="c1">;打印'B'，表明二进制数打印成功</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">endstr</span> <span class="c1">;换行</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+    <span class="nf">pop</span> <span class="nb">ax</span>
+    <span class="nf">call</span> <span class="nv">printDec</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'D'</span> <span class="c1">;打印'D'，表示十进制数打印成功</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">09h</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="nv">offset</span> <span class="nv">endstr</span> <span class="c1">;换行</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">4ch</span> <span class="c1">;结束当前正在执行的程序，返回操作系统，屏幕显示系统操作符</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+
+<span class="c1">;将输入得到的字符分别进行合法性判断，入口参数:si(指向输入字符串的地址)，返回参数:dl(表示是否合法)</span>
+<span class="nf">judgeNum</span> <span class="nv">proc</span> 
+    <span class="nf">add</span> <span class="nb">si</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="p">[</span><span class="nb">si</span><span class="p">]</span>
+    <span class="nf">cmp</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'0'</span>
+    <span class="nf">jb</span> <span class="nv">false</span>
+    <span class="nf">cmp</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'9'</span>
+    <span class="nf">ja</span> <span class="nv">false</span>
+
+    <span class="nf">cmp</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">si</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span> <span class="c1">;[si-1]为实际输入的字符个数</span>
+    <span class="nf">jz</span> <span class="nv">then</span> <span class="c1">;zf=1，说明输入的字符只有1位</span>
+
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="p">[</span><span class="nb">si</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="nf">cmp</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'0'</span>
+    <span class="nf">jb</span> <span class="nv">false</span>
+    <span class="nf">cmp</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'9'</span>
+    <span class="nf">ja</span> <span class="nv">false</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;返回参数为1</span>
+    <span class="nf">jmp</span> <span class="nv">then</span>
+<span class="nl">false:</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;返回参数为0</span>
+<span class="nl">then:</span>
+    <span class="nf">ret</span>
+<span class="nf">judgeNum</span> <span class="nv">endp</span>
+
+<span class="c1">;将输入得到的两个字符转换为数字，入口参数:si(指向输入字符串的地址)，返回参数:al(存放转换得到的数字)</span>
+<span class="nf">transToNum</span> <span class="nv">proc</span> 
+    <span class="nf">push</span> <span class="nb">dx</span>
+    <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">0h</span>
+    <span class="nf">add</span> <span class="nb">si</span><span class="p">,</span> <span class="mi">2</span> <span class="c1">;字符串中第一个数字（高位数字）</span>
+    <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">ds</span><span class="p">:[</span><span class="nb">si</span><span class="p">]</span> 
+    <span class="nf">and</span> <span class="nb">al</span><span class="p">,</span> <span class="mh">0fh</span> <span class="c1">;屏蔽该数字的前4位(ASCII转换为对应的数字)</span>
+    <span class="nf">cmp</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">si</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span> 
+    <span class="nf">jz</span> <span class="nv">then2</span> <span class="c1">;若zf=1，说明输入的字符只有一位</span>
+
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="mi">10</span>
+    <span class="nf">mul</span> <span class="nb">dl</span><span class="c1">;高位乘10</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="nb">ds</span><span class="p">:[</span><span class="nb">si</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="c1">;获得个位上的字符</span>
+    <span class="nf">and</span> <span class="nb">dl</span><span class="p">,</span> <span class="mh">0fh</span> <span class="c1">;ASCII转换为数字</span>
+    <span class="nf">add</span> <span class="nb">al</span><span class="p">,</span> <span class="nb">dl</span> <span class="c1">;得到最终数字</span>
+<span class="nl">then2:</span>
+    <span class="nf">pop</span> <span class="nb">dx</span>
+    <span class="nf">ret</span>
+<span class="nf">transToNum</span> <span class="nv">endp</span>
+
+<span class="c1">;直接转换法，将数字转换为ASCII码，同时打印数字，入口参数:dl(需要转换的两位数字)，返回参数:无</span>
+<span class="nf">transToASCII</span> <span class="nv">proc</span>  
+    <span class="nf">push</span> <span class="nb">ax</span>
+    <span class="nf">or</span> <span class="nb">dl</span><span class="p">,</span> <span class="mh">30h</span>
+    <span class="nf">cmp</span> <span class="nb">dl</span><span class="p">,</span> <span class="mh">39h</span>
+    <span class="nf">jbe</span> <span class="nv">output</span>
+    <span class="nf">add</span> <span class="nb">dl</span><span class="p">,</span> <span class="mi">7</span> <span class="c1">;说明当前位的数字超过9</span>
+<span class="nl">output:</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">pop</span> <span class="nb">ax</span>
+    <span class="nf">ret</span>
+<span class="nf">transToASCII</span> <span class="nv">endp</span>
+
+<span class="c1">;分解两位16进制数，同时处理前导零的输出，入口参数：bl(需要输出的两位数字)，返回参数：无</span>
+<span class="nf">printHex</span> <span class="nv">proc</span> 
+    <span class="nf">push</span> <span class="nb">ax</span>
+    <span class="nf">push</span> <span class="nb">bx</span>
+    <span class="nf">push</span> <span class="nb">cx</span> <span class="c1">;保护</span>
+    <span class="nf">push</span> <span class="nb">bx</span> <span class="c1">;暂存</span>
+    <span class="c1">;先处理bl的高4位</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="nb">bl</span>
+    <span class="nf">mov</span> <span class="nb">cl</span><span class="p">,</span> <span class="mi">4</span> 
+    <span class="nf">shr</span> <span class="nb">dl</span><span class="p">,</span> <span class="nb">cl</span> 
+
+    <span class="nf">mov</span> <span class="nb">bl</span><span class="p">,</span> <span class="nb">dl</span>
+    <span class="nf">test</span> <span class="nb">bl</span><span class="p">,</span> <span class="nb">bl</span>
+    <span class="nf">jnz</span> <span class="nv">goTrans</span> <span class="c1">;说明当前位不为0，肯定要输出；若当前位为0，先看看是否仍为前导零</span>
+    <span class="nf">and</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span> 
+    <span class="nf">jz</span> <span class="nv">nextstep</span> <span class="c1">;zf=0时，不需要输出此前导零</span>
+<span class="nl">goTrans:</span>
+    <span class="nf">mov</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;说明当前位不属于前导零 </span>
+    <span class="nf">call</span> <span class="nv">transToASCII</span> <span class="c1">;此时需要将当前位输出</span>
+<span class="nl">nextstep:</span>
+    <span class="nf">pop</span> <span class="nb">dx</span>  <span class="c1">;暂存的bx赋值到dx</span>
+    <span class="nf">and</span> <span class="nb">dx</span><span class="p">,</span> <span class="mh">000fh</span> 
+    <span class="c1">;将dl的前4位置零</span>
+    <span class="nf">mov</span> <span class="nb">bl</span><span class="p">,</span> <span class="nb">dl</span>
+    <span class="nf">test</span> <span class="nb">bl</span><span class="p">,</span> <span class="nb">bl</span>
+    <span class="nf">jnz</span> <span class="nv">goTrans2</span>
+    <span class="nf">and</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span> 
+    <span class="nf">jz</span> <span class="nv">nextstep2</span>
+<span class="nl">goTrans2:</span>
+    <span class="nf">mov</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">call</span> <span class="nv">transToASCII</span>
+<span class="nl">nextstep2:</span>
+    <span class="nf">pop</span> <span class="nb">cx</span>
+    <span class="nf">pop</span> <span class="nb">bx</span>
+    <span class="nf">pop</span> <span class="nb">ax</span>
+    <span class="nf">ret</span>
+<span class="nf">printHex</span> <span class="nv">endp</span>
+
+<span class="c1">;将输入的数字按二进制进行输出，入口参数:bx(需要输出的四位数字)，返回参数：无</span>
+<span class="nf">printBin</span> <span class="nv">proc</span> 
+    <span class="nf">push</span> <span class="nb">ax</span>
+    <span class="nf">push</span> <span class="nb">cx</span>
+    <span class="nf">push</span> <span class="nb">dx</span>
+    <span class="nf">mov</span> <span class="nb">ax</span><span class="p">,</span> <span class="mh">8000h</span> <span class="c1">;D15置1，其余位置0</span>
+<span class="nl">again:</span>
+    <span class="nf">test</span> <span class="nb">bx</span><span class="p">,</span> <span class="nb">ax</span> <span class="c1">;判断最高位是否为0</span>
+    <span class="nf">jz</span> <span class="nv">moveZero</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'1'</span>
+    <span class="nf">mov</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;确定当前位不是前导零</span>
+    <span class="nf">jmp</span> <span class="nv">printNum</span>
+<span class="nl">moveZero:</span>
+    <span class="nf">mov</span> <span class="nb">dl</span><span class="p">,</span> <span class="s">'0'</span>
+<span class="nl">printNum:</span>
+    <span class="nf">and</span> <span class="nv">nozero</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;判断当前最高位是否仍存在前导零</span>
+    <span class="nf">jz</span> <span class="nv">thus</span> <span class="c1">;说明仍有前导0，无需输出</span>
+    <span class="nf">push</span> <span class="nb">ax</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">pop</span> <span class="nb">ax</span>
+<span class="nl">thus:</span>
+    <span class="nf">shr</span> <span class="nb">ax</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;ax进行右移</span>
+    <span class="nf">test</span> <span class="nb">ax</span><span class="p">,</span> <span class="nb">ax</span> 
+    <span class="nf">jnz</span> <span class="nv">again</span>  <span class="c1">;循环继续</span>
+    <span class="nf">pop</span> <span class="nb">dx</span>
+    <span class="nf">pop</span> <span class="nb">cx</span>
+    <span class="nf">pop</span> <span class="nb">ax</span>
+    <span class="nf">ret</span>
+<span class="nf">printBin</span> <span class="nv">endp</span>
+
+<span class="c1">;将输入的数字按十进制输出，入口参数:ax，返回参数：无</span>
+<span class="nf">printDec</span> <span class="nv">proc</span> 
+    <span class="nf">push</span> <span class="nb">bx</span>
+    <span class="nf">push</span> <span class="nb">cx</span>
+    <span class="nf">push</span> <span class="nb">dx</span>
+    <span class="nf">mov</span> <span class="nb">cx</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;记录10进制位数</span>
+    <span class="nf">mov</span> <span class="nb">bx</span><span class="p">,</span> <span class="mi">10</span><span class="nv">D</span> <span class="c1">;存放除数</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;初始化余数</span>
+<span class="nl">goDivide:</span>
+    <span class="nf">inc</span> <span class="nb">cx</span>
+    <span class="nf">mov</span> <span class="nb">dx</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;余数一定要记得清零，否则会与ax一起运算</span>
+    <span class="nf">div</span> <span class="nb">bx</span> <span class="c1">;为了将余数存放到dx，用bx作为除数</span>
+    <span class="nf">push</span> <span class="nb">dx</span>
+    <span class="nf">test</span> <span class="nb">ax</span><span class="p">,</span> <span class="nb">ax</span> 
+    <span class="nf">jnz</span> <span class="nv">goDivide</span>
+<span class="nl">goOutput:</span>
+    <span class="nf">pop</span> <span class="nb">dx</span>
+    <span class="nf">or</span> <span class="nb">dl</span><span class="p">,</span> <span class="mh">30h</span>
+    <span class="nf">mov</span> <span class="nb">ah</span><span class="p">,</span> <span class="mh">02h</span>
+    <span class="nf">int</span> <span class="mh">21h</span>
+    <span class="nf">loop</span> <span class="nv">goOutput</span>
+
+    <span class="nf">pop</span> <span class="nb">dx</span>
+    <span class="nf">pop</span> <span class="nb">cx</span>
+    <span class="nf">pop</span> <span class="nb">bx</span>
+    <span class="nf">ret</span>
+<span class="nf">printDec</span> <span class="nv">endp</span>
+<span class="nf">codesg</span> <span class="nv">ends</span>
+    <span class="nf">end</span> <span class="nv">start</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/programming-languages/">Programming Languages</a>, <a href="/categories/assembly-language/">Assembly Language</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/assembly/" class="post-tag no-text-decoration">Assembly</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/&amp;title=%E3%80%8C%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503%E3%80%8D%E5%AE%9E%E9%AA%8C%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8C%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503%E3%80%8D%E5%AE%9E%E9%AA%8C%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8C%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503%E3%80%8D%E5%AE%9E%E9%AA%8C%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8C%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503%E3%80%8D%E5%AE%9E%E9%AA%8C%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8C%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503%E3%80%8D%E5%AE%9E%E9%AA%8C%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9503/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9501%E4%B8%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/"><div class="card-body"> <span class="timeago small"> Nov 14, 2020 <i class="unloaded">2020-11-14T00:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「汇编学习记录01」开发工具安装及编译运行第一个程序</h3>
+<div class="text-muted small"><p> 汇编语言开发工具安装 首先安装VS Code（建议下载最新版，否则有可能会与的下面拓展版本不兼容） 安装完成VS Code后，点击拓展——搜索MASM/TASM拓展——安装。 由于课程需要，我会选择MASM作为汇编工具，选择DOSBox作为16位模拟器，这些都可以在VSCode的拓展设置中进行设置，如下图： 简单几步即可开始敲汇编代码了<img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"> 该拓展的Github地址戳...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9502%E4%B9%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/"><div class="card-body"> <span class="timeago small"> Dec 26, 2020 <i class="unloaded">2020-12-26T00:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「汇编学习记录02」之程序设计技巧</h3>
+<div class="text-muted small"><p> 感谢曹老师的PPT、《汇编语言程序设计教程》（卜艳萍，清华出版社），仔细阅读后，自己提取并总结了这些技巧或方法。文中若有纰漏之处，恳请读者通过邮件向我指正。 位运算技巧在汇编程序中的应用 寄存器初始化 举例使用： xor ax, ax ;将ax寄存器置零 判断寄存器是否为0 假如我们刚刚进行完除法运算，需要判断余...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/NetWorkSummary/"><div class="card-body"> <span class="timeago small"> Jun 18 <i class="unloaded">2021-06-18T00:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>计算机网络错题汇总</h3>
+<div class="text-muted small"><p> Chap 2. 物理层 编码 -&gt; 基带调制 光纤分为多模光纤和单模光纤 奈奎斯特定理：理想低通信道下的极限数据传输率 = $2W\log_2{V}$ $W$ 是带宽（单位：Hz），$V$ 表示每个码元离散电平的数目（比如16种码元，需要4位二进制位） Chap 3. 数据链路层 ...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%9502%E4%B9%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/" class="btn btn-outline-primary" prompt="&lt; Older"><p>「汇编学习记录02」之程序设计技巧</p></a> <a href="/posts/enable-google-pv/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>Enable Google Page Views</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

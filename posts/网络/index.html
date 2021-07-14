@@ -1,0 +1,817 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「JavaSE学习笔记08」网络编程" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="Chapter 14. 网络编程" /><meta property="og:description" content="Chapter 14. 网络编程" /><link rel="canonical" href="https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" /><meta property="og:url" content="https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-11-21T21:22:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「JavaSE学习笔记08」网络编程" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"Chapter 14. 网络编程","url":"https://joydee.top/posts/%E7%BD%91%E7%BB%9C/","@type":"BlogPosting","headline":"「JavaSE学习笔记08」网络编程","dateModified":"2021-02-22T11:38:31+08:00","datePublished":"2020-11-21T21:22:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/%E7%BD%91%E7%BB%9C/"},"@context":"https://schema.org"}</script><title>「JavaSE学习笔记08」网络编程 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「JavaSE学习笔记08」网络编程</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<h1 data-toc-skip>「JavaSE学习笔记08」网络编程</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Sat, Nov 21, 2020, 9:22 PM +0800"> Nov 21, 2020 <i class="unloaded">2020-11-21T21:22:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Feb 22, 2021, 11:38 AM +0800"> Feb 22 <i class="unloaded">2021-02-22T11:38:31+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="5032 words">55 min</span> <span id="/posts/%E7%BD%91%E7%BB%9C/" class="leancloud_visitors" data-flag-title="「JavaSE学习笔记08」网络编程"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<h1 id="chapter-14-网络编程">Chapter 14. 网络编程</h1>
+<p>网络编程，即使用编程语言实现多台计算机的通信。</p>
+<h2 id="141-计算机网络入门">14.1 计算机网络入门</h2>
+<p>当前节的知识点只是一个概述，更具体、详细的内容放在 计算机网络 中。</p>
+<h3 id="1411-软件结构">14.1.1 软件结构</h3>
+<ul>
+<li>
+<strong>C/S结构</strong>（Client/Server结构）：指客户端与服务器结构，常见程序有QQ、迅雷等软件。</li>
+<li>
+<strong>B/S结构</strong>（Browser/Server结构）：指浏览器与服务器结构。</li>
+</ul>
+<p>两种架构各有优势，无论哪种架构，都离不开网络的支持。<strong>网络编程</strong>，就是在一定的协议下，实现两台计算机的通信的程序。</p>
+<h3 id="1412-网络通信协议">14.1.2 网络通信协议</h3>
+<ul>
+<li><p>网络通信协议：只有遵守这些规则，计算机之间才能进行通信。协议中对数据的传输格式、传输速率、传输步骤等做了统一规定，通信双方必须同时遵守，最终完成数据交换。</p></li>
+<li>
+<p><strong>TCP/IP</strong>（ TCP/IP 协议<strong>族</strong> 的简称）：传输控制协议/网际协议（Transmission Control Protocol / Internet Protocol），是网络通信模型，以及整个网络传输协议家族，为网际网络的基础通信架构。它将软件通信过程抽象化为<strong>四个抽象层</strong>，采取协议堆栈的方式，分别实现出不同通信协议。该协议家族的两个核心协议、最具代表性的协议为：<strong>TCP</strong>（传输控制协议）和<strong>IP</strong>（网际协议）。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201121201210.png"></p>
+</li>
+</ul>
+<h3 id="1413-协议分类">14.1.3 协议分类</h3>
+<p><code class="language-plaintext highlighter-rouge">java.net</code>包中包含的类和接口，提供低层次的通信细节。该包中提供了两种常见的网络协议的支持：</p>
+<ul>
+<li><p><strong>UDP</strong>：用户数据报协议（User Datagram Protocol）。UDP协议是一个面向无连接的协议。传输数据时，<strong>不需建立连接</strong>，不管对方端服务是否启动，直接将数据、数据源和目的地都封装在数据包中，直接发送。每个数据包的大小限制在$64k$以内。由于无连接，故传输速度快，但容易丢失数据，日常应用于视频会议、QQ聊天等。</p></li>
+<li>
+<p><strong>TCP</strong>：传输控制协议（Transmission Control Protocol）。TCP协议是<strong>面向连接</strong>的通信协议，即传输数据之前，在发送端和接收端<strong>建立逻辑连接</strong>，然后再传输数据，它提供了两台计算机之间可靠无差错的数据传输。TCP协议中，在发送数据的准备阶段，客户端与服务器的三次交互，称为<strong>三次握手</strong>，以保证连接的可靠。</p>
+<ul>
+<li>第一次握手：客户端向服务器端发出连接请求，等待服务器确认。</li>
+<li>第二次握手：服务器端向客户端回送一个响应，通知客户端收到连接请求。</li>
+<li>第三次握手：客户端再次向服务器端发送确认信息，确认连接。</li>
+</ul>
+<p>当完成三次握手，连接建立后，客户端和服务器就可以开始进行数据传输，由于这种面向连接的特性，TCP协议可以保证传输数据的安全，故应用十分广泛，例如下载文件、浏览网页等。</p>
+</li>
+</ul>
+<h3 id="1414-网络编程三要素">14.1.4 网络编程三要素</h3>
+<p>利用<strong>协议</strong>+<strong>IP地址</strong>+<strong>端口号</strong> 三元组，即可标识网络中的进程。而进程间的通信即可利用该标识与其他进程进行交互。</p>
+<ol>
+<li>
+<p><strong>协议</strong></p>
+<p>定义通信规则。</p>
+<blockquote><p>IP地址可以唯一标识网络中的<strong>设备</strong>，端口号可以唯一标识设备中的<strong>进程</strong>（应用程序）。</p></blockquote>
+</li>
+<li>
+<p><strong>IP地址</strong></p>
+<p>IP 指互联网协议地址（Internet Protocol Address），它用来给一个网络中的计算机设备做唯一的编号。而IP地址有如下分类：</p>
+<ul>
+<li>IPv4：使用32位地址（4字节），故地址空间只有$2^{32}$个地址。通常采用点分十进制的格式：<code class="language-plaintext highlighter-rouge">a.b.c.d</code>，其中<code class="language-plaintext highlighter-rouge">a</code>、<code class="language-plaintext highlighter-rouge">b</code>、<code class="language-plaintext highlighter-rouge">c</code>、<code class="language-plaintext highlighter-rouge">d</code>均为0~255之间的<strong>十进制</strong>整数并用<code class="language-plaintext highlighter-rouge">.</code>分开，如<code class="language-plaintext highlighter-rouge">192.168.56.100</code>。</li>
+<li>IPv6：使用128位地址，故地址空间支持$2^{128}(=16^{32})$个地址。它可以分为8组，用<code class="language-plaintext highlighter-rouge">:</code>进行分组，每组以4位十六进制方式表示，如<code class="language-plaintext highlighter-rouge"> ABCD:EF01:2345:6789:ABCD:EF01:2345:6789</code>
+</li>
+</ul>
+<p>常用命令有：</p>
+<ul>
+<li>
+<p>查看本机IP地址，在控制台输入：<code class="language-plaintext highlighter-rouge">ipconfig</code> 或者 通过控制面板</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210220224143.png"></p>
+</li>
+<li><p>检查网络是否连通，在控制台输入：<code class="language-plaintext highlighter-rouge">ping IP地址</code>（如<code class="language-plaintext highlighter-rouge">ping 220.181.57.216</code>）</p></li>
+</ul>
+</li>
+<li>
+<p><strong>端口号</strong></p>
+<p>端口号，是一个逻辑端口。它用<strong>两个字节</strong>表示的整数，其取整范围为[$0, 2^8\times2^8$]。其中[$0,1023$]之间的端口号用于一些知名的网络服务和应用。$1024$以上的端口则用于普通的应用程序。当网络软件一打开，操作系统便会为该网络软件分配一个随机的端口号。若端口号被另外一个服务或应用所占用，会导致当前程序启动失败。</p>
+<blockquote>
+<p>常用端口号有：</p>
+<ol>
+<li>80端口：网络端口</li>
+<li>数据库：mysql：3306；oracle：1521</li>
+<li>Tomcat服务器：8080</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<blockquote><p>举例：若我要和张三说话，我需要张三的地址来找到他（相当于通过IP找到指定计算机）；接着我要与张三的说话，而他用耳朵听我说话（相当于用特定端口接收）；而我们之间对话的语言，需要做好约定，彼此都能听懂（协议所起的作用）。</p></blockquote>
+<h2 id="142-tcp通信程序">14.2 TCP通信程序</h2>
+<h3 id="1421-概述">14.2.1 概述</h3>
+<p>TCP通信能实现两条计算机之间的数据交互，通信的两端，要严格区分客户端（Client）与服务端（Server）。</p>
+<p>两端通信时步骤：</p>
+<ol>
+<li>服务端程序，需事<strong>先启动</strong>！但服务端不能够主动连接客户端，需等待客户端的连接。这个连接当中包含IO对象（字节流对象）。</li>
+<li>客户端<strong>主动连接</strong>服务器端，连接成功后，客户端和服务器端可使用IO对象进行通信了。一个数据的交互则需要4个IO流对象</li>
+</ol>
+<p>在Java中，提供两个类用于实现TCP通信程序：</p>
+<ol>
+<li><p>客户端：用<code class="language-plaintext highlighter-rouge">java.net.Socket</code> 类表示。创建 <code class="language-plaintext highlighter-rouge">Socket</code> 对象，向服务端发出连接请求，等到服务端响应请求后，两者建立连接开始通信。</p></li>
+<li>
+<p>服务端：用<code class="language-plaintext highlighter-rouge">java.net.ServerSocket</code> 类表示。创建 <code class="language-plaintext highlighter-rouge">ServerSocket</code> 对象，相当于开启一个服务，并等待客户端的连接。</p>
+<p>注意，服务端没有IO流，它使用每个客户端<code class="language-plaintext highlighter-rouge">Socket</code>中提供的IO流和客户端进行交互：</p>
+<ul>
+<li>服务端使用客户端的字节输入流读入客户端发送的数据。</li>
+<li>服务端使用客户端的字节输出流给客户端回写数据。</li>
+</ul>
+</li>
+</ol>
+<h3 id="1422-socket-类">14.2.2 Socket 类</h3>
+<p>使用<code class="language-plaintext highlighter-rouge">Socket</code> 类，实现客户端套接字（套接字<em>Socket</em>，可以理解为插座，它包含了<strong>IP地址和端口号</strong>的网络单位）。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201121214953.png"></p>
+<p>构造方法：</p>
+<ul><li>
+<p><code class="language-plaintext highlighter-rouge">public Socket(String host, int port)</code>：创建套接字（Socket）对象，并将其连接到指定主机上的指定端口号。</p>
+<p>参数：</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">String host</code>：服务器主机的名称/<strong>服务器的IP地址</strong>。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">int port</code>：服务器的端口号。</li>
+</ul>
+<blockquote><p>如果指定的 <code class="language-plaintext highlighter-rouge">host</code> 是 <code class="language-plaintext highlighter-rouge">null</code> ，则相当于指定地址为回送地址。回送地址(127.x.x.x) 是本机回送地址（Loopback Address），主要用于网络软件测试以及本 地机进程间通信，无论什么程序，一旦使用回送地址发送数据，立即返回，不进行任何网络传输。</p></blockquote>
+</li></ul>
+<p>成员方法</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">public InputStream getInputStream()</code>：返回此套接字的输入流。若此<code class="language-plaintext highlighter-rouge">Scoket</code>具有相关联的通道，则生成的<code class="language-plaintext highlighter-rouge">InputStream</code>的所有操作也关联该通道。关闭生成的<code class="language-plaintext highlighter-rouge">InputStream</code>也将关闭相关的<code class="language-plaintext highlighter-rouge">Socket</code>。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public OutputStream getOutputStream()</code>：返回此套接字的输出流。与上同理。</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public void close()</code>：关闭此套接字。一个<code class="language-plaintext highlighter-rouge">Socket</code>被关闭，则不可再被使用</li>
+<li>
+<code class="language-plaintext highlighter-rouge">public void shutdownOutput()</code>：禁用此套接字的输出流。任何先前写出的数据将被发送，随后终止输出流。</li>
+</ul>
+<h3 id="1423-serversocket-类">14.2.3 ServerSocket 类</h3>
+<p><code class="language-plaintext highlighter-rouge">ServerSocket</code>类，实现了服务器套接字，该对象等待通过网络的请求。</p>
+<p>构造方法：</p>
+<ul><li>
+<code class="language-plaintext highlighter-rouge">public ServerSocket(int port)</code>：创建绑定到特定端口<code class="language-plaintext highlighter-rouge">port</code>的服务器套接字</li></ul>
+<p>成员方法：</p>
+<ul><li>
+<code class="language-plaintext highlighter-rouge">public Socket accept()</code>：侦听并接受连接，返回一个新的<code class="language-plaintext highlighter-rouge">Socket</code>对象，用于给客户端实现通信，该方法会一直阻塞到建立连接。由于服务端必须明确是哪个客户端发送请求，故可使用该方法以获取到发送请求的客户端对象<code class="language-plaintext highlighter-rouge">Socket</code>。</li></ul>
+<h3 id="1424-简单的tcp网络程序">14.2.4 简单的TCP网络程序</h3>
+<p>TCP通信步骤：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/5_简单通信.jpg"></p>
+<ol>
+<li><p>【服务端】启动，创建<code class="language-plaintext highlighter-rouge">ServerSocket</code>对象，等待连接。</p></li>
+<li><p>【客户端】启动，创建<code class="language-plaintext highlighter-rouge">Socket</code>对象，请求连接。</p></li>
+<li><p>【服务端】接收连接，调用<code class="language-plaintext highlighter-rouge">accept()</code>方法，并返回一个<code class="language-plaintext highlighter-rouge">Socket</code>对象。</p></li>
+<li><p>【客户端】<code class="language-plaintext highlighter-rouge">Socket</code>对象，获取<code class="language-plaintext highlighter-rouge">OutputStream</code>，向服务端写出数据。</p></li>
+<li>
+<p>【服务端】<code class="language-plaintext highlighter-rouge">Socket</code>对象，获取<code class="language-plaintext highlighter-rouge">InputStream</code>，读入客户端发送的数据。</p>
+<blockquote>
+<p>到此，客户端向服务器发送数据成功！</p>
+<p>至此，服务端向客户端回写数据</p>
+</blockquote>
+</li>
+<li><p>【服务端】<code class="language-plaintext highlighter-rouge">Socket</code>对象，获取<code class="language-plaintext highlighter-rouge">OutputStream</code>，向客户端回写数据。</p></li>
+<li><p>【客户端】<code class="language-plaintext highlighter-rouge">Socket</code>对象，获取<code class="language-plaintext highlighter-rouge">InputStream</code>，解析回写数据。</p></li>
+<li><p>【客户端】释放资源，断开连接。</p></li>
+</ol>
+<p>服务端实现：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServerTCP</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务端启动，等待连接中...."</span><span class="o">);</span>
+        <span class="nc">ServerSocket</span> <span class="n">ss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="mi">6666</span><span class="o">);</span> <span class="c1">//1.创建ServerSocket对象，绑定端口，开始等待连接</span>
+        <span class="nc">Socket</span> <span class="n">server</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> <span class="c1">//2.调用accept方法，以获取发送请求的客户端Socket</span>
+        <span class="nc">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span> <span class="c1">//3.通过Socket对象获取输入流，读入客户端发送的数据</span>
+		<span class="c1">//4.一次性读入数据</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span> <span class="c1">//读入至字节数组中</span>
+        <span class="nc">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span> <span class="c1">//解析数组，打印字符串信息</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span> <span class="c1">//打印字符串信息，供测试</span>
+
+        <span class="cm">/* ---------------回写数据--------------- */</span>
+        <span class="nc">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span> <span class="c1">//5.通过Socket获取输出流</span>
+        <span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hey man, I am good!"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span> <span class="c1">//6.回写数据至客户端</span>
+		
+        <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">server</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>客户端实现：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientTCP</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"客户端发送数据！"</span><span class="o">);</span>
+        <span class="nc">Socket</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Socket</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">6666</span><span class="o">);</span> <span class="c1">//1.确定连接至哪个服务端</span>
+        <span class="nc">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span> <span class="c1">//2.获取输出流对象</span>
+        <span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"How do you do, TCP? I am coming!"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span> <span class="c1">//3.写出数据至服务端</span>
+
+        <span class="cm">/* ---------------解析回写--------------- */</span>
+        <span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span> <span class="c1">//4.获取输入流对象</span>
+        <span class="c1">//5.读入回写的数据</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">));</span> <span class="c1">//打印服务端回写的数据</span>
+
+        <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">client</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>启动时，应该先运行服务端，再运行客户端（手速要快），顺序颠倒会导致抛出异常</p>
+<p><code class="language-plaintext highlighter-rouge">ServerTCP</code>运行结果：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201121222818.png" width="400"></p>
+<p><code class="language-plaintext highlighter-rouge">ClientTCP</code>运行结果：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20201121222905.png" width="400"></p>
+<h2 id="143-综合案例">14.3 综合案例</h2>
+<h3 id="1431-文件上传">14.3.1 文件上传</h3>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210125104522.png"></p>
+<blockquote>
+<p>①【客户端】输入流，从本地硬盘读入文件数据到程序中；</p>
+<p>②【客户端】输出流，写出文件数据到服务端；</p>
+<p>③【服务端】输入流，读入文件数据到服务端程序；</p>
+<p>④【服务端】输出流，写出文件数据到服务器硬盘中。</p>
+</blockquote>
+<p>一、初步实现</p>
+<p>服务端<em>初步</em>代码实现：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.ServerSocket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileUpload_Server</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务器已经启动...."</span><span class="o">);</span>
+        <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="mi">8888</span><span class="o">);</span> <span class="c1">//1.创建服务端ServerSocket</span>
+        <span class="nc">Socket</span> <span class="n">apt</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> <span class="c1">//2.建立连接</span>
+        <span class="c1">//3.创建流对象</span>
+        <span class="nc">BufferedInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="n">apt</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span> <span class="c1">//获取输入流，读入文件数据</span>
+        <span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\uploadbyJava"</span><span class="o">);</span>
+        <span class="c1">//假定D盘即为服务器硬盘</span>
+        <span class="k">if</span><span class="o">(!</span><span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="n">file</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span> <span class="c1">//不存在该文件夹则创建它</span>
+        <span class="nc">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span> <span class="o">+</span> <span class="s">"\\copy.jpg"</span><span class="o">));</span><span class="c1">//创建输出流，写出到服务器本地</span>
+        <span class="c1">//4.读写数据</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">8</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+            <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="c1">//5.关闭资源</span>
+        <span class="n">bos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">bis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">apt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"上传的文件已经保存！"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>客户端<em>初步</em>代码实现：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileUpload_Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">//1.创建流对象</span>
+        <span class="nc">BufferedInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"E:\\wall.jpg"</span><span class="o">));</span><span class="c1">//1.1 创建输入流，读入本地硬盘的文件</span>
+        <span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Socket</span><span class="o">(</span><span class="s">"127.0.0.1"</span><span class="o">,</span> <span class="mi">8888</span><span class="o">);</span>
+        <span class="nc">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span> <span class="c1">//创建输出流，写出到服务端</span>
+        <span class="c1">//2.读写数据</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">8</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+            <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+            <span class="n">bos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span> 
+            <span class="cm">/* 注意！flush()在此处十分重要！它既能够保证将缓冲区刷新，又能够在下一轮循环中继续使用。*/</span>            
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"文件发送完毕!"</span><span class="o">);</span>
+        <span class="c1">//3.释放资源</span>
+        <span class="n">bos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">bis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"文件上传完毕!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote><p>客户端知道自己的文件什么时候读取完毕，可以自己停止。如果不使用 <code class="language-plaintext highlighter-rouge">flush()</code> 或者是视频中 <code class="language-plaintext highlighter-rouge">shutdownOutput()</code>，服务器不能够接收到文件结束的标记，也即无法知道何时停止，会不断地等待着（死循环）接收客户端<code class="language-plaintext highlighter-rouge">read()</code>中的内容，进入<strong>阻塞</strong>状态。</p></blockquote>
+<p>二、优化分析</p>
+<ol>
+<li>
+<p>关于文件名称写死的问题</p>
+<p>为了在服务器硬盘中保存多个文件，不应将文件名称写死，如 <code class="language-plaintext highlighter-rouge">xxx.jpg</code>。可以使用系统时间+随机数来进行命名。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">999999</span><span class="o">)+</span><span class="s">".jpg"</span><span class="o">;</span><span class="c1">//文件名称</span>
+<span class="nc">FileOutputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span> <span class="o">+</span> 
+<span class="s">"\\"</span> <span class="o">+</span> <span class="n">fileName</span><span class="o">);</span> <span class="c1">// 文件路径</span>
+<span class="nc">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="n">fis</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>关于循环接收的问题</p>
+<p>服务端如果只保存一个文件就关闭的话，用户无法再进行文件上传，不符合实际。可使用循环进行改进，使得服务器一直处于监听状态，不断地接收不同用户的文件（注意，它不同于上面所述的阻塞状态）</p>
+<blockquote><p>运行的时候，不需要手速了😂</p></blockquote>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span> <span class="c1">// 每次接收新的连接,创建一个Socket</span>
+    <span class="nc">Socket</span> <span class="n">accept</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+    <span class="o">......</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>关于效率的问题</p>
+<p>服务端，在接收大文件时，可能耗费几秒钟的时间，此时不能接收其他用户上传，所以，使用多线程技术优化，代码如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+    <span class="nc">Socket</span> <span class="n">apt</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+    <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="c1">//socket对象交给子线程处理进行读写操作，Runnable接口中只有一个run方法，使用lambda表达式简化格式</span>
+        <span class="nc">InputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="n">accept</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+        <span class="c1">//...</span>
+    <span class="o">})</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ol>
+<p>三、代码优化+信息回写</p>
+<p>服务端代码：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.ServerSocket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileUpload_Server</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"D:\\uploadbyJava"</span><span class="o">);</span> <span class="c1">//假定D盘即为服务器硬盘，设置文件路径</span>
+        <span class="k">if</span><span class="o">(!</span><span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="n">file</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span> <span class="c1">//不存在该文件夹则创建它</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务器已经启动...."</span><span class="o">);</span>
+        <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="mi">8888</span><span class="o">);</span> <span class="c1">//1.创建服务端ServerSocket</span>
+		<span class="c1">//2.循环接收，建立连接</span>
+        <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+            <span class="nc">Socket</span> <span class="n">apt</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> 
+            <span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">999999</span><span class="o">)+</span><span class="s">".jpg"</span><span class="o">;</span> <span class="c1">//文件名</span>
+            <span class="cm">/* 3.socket对象交给子线程处理,进行读写操作
+               Runnable接口中,只有一个run方法,使用lambda表达式简化格式
+            */</span>
+            <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="k">try</span><span class="o">(</span>
+                        <span class="nc">BufferedInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="n">apt</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span><span class="c1">//获取输入流对象</span>
+                        <span class="nc">FileOutputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">file</span> <span class="o">+</span> <span class="s">"\\"</span> <span class="o">+</span> <span class="n">fileName</span><span class="o">);</span> <span class="c1">// 创建输出流对象，用于写出至服务器本地</span>
+                        <span class="nc">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="n">fis</span><span class="o">);</span>
+                <span class="o">){</span> <span class="c1">//读写数据</span>
+                    <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">8</span><span class="o">];</span>
+                    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                    <span class="k">while</span><span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+                        <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+                    <span class="o">}</span>
+					<span class="cm">/* 4.信息回写 */</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"back...."</span><span class="o">);</span>
+                    <span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="n">apt</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"文件上传成功至服务器!"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+                    <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+					<span class="c1">//关闭资源</span>
+                    <span class="n">apt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"上传的文件已经保存!"</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">){</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}).</span><span class="na">start</span><span class="o">();</span> <span class="c1">//别忘记运行进程</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>客户端代码：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.Socket</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileUpload_Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">//1.创建流对象</span>
+        <span class="nc">BufferedInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"E:\\wall.jpg"</span><span class="o">));</span><span class="c1">//创建输入流，读入本地硬盘的文件</span>
+        <span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Socket</span><span class="o">(</span><span class="s">"127.0.0.1"</span><span class="o">,</span> <span class="mi">8888</span><span class="o">);</span>
+        <span class="nc">BufferedOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span> <span class="c1">//创建输出流，写出到服务端</span>
+        <span class="c1">//2.读写数据</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">8</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+            <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+            <span class="c1">//bos.flush();</span>
+        <span class="o">}</span>
+        <span class="n">socket</span><span class="o">.</span><span class="na">shutdownOutput</span><span class="o">();</span> <span class="c1">//关闭输出流，通知服务端，写出数据完毕</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"文件发送完毕!"</span><span class="o">);</span>
+		<span class="cm">/* 3. 解析回写 */</span>
+        <span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">back</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">20</span><span class="o">];</span>
+        <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">back</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">back</span><span class="o">));</span>
+        <span class="c1">// 4. 释放资源</span>
+        <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">bis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>运行结果：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>服务端运行窗口</th>
+<th>客户端运行窗口</th>
+<th>实际运行结果</th>
+</tr></thead>
+<tbody><tr>
+<td><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210125164753.png"></td>
+<td><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210125164849.png"></td>
+<td><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/image-20210125164904495.png" alt="image-20210125164904495"></td>
+</tr></tbody>
+</table></div>
+<h3 id="1432-模拟bs服务器">14.3.2 模拟B/S服务器</h3>
+<p>模拟网站服务器，使用浏览器来访问自己编写的服务端程序，查看网页效果。</p>
+<p>要点：</p>
+<ol>
+<li>
+<p>我们可以将页面数据放置到某个web文件夹中，服务器端程序启动时，在浏览器中输入地址：<code class="language-plaintext highlighter-rouge">localhost:端口号/页面数据文件路径</code>，如下图：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210125180648.png"></p>
+</li>
+<li>
+<p>服务器程序中字节输入流可读入浏览器发来的请求信息，类似于下图：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/读取访问信息.jpg"></p>
+<p>其中，第一行为浏览器的请求信息，而 <code class="language-plaintext highlighter-rouge">/web/index.html</code> 正是浏览器想要请求的服务器端的资源，需要用<strong>字符串进行切割</strong>获取</p>
+</li>
+<li><p>浏览器在得到响应信息后，便在页面进行数据的展示。</p></li>
+<li><p>浏览器遇到图片时，会开启一个线程进行单独的访问，因而需要在服务器端使用线程技术。</p></li>
+</ol>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BS_ServerDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务端启动，等待连接中...."</span><span class="o">);</span>
+        <span class="nc">ServerSocket</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="mi">8888</span><span class="o">);</span>
+        <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+            <span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+            <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Web</span><span class="o">(</span><span class="n">socket</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span> <span class="c1">//Web作为target，Thread对象才是真正的线程对象，需要调用start启动线程</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Web</span> <span class="kd">implements</span> <span class="nc">Runnable</span><span class="o">{</span> <span class="c1">//实现Runnable接口，以创建线程</span>
+        <span class="kd">private</span> <span class="nc">Socket</span> <span class="n">socket</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Web</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">socket</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span> <span class="c1">//定义Runnable接口的实现类，需要覆写该接口的run方法</span>
+            <span class="k">try</span><span class="o">{</span>
+                <span class="nc">BufferedReader</span> <span class="n">readWb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+                <span class="c1">//转换流读入浏览器请求的信息，类似于"GET, /basic-codes/NewModule/web/index.html, HTTP/1.1"</span>
+                <span class="nc">String</span> <span class="n">reqst</span> <span class="o">=</span> <span class="n">readWb</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                <span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">reqst</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span> <span class="c1">//以空格字符作为分隔符，将上面的信息切割，我要取出其中的请求资源的路径</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">arr</span><span class="o">));</span>
+                <span class="nc">String</span> <span class="n">realpath</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">substring</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//因为arr[1]="/basic-codes/NewModule/web/index.html"有多余的‘/’字符</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">realpath</span><span class="o">);</span>
+
+                <span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">realpath</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fis</span><span class="o">);</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span><span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">];</span>
+                <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                <span class="c1">//字节输出流，接下来三行是固定的，将HTTP协议响应头写出给客户端</span>
+                <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"HTTP/1.1 200 OK\r\n"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+                <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Content-Type:text/html\r\n"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+                <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"\r\n"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span> <span class="c1">// 必须要写入空行,否则浏览器不解析</span>
+                <span class="k">while</span><span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">fis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span> <span class="c1">//读入（客户端所请求的）资源文件</span>
+                    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">fis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="n">readWb</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">){</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/javase/" class="post-tag no-text-decoration">JavaSE</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/%E7%BD%91%E7%BB%9C/&amp;title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008%E3%80%8D%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008%E3%80%8D%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008%E3%80%8D%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008%E3%80%8D%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008%E3%80%8D%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/%E5%BC%80%E5%8F%91%E5%89%8D%E8%A8%80%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><div class="card-body"> <span class="timeago small"> Oct 18, 2020 <i class="unloaded">2020-10-18T22:20:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记01」开发前言与环境搭建、基础语法</h3>
+<div class="text-muted small"><p> 本蒟蒻学习过C/C++的语法，故在学习Java的过程中，会关注于C++与Java的区别。开发前言部分，看了苏星河教程中的操作步骤。而后，主要阅读了《Java核心技术 卷1 基础知识》(第8版)，本篇笔记的诞生与这本书有很大的关系。<img class="emoji" title=":smile_cat:" alt=":smile_cat:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f638.png" height="20" width="20"> “程序设计语言的成功，更多地取决于其支撑系统的能力，而不是优美的语法。” Chapter 1. 开发前言 1.0 错误总结 ...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 23, 2020 <i class="unloaded">2020-10-23T22:27:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记02」对象与类</h3>
+<div class="text-muted small"><p> Chapter 4. 对象与类 4.1 面向对象程序设计概述 面向对象程序设计（简称OOP），是当今主流程序设计范型。面向对象的程序是由对象组成的，每个对象（来自于标准库或自定义的）包含对用户公开的特定功能和隐藏的实现部分。在OOP中，不必关心对象的具体实现，只要能够满足用户的需求即可。面向对象的语言中，包含了三大基本特征：封装、继承、多态。 4.1.1 类 类(class)，是构造...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E7%BB%A7%E6%89%BF-%E6%8E%A5%E5%8F%A3-%E5%A4%9A%E6%80%81-%E5%86%85%E9%83%A8%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 25, 2020 <i class="unloaded">2020-10-25T22:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记03」继承、接口、多态、内部类</h3>
+<div class="text-muted small"><p> Chapter5. 继承 继承作为面向对象的三大特征之一，它是多态的前提。它主要解决的问题是共性抽取。 Java中的继承，是单继承、多级继承的。 已存在的类，被称为超类、基类、父类(parent class)；新类，被称为子类(subclass)、派生类。 每一个子类的直接父亲是唯一的，但一个父亲可拥有多个子类。子类比父类拥有的功能更加丰富。 5.1 继承的格式 定义父类的格式（...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/CSUST&amp;CSDN/" class="btn btn-outline-primary" prompt="&lt; Older"><p>CSUST &amp; CSDN 软件工程师联培班 考核筛选游记</p></a> <a href="/posts/Ubuntu%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B%E9%9B%86%E5%90%88/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>Ubuntu系统安装、配置及软件教程集合</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>

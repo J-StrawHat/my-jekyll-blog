@@ -1,0 +1,1146 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="「JavaSE学习笔记09」Junit、反射、注解" /><meta name="author" content="JoyDee" /><meta property="og:locale" content="en_US" /><meta name="description" content="Chapter 15. Junit单元测试" /><meta property="og:description" content="Chapter 15. Junit单元测试" /><link rel="canonical" href="https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" /><meta property="og:url" content="https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" /><meta property="og:site_name" content="JoyDee’s Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-02-04T23:51:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="「JavaSE学习笔记09」Junit、反射、注解" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"JoyDee"},"description":"Chapter 15. Junit单元测试","url":"https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/","@type":"BlogPosting","headline":"「JavaSE学习笔记09」Junit、反射、注解","dateModified":"2021-02-22T11:38:31+08:00","datePublished":"2021-02-04T23:51:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/"},"@context":"https://schema.org"}</script><title>「JavaSE学习笔记09」Junit、反射、注解 | JoyDee's Blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"> <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> <script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="baidu-site-verification" content="code-LaMrc1BO1k" /><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML"> </script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-7E6EFX8P3K"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7E6EFX8P3K'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">JoyDee's Blog</a>
+</div>
+<div class="site-subtitle font-italic">Cause I have a dream.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>主页 | HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-layer-group ml-xl-3 mr-xl-3 unloaded"></i> <span>分类 | CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>标签 | TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw far fa-calendar-alt ml-xl-3 mr-xl-3 unloaded"></i> <span>归档 | ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>关于 | ABOUT</span> </a>
+</li>
+<li class="nav-item"> <a href="/tabs/links/" class="nav-link"> <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i> <span>链接 | LINKS</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/J-StrawHat" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://music.163.com/#/user/home?id=86403312" aria-label="music" class="order-4" target="_blank" rel="noopener"> <i class="fas fa-compact-disc"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'422148166','qq.com'%5D.join('@')" aria-label="email" class="order-5"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6"> <i class="fas fa-rss-square"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>「JavaSE学习笔记09」Junit、反射、注解</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="搜索一下..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<h1 data-toc-skip>「JavaSE学习笔记09」Junit、反射、注解</h1>
+<div class="post-meta text-muted d-flex flex-column">
+<div> Created <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Thu, Feb 4, 2021, 11:51 PM +0800"> Feb 4 <i class="unloaded">2021-02-04T23:51:00+08:00</i> </span> by <span class="author"> JoyDee </span>
+</div>
+<div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Feb 22, 2021, 11:38 AM +0800"> Feb 22 <i class="unloaded">2021-02-22T11:38:31+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="4593 words">51 min</span> <span id="/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" class="leancloud_visitors" data-flag-title="「JavaSE学习笔记09」Junit、反射、注解"> <span id="pv" class="pageviews"> <i class="leancloud-visitors-count" font-style="normal">1000000</i> </span> </span>
+</div>
+</div>
+<div class="post-content">
+<h1 id="chapter-15-junit单元测试">Chapter 15. Junit单元测试</h1>
+<h2 id="151-软件测试方法">15.1 软件测试方法</h2>
+<ul>
+<li>白盒测试（结构测试）：测试者清楚待测试对象内部工作机制，该测试是开发者测试自己设计编码的代码。而接下来要讨论的 Junit 即是基于白盒测试</li>
+<li>黑盒测试（功能测试）：通过测试检验是否每个功能都能正常工作，检查程序功能是否按<strong>规格说明书</strong>的规定正常使用，这是在程序接口进行的测试。</li>
+</ul>
+<h2 id="152-junit使用步骤">15.2 Junit使用步骤</h2>
+<ol>
+<li>
+<p>定义一个测试类，命名建议如下：</p>
+<ul>
+<li>测试类的名称：<code class="language-plaintext highlighter-rouge">被测试的类名Test.java</code>，如<code class="language-plaintext highlighter-rouge">CalculatorTest</code>；</li>
+<li>包名称：<code class="language-plaintext highlighter-rouge">xxx.xxx.xx.test</code>
+</li>
+</ul>
+</li>
+<li>
+<p>定义测试方法（能够在IDE中独立运行的模块），其定义建议如下：</p>
+<ul>
+<li>方法名：test被测试的方法名称</li>
+<li>返回值：<code class="language-plaintext highlighter-rouge">void</code>
+</li>
+<li>参数列表：空参</li>
+</ul>
+</li>
+<li>
+<p>给方法加上 <code class="language-plaintext highlighter-rouge">@Test</code> 的注解</p>
+<blockquote>
+<p>此外，在这个测试类中，还能对另一些方法，加上这些注解：</p>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">@Before</code>：常用于资源的申请，修饰的方法会在测试方法之前被自动执行</li>
+<li>
+<code class="language-plaintext highlighter-rouge">@After</code>：与上相反的情况。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>导入 Junit 依赖环境</p>
+<blockquote>
+<p>IDEA中鼠标指向红线处，即能够导入 Junit 各种依赖环境了。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210205204432.png" style="zoom:80%;"></p>
+</blockquote>
+</li>
+<li><p>点击你需要测试的方法的首行右侧绿色按钮，便能够单独地运行该方法。</p></li>
+<li>
+<p>通过 断言语句 来判断测试结果与期望的结果是否一致。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">期望的结果</span><span class="o">,</span><span class="n">运算的结果</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ol>
+<h2 id="案例演示">案例演示</h2>
+<p>项目结构：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre>JoyDee
+├─ LearningJunit
+|  └─ Calculator.java
+|
+└─ test
+   └─ CalculatorTest.java
+</pre></td>
+</tr></tbody></table></code></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningJunit</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Calculator</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">addNums</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">subNums</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="mi">0</span><span class="o">;</span> <span class="cm">/* 此处作为错误演示 */</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mulNums</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">JoyDee.LearningJunit.Calculator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.After</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span> <span class="cm">/* 4.导入junit依赖 */</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CalculatorTest</span> <span class="o">{</span> <span class="cm">/* 2.定义测试方法 */</span>
+    <span class="nd">@Test</span>       <span class="cm">/* 3.为方法添加@Test注解 */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAddNums</span><span class="o">(){</span>
+        <span class="nc">Calculator</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Calculator</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">addNums</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">res</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSubNums</span><span class="o">(){</span>
+        <span class="nc">Calculator</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Calculator</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">subNums</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">res</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testMulNums</span><span class="o">(){</span>
+        <span class="nc">Calculator</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Calculator</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">mulNums</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+        <span class="nc">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="n">res</span><span class="o">);</span> <span class="cm">/* 期望值 与 测试值 进行比较 */</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Before</span> <span class="cm">/*所有测试方法执行之前，必须先执行该方法*/</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Initializing..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@After</span> <span class="cm">/*所有测试方法执行之后，必须先执行该方法*/</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">close</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Closing the resource..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210205204900.png" style="zoom:70%;"></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210205205053.png" style="zoom:80%;"></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/20210205205439.png" style="zoom:80%;"></p>
+<h1 id="chapter-16-反射">Chapter 16. 反射</h1>
+<h2 id="161-java类的加载">16.1 Java类的加载</h2>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/14923529-ac753500687cf9d2.png"></p>
+<blockquote><p>如上图，Java类的完整加载机制分上面的七个阶段，现在讨论的是“加载”，是Java类的完整加载机制的第一个阶段。</p></blockquote>
+<p>参考了<a href="https://www.zhihu.com/question/24304289/answer/147529485">“学习java应该如何理解反射？”——Kira的知乎回答</a>，假定你需要运行下面这个代码：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>首先这段代码通过 javac 编译成一个 <code class="language-plaintext highlighter-rouge">.class</code> 的二进制文件，然后通过 类加载器（ClassLoader）加载进JVM的内存中（此时，类 <code class="language-plaintext highlighter-rouge">Object</code> 加载到内存的方法区中）。</p>
+<p>接着，创建了 <code class="language-plaintext highlighter-rouge">Object</code> 类的<strong><code class="language-plaintext highlighter-rouge">Class</code> 对象</strong>（类型对象，每个类只有一个 <code class="language-plaintext highlighter-rouge">Class</code> 对象，作为方法区类的数据结构的接口。故并不是你 <code class="language-plaintext highlighter-rouge">new</code> 出来的实例对象！）</p>
+<p>JVM 创建一个实例对象前，会先检查这个对象所属的类是否被加载，寻找该类对应的 <code class="language-plaintext highlighter-rouge">Class</code> 对象。若已经加载好，则会为你需要的对象<strong>分配内存</strong>，初始化（即 <code class="language-plaintext highlighter-rouge">new Object()</code>）</p>
+<h2 id="162-反射概述">16.2 反射概述</h2>
+<p>Java的反射（reflection）机制，是指在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法。</p>
+<p>这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。反射被视为动态语言的关键。</p>
+<p>此外，通过反射，我们能够解耦，提高程序的可扩展性。</p>
+<p>下面的<code class="language-plaintext highlighter-rouge">.java</code>文件、<code class="language-plaintext highlighter-rouge">.class</code>文件、<code class="language-plaintext highlighter-rouge">Class</code>类的关系图，源自<a href="https://www.zhihu.com/question/24304289/answer/694344906">bravo1988的回答</a>。</p>
+<blockquote><p><code class="language-plaintext highlighter-rouge">Class</code> 类对反射的支持写了内部类，里面的字段与 <code class="language-plaintext highlighter-rouge">.class</code> 文件的内容形成映射</p></blockquote>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/v2-de522e669207c17994cf7394a9f23670_r.jpg"></p>
+<h2 id="163-class对象及其内部成员的获取方法">16.3 Class对象及其内部成员的获取方法</h2>
+<p>获取 <code class="language-plaintext highlighter-rouge">Class</code> 对象的方法共三个：（获取的 <code class="language-plaintext highlighter-rouge">Class</code> 对象，都是<strong>一样</strong>的！）</p>
+<ol>
+<li>
+<p>将字节码文件（<code class="language-plaintext highlighter-rouge">.class</code>）加载进内存，返回 <code class="language-plaintext highlighter-rouge">Class</code> 对象：<code class="language-plaintext highlighter-rouge">Class.forName("全类名")</code>（全类名，即” <code class="language-plaintext highlighter-rouge">包名.类名</code> “），举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">cls1</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"top.JoyDee.Person"</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>多用于配置文件，将类名定义在配置文件中，读入文件，加载类。</p>
+</li>
+<li>
+<p>通过<strong>类名</strong>的属性 <code class="language-plaintext highlighter-rouge">class</code> 来获取：<code class="language-plaintext highlighter-rouge">类名.class</code>，举例如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">cls2</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>多用于参数的传递。</p>
+</li>
+<li>
+<p><strong>对象</strong>继承了 <code class="language-plaintext highlighter-rouge">Object</code> 类定义的 <code class="language-plaintext highlighter-rouge">getClass()</code> 方法：<code class="language-plaintext highlighter-rouge">对象.getClass</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Person</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+<span class="nc">Class</span> <span class="n">cls3</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>多用在，有了对象，要获取其对应的字节码文件对象。</p>
+</li>
+</ol>
+<p>通过 <code class="language-plaintext highlighter-rouge">Class</code> 对象的方法，获取其内部成员：</p>
+<p>一、获取成员变量们：</p>
+<ul>
+<li>
+<p>获取所有 <code class="language-plaintext highlighter-rouge">public</code> 修饰的成员变量：<code class="language-plaintext highlighter-rouge">Field[] getFields()</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">personCls</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span> <span class="c1">//获取Person的Class对象</span>
+<span class="nc">Field</span><span class="o">[]</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getFields</span><span class="o">();</span> <span class="c1">//获取所有public修饰的成员变量</span>
+<span class="k">for</span><span class="o">(</span><span class="nc">Field</span> <span class="n">fe</span> <span class="o">:</span> <span class="n">fs</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fe</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>获取<strong>指定名称</strong>的 public修饰的成员变量：<code class="language-plaintext highlighter-rouge">Field getField(String name)</code>
+</li>
+<li>获取<strong>所有</strong>的成员变量（包括<code class="language-plaintext highlighter-rouge">private</code>、<code class="language-plaintext highlighter-rouge">protected</code>、<code class="language-plaintext highlighter-rouge">public</code>及默认），不考虑修饰符：<code class="language-plaintext highlighter-rouge">Field[] getDeclaredFields()</code>
+</li>
+<li>获取指定名称的 且不考虑修饰 的成员变量：<code class="language-plaintext highlighter-rouge">Field getDeclaredField(String name)</code>
+</li>
+</ul>
+<p>二、获取构造器们：</p>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">Constructor&lt;?&gt;[] getConstructors()</code></p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">Constructor&lt;T&gt; getConstructor(类&lt;?&gt;... parameterTypes)</code> （括号中是某个构造器的 参数类型 的 <code class="language-plaintext highlighter-rouge">Class</code> 对象列表）</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">personCls</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="nc">Constructor</span> <span class="n">c</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">Constructor&lt;T&gt; getDeclaredConstructor(类&lt;?&gt;... parameterTypes)</code></p></li>
+<li><p><code class="language-plaintext highlighter-rouge">Constructor&lt;?&gt;[] getDeclaredConstructors()</code></p></li>
+</ul>
+<p>三、获取成员方法们：</p>
+<ul>
+<li><p>获取本类及<strong>父类或父接口</strong>的所有<strong>公共</strong>方法：<code class="language-plaintext highlighter-rouge">Method[] getMethods()</code></p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">Method getMethod(String name, 类&lt;?&gt;... parameterTypes)</code></p>
+<blockquote><p>注意，与 获取构造器 不同在于，获取成员方法，需要传入（方法名，参数类型的<code class="language-plaintext highlighter-rouge">Class</code>对象列表）</p></blockquote>
+</li>
+<li><p>获取<strong>本类</strong>中的<strong>所有</strong>方法（包括<code class="language-plaintext highlighter-rouge">private</code>、<code class="language-plaintext highlighter-rouge">protected</code>、<code class="language-plaintext highlighter-rouge">public</code>及默认）<code class="language-plaintext highlighter-rouge">Method[] getDeclaredMethods()</code></p></li>
+<li><p><code class="language-plaintext highlighter-rouge">Method getDeclaredMethod(String name, 类&lt;?&gt;... parameterTypes)</code></p></li>
+</ul>
+<p>四、获取<strong>全类</strong>名：<code class="language-plaintext highlighter-rouge">String getName()</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">personCls</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">className</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">className</span><span class="o">);</span> <span class="cm">/* JoyDee.LearningReflection.Person */</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h2 id="164-成员变量构造器成员方法相关api">16.4 成员变量、构造器、成员方法相关API</h2>
+<p><code class="language-plaintext highlighter-rouge">Field</code>：成员变量</p>
+<ul>
+<li><p>设置值：<code class="language-plaintext highlighter-rouge">void set(Object obj, Object value)</code></p></li>
+<li><p>获取值：<code class="language-plaintext highlighter-rouge">get(Object obj)</code></p></li>
+<li>
+<p>忽略访问权限修饰符的安全检查：<code class="language-plaintext highlighter-rouge">成员变量.setAccessible(true)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+  
+<span class="nc">Field</span> <span class="n">ne</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getField</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span> <span class="c1">//获取相应字段的成员变量</span>
+<span class="nc">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">ne</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">);</span> <span class="c1">//将p对象传进去，使其返回值</span>
+<span class="n">ne</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="s">"Luffy"</span><span class="o">);</span> <span class="c1">//修改</span>
+  
+<span class="nc">Field</span> <span class="n">ie</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getField</span><span class="o">(</span><span class="s">"id"</span><span class="o">);</span>
+<span class="n">is</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  <span class="c1">//暴力反射</span>
+<span class="nc">Object</span> <span class="n">value2</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+  
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<p><code class="language-plaintext highlighter-rouge">Constructor</code>：构造器</p>
+<ul><li>
+<p>创建其构造的对象：<code class="language-plaintext highlighter-rouge">T newInstance(Object... initargs)</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">personCls</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="nc">Constructor</span> <span class="n">c</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">Object</span> <span class="n">person</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="s">"Luffy"</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li></ul>
+<p><code class="language-plaintext highlighter-rouge">Method</code>：成员方法</p>
+<ul>
+<li>
+<p>执行其方法：<code class="language-plaintext highlighter-rouge">Object invoke(Object obj, Object... args) </code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">Class</span> <span class="n">personCls</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="nc">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+<span class="nc">Method</span> <span class="n">eat_method</span> <span class="o">=</span> <span class="n">personCls</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">"eat"</span><span class="err">，</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">//获取指定名称的方法</span>
+<span class="n">eat_method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="s">"饭"</span><span class="o">);</span> <span class="c1">//指向方法，传入 指定对象及方法参数列表</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p>获取方法名称：<code class="language-plaintext highlighter-rouge">String getName()</code></p></li>
+<li>
+<p>忽略访问权限修饰符的安全检查：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="n">mymethod</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h2 id="165-综合案例">16.5 综合案例</h2>
+<ul>
+<li><p>需求：写一个”框架”，不能改变该类的任何代码的前提下，可以帮我们创建任意类的对象，并且执行其中任意方法。</p></li>
+<li>
+<p>实现：</p>
+<ul>
+<li>配置文件</li>
+<li>反射</li>
+</ul>
+</li>
+<li>
+<p>步骤：</p>
+<ol>
+<li>将需要创建的对象的全类名和需要执行的方法<strong>定义在配置文件</strong>中</li>
+<li>在程序中加载读取配置文件</li>
+<li>使用反射技术来加载类文件进内存</li>
+<li>创建实例对象</li>
+<li>执行方法</li>
+</ol>
+</li>
+</ul>
+<p>项目文件：</p>
+<p><code class="language-plaintext highlighter-rouge">pro.properties</code> 配置文件：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre>className = JoyDee.LearningReflection.Person 
+methodName = eat
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">Person.java</code> 文件：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am EATING!!!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">ReflectDemo.java</code> 文件</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Constructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Properties</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReflectDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+        <span class="c1">//1.1 创建属性集对象（可参看IO流章节）</span>
+        <span class="nc">Properties</span> <span class="n">pro</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Properties</span><span class="o">();</span>
+        <span class="c1">//1.2 通过类加载器获取配置文件</span>
+        <span class="nc">ClassLoader</span> <span class="n">clsRoader</span> <span class="o">=</span> <span class="nc">ReflectDemo</span><span class="o">.</span><span class="na">class</span> <span class="o">.</span><span class="na">getClassLoader</span><span class="o">();</span>
+        <span class="nc">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">clsRoader</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span><span class="s">"pro.properties"</span><span class="o">);</span> <span class="c1">//字节输入流</span>
+        <span class="n">pro</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">is</span><span class="o">);</span> <span class="c1">//从字节输入流读入键值对</span>
+
+        <span class="c1">//2.获取配置文件中定义的数据</span>
+        <span class="nc">String</span> <span class="n">className</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"className"</span><span class="o">);</span> <span class="c1">//通过键找到值</span>
+        <span class="nc">String</span> <span class="n">methodName</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"methodName"</span><span class="o">);</span>
+
+        <span class="c1">//3. 加载该类进内存</span>
+        <span class="nc">Class</span> <span class="n">cls</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">className</span><span class="o">);</span> <span class="c1">//传入类名</span>
+
+        <span class="c1">//4. 创建实例对象</span>
+        <span class="nc">Constructor</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">();</span> <span class="c1">//获取空参构造器</span>
+        <span class="nc">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span> <span class="c1">//执行该空参构造器来创建实例</span>
+
+        <span class="c1">//5.获取方法对象</span>
+        <span class="nc">Method</span> <span class="n">method</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="n">methodName</span><span class="o">);</span> <span class="c1">//找到配置文件对应的方法名</span>
+        <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span> <span class="c1">//需要传入“实例”对象</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h1 id="chapter-17-注解">Chapter 17. 注解</h1>
+<h2 id="171-注解概述">17.1 注解概述</h2>
+<p><strong>Java注解</strong> （Annotation）又称<strong>Java标注</strong>，是 Java 语言 5.0 版本开始支持加入源代码的特殊语法 元数据 。</p>
+<p>注解与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。（注解，不是程序的一部分）</p>
+<p>和 Javadoc 不同，Java标注可以通过反射获取标注内容。在编译器生成类文件时，标注可以被嵌入到字节码中。Java虚拟机可以保留标注内容，在运行时可以获取到标注内容。 当然它也支持自定义Java标注。</p>
+<p>按照作用来分类：</p>
+<ul>
+<li><p>根据 Annotation 生成帮助文档：加上 <code class="language-plaintext highlighter-rouge">@Documente</code> 标签能使该 Annotation 标签的内容出现在 javadoc中；</p></li>
+<li><p>让编译器进行编译检查：例如 <code class="language-plaintext highlighter-rouge">@Override</code></p></li>
+<li><p>代码分析：在反射中解析并使用 Annotation，或者，使用别人写的 测试类框架 对每个需要测试的方法加上诸如 <code class="language-plaintext highlighter-rouge">@Check</code> 的注解</p></li>
+</ul>
+<h2 id="172-内置的注解">17.2 内置的注解</h2>
+<p><code class="language-plaintext highlighter-rouge">Annotation</code> 接口的架构：</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://gitee.com/j__strawhat/MyImages/raw/master/28123151-d471f82eb2bc4812b46cc5ff3e9e6b82.jpg" style="zoom: 50%;"></p>
+<p>Java 定义了一套注解，共有 7 个，3 个在 <code class="language-plaintext highlighter-rouge">java.lang</code> 中，剩下 4 个在 <code class="language-plaintext highlighter-rouge">java.lang.annotation</code> 中。从 Java 7 开始，额外添加了新 3 个注解（本文暂不讨论）</p>
+<h3 id="作用在代码的注释">作用在代码的注释</h3>
+<ul>
+<li><p><code class="language-plaintext highlighter-rouge">@Override</code>：检查该方法是否有覆写方法。若发现其父类或引用的接口中并没有该方法，则会报编译错误。</p></li>
+<li><p><code class="language-plaintext highlighter-rouge">@Deprecated</code>：标记过时的方法，若使用该方法，则会报编译警告</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">@SuppressWarnings</code>：指示编译器去<strong>忽略</strong>注释中声明的警告。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"all"</span><span class="o">)</span>
+<span class="cm">/* 一般传递参数all */</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<h3 id="作用在其他注解的注解又称-元注解">作用在其他注解的注解（又称 元注解）</h3>
+<ul>
+<li>
+<p><code class="language-plaintext highlighter-rouge">@Retention</code>：标识这个注解如何保存，是只在代码中，还是编入 <code class="language-plaintext highlighter-rouge">.class</code> 文件中，或者是在运行时可通过<strong>反射</strong>访问。（缺省情况下，默认是 <code class="language-plaintext highlighter-rouge">RetentionPolicy.CLASS</code>）</p>
+<p>可以选择：<code class="language-plaintext highlighter-rouge">SOURCE</code>、<code class="language-plaintext highlighter-rouge">CLASS</code>、<strong><code class="language-plaintext highlighter-rouge">RUNTIME </code></strong>（一般而言，我们会取 <code class="language-plaintext highlighter-rouge">RUNTIME</code> 值）</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="cm">/* 当前被描述的注解，会保留到class字节码文件中，并被JVM读取到 */</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">@Documented</code>：标记这些注解是否包含在用户API文档中。（缺省情况下不出现在 javadoc）</p></li>
+<li>
+<p><code class="language-plaintext highlighter-rouge">@Target</code>：标记这个注解应该是哪种 Java 成员，它一般指定<code class="language-plaintext highlighter-rouge">Annotation</code>类型属性 <code class="language-plaintext highlighter-rouge">ElementType</code> 取值）：（缺省情况下可指定任何地方）</p>
+<blockquote><p>源码中，<code class="language-plaintext highlighter-rouge">Target</code> 类中有一成员，为枚举类数组<code class="language-plaintext highlighter-rouge">ElementType[]</code>，名称为 <code class="language-plaintext highlighter-rouge">value</code></p></blockquote>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">TYPE</code>：标记该注解只能作用在类上</li>
+<li>
+<code class="language-plaintext highlighter-rouge">METHOD</code>：标记该注解只能作用在方法上</li>
+<li>
+<code class="language-plaintext highlighter-rouge">FIELD</code>：标记该注解只能作用在成员变量上</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Target</span><span class="o">(</span><span class="n">value</span><span class="o">={</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">,</span> <span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">})</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">MyAnno3</span><span class="o">{</span>
+      
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p><code class="language-plaintext highlighter-rouge">@Inherited</code>：标记这个注解是继承于哪个注释类，一般指定 <code class="language-plaintext highlighter-rouge">Annotation</code> 的策略属性</p></li>
+</ul>
+<h2 id="173-自定义注解">17.3 自定义注解</h2>
+<p>一、通用格式：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@元注解</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">注解名称</span><span class="o">{</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<blockquote>
+<p>通过反汇编得到其本质：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">注解名称</span> <span class="kd">extends</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">annotation</span><span class="o">.</span><span class="na">Annotation</span><span class="o">{</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</blockquote>
+<p>二、举例：</p>
+<ul>
+<li>
+<p>定义 自定义的注解类：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Documented</span> <span class="c1">// 表示它可以出现在 javadoc 中。</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span> <span class="c1">//意味着MyAnnotation是来修饰"类、接口（包括注释类型）或枚举声明"的注解。</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>  <span class="c1">//编译器会将该Annotation信息保留在.class文件中，并且能被虚拟机读取。</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">MyAnnotation</span><span class="o">{</span>
+    <span class="c1">// Annotation 接口的实现细节都由编译器完成。</span>
+      
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">age</span><span class="o">();</span> <span class="c1">//定义抽象方法，它是这个注解的属性</span>
+    <span class="kd">public</span> <span class="nf">String</span><span class="o">()</span> <span class="k">default</span> <span class="s">"Luffy"</span><span class="o">;</span> 
+    <span class="kd">public</span> <span class="nc">MyAnno2</span> <span class="nf">anno2</span><span class="o">();</span> <span class="c1">//注解类型</span>
+    <span class="kd">public</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">strs</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li>
+<p>使用自定义注解类：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@MyAnnotation</span><span class="o">(</span><span class="n">age</span> <span class="o">=</span> <span class="mi">20</span><span class="o">,</span> <span class="n">anno2</span> <span class="o">=</span> <span class="nd">@MyAnno2</span><span class="o">,</span> <span class="n">strs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"Luffy"</span><span class="o">,</span> <span class="s">"Zoro"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Worker</span><span class="o">{</span>
+      
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+<p>三、属性：接口中的<strong>抽象方法</strong>。其要求有：</p>
+<ul>
+<li>
+<p>属性的返回值类型只能为：基本数据类型、<code class="language-plaintext highlighter-rouge">String</code>、枚举、注解、以上类型的数组</p>
+<blockquote><p>因而，属性的返回值不能是自定义的类</p></blockquote>
+</li>
+<li>
+<p>一旦定义了属性，在<strong>使用</strong>时需给属性进行赋值</p>
+<ul>
+<li><p>定义时如果用 <code class="language-plaintext highlighter-rouge">default</code>设置默认值，就无需再赋值（见上面的代码）</p></li>
+<li>
+<p>如果只有一个属性需要赋值，则只需要这样写即可：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@MyAnnotation</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Worker</span><span class="o">{</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="174-解析注解">17.4 解析注解</h2>
+<p>在程序中使用（解析）注解，就是获取注解中定义的属性值。步骤如下：</p>
+<ol>
+<li><p>获取你注解类 定义的 的 <strong>类型对象</strong>（如 <code class="language-plaintext highlighter-rouge">Class</code>、<code class="language-plaintext highlighter-rouge">Method</code>、<code class="language-plaintext highlighter-rouge">Field</code>）</p></li>
+<li>
+<p>调用 类型对象 的方法，来获取指定的 注解对象 ：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="n">getAnnotation</span><span class="o">(</span><span class="nc">Class</span><span class="o">)</span> <span class="c1">//其实就是在内存中生成了一个该注解接口的子类实现对象</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+</li>
+<li><p>调用注解对象中的方法，来获取配置的属性值</p></li>
+</ol>
+<h3 id="案例一">案例一</h3>
+<p>现在通过注解的方式，简化 16.5 综合案例中 的简单框架配置</p>
+<p><code class="language-plaintext highlighter-rouge">MyAnno.java</code> 文件：描述需要执行的类名、方法名</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.annotation.ElementType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Retention</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.RetentionPolicy</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Target</span><span class="o">;</span>
+
+<span class="nd">@Target</span><span class="o">({</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">MyAnno</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">className</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="nf">methodName</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+ * MyAnno a1 = refCls.getAnnotation(MyAnno.class);
+ * 其实就相当于给这个接口实现一个类:
+ * public class ProImpl implements Pro{
+ *     public String className(){
+ *         return "JoyDee.LearningReflection.Person";
+ *     }
+ *     public String methodName(){
+ *         return "eat";
+ *     }
+ * }
+ */</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">Person.java</code>文件：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am EATING!!!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">ReflectDemo.java</code> 文件：框架类（无需属性集类、IO流类）</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Constructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+
+<span class="nd">@MyAnno</span><span class="o">(</span><span class="n">className</span> <span class="o">=</span> <span class="s">"JoyDee.LearningReflection.Person"</span><span class="o">,</span> <span class="n">methodName</span> <span class="o">=</span> <span class="s">"eat"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReflectDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+        <span class="c1">// 一.解析注解</span>
+        <span class="nc">Class</span><span class="o">&lt;</span><span class="nc">ReflectDemo</span><span class="o">&gt;</span> <span class="n">refCls</span> <span class="o">=</span> <span class="nc">ReflectDemo</span><span class="o">.</span><span class="na">class</span><span class="o">;</span> <span class="c1">//获取该类的字节码文件对象</span>
+        <span class="nc">MyAnno</span> <span class="n">a</span> <span class="o">=</span> <span class="n">refCls</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">MyAnno</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">//传入注解接口，得到实例对象</span>
+        <span class="nc">String</span> <span class="n">className</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">className</span><span class="o">();</span> <span class="c1">//由此得到注解上面写的"JoyDee.LearningReflection.Person"</span>
+        <span class="nc">String</span> <span class="n">methodName</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">methodName</span><span class="o">();</span> <span class="c1">//由此得到"eat"</span>
+
+        <span class="c1">//二. 就是之前所写的代码了</span>
+        <span class="c1">//3. 加载该类进内存</span>
+        <span class="nc">Class</span> <span class="n">cls</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">className</span><span class="o">);</span> <span class="c1">//传入类名</span>
+
+        <span class="c1">//4. 创建实例对象</span>
+        <span class="nc">Constructor</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">();</span> <span class="c1">//获取空参构造器</span>
+        <span class="nc">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span> <span class="c1">//执行该空参构造器来创建实例</span>
+
+        <span class="c1">//5.获取方法对象</span>
+        <span class="nc">Method</span> <span class="n">method</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="n">methodName</span><span class="o">);</span> <span class="c1">//找到配置文件对应的方法名</span>
+        <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span> <span class="c1">//需要传入“实例”对象</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<h3 id="案例二设计测试框架">案例二：设计测试框架</h3>
+<p><code class="language-plaintext highlighter-rouge">Calculator.java</code> 文件：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Calculator</span> <span class="o">{</span>
+    <span class="nd">@Check</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">addNums</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">subNums</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Check</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mulNums</span><span class="o">(){</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span> <span class="cm">/* 此处作为错误演示 */</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Check</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">divNums</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">0</span><span class="o">;</span> <span class="cm">/* 此处作为错误演示 */</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">TestCheck.java</code> 文件：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">JoyDee.LearningReflection</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.BufferedWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCheck</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">//创建计算器类的对象</span>
+        <span class="nc">Calculator</span> <span class="n">cal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Calculator</span><span class="o">();</span>
+        <span class="c1">//获取字节码文件对象</span>
+        <span class="nc">Class</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+        <span class="c1">//获取所有方法</span>
+        <span class="nc">Method</span><span class="o">[]</span> <span class="n">methods</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="na">getMethods</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">//统计出现异常的次数</span>
+        <span class="c1">//将异常具体信息写入文件中</span>
+        <span class="nc">BufferedWriter</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"bug.txt"</span><span class="o">));</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Method</span> <span class="n">method</span> <span class="o">:</span> <span class="n">methods</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">method</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="nc">Check</span><span class="o">.</span><span class="na">class</span><span class="o">)){</span>
+                <span class="c1">//判断方法上是否有Check注解，若有则检查异常</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">cal</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">cnt</span> <span class="o">++;</span>
+                    <span class="nc">Throwable</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
+                    <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">method</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span> <span class="s">" 方法出异常了"</span><span class="o">);</span>
+                    <span class="n">bw</span><span class="o">.</span><span class="na">newLine</span><span class="o">();</span>
+                    <span class="k">if</span><span class="o">(</span><span class="n">tmp</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">//注意，要避免tmp是个null（我在教程视频中发现的错误）</span>
+                        <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"异常的名称:"</span>
+                                <span class="o">+</span> <span class="n">tmp</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getSimpleName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+                        <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"异常的原因:"</span>
+                                <span class="o">+</span> <span class="n">tmp</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"--------------------------\n"</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">bw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"本次测试一共出现了 "</span> <span class="o">+</span> <span class="n">cnt</span> <span class="o">+</span> <span class="s">" 次的异常"</span><span class="o">);</span>
+        <span class="n">bw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">bw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>运行结果：写入了<code class="language-plaintext highlighter-rouge">bug.txt</code>文件中：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre>mulNums 方法出异常了
+异常的名称:NullPointerException
+异常的原因:Cannot invoke "String.toString()" because "str" is null
+--------------------------
+divNums 方法出异常了
+异常的名称:ArithmeticException
+异常的原因:/ by zero
+--------------------------
+本次测试一共出现了 2 次的异常
+</pre></td>
+</tr></tbody></table></code></div></div>
+<p>`</p>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/java/">Java</a>, <a href="/categories/javase/">JavaSE</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/javase/" class="post-tag no-text-decoration">JavaSE</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="http://connect.qq.com/widget/shareqq/index.html?url=https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/&amp;title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009%E3%80%8DJunit%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%20-%20JoyDee's%20Blog" data-toggle="tooltip" data-placement="top" title="QQ" target="_blank" rel="noopener" aria-label="QQ"> <i class="fa-fw fab fa-qq"></i> </a> <a href="http://service.weibo.com/share/share.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009%E3%80%8DJunit%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="微博" target="_blank" rel="noopener" aria-label="微博"> <i class="fa-fw fab fa-weibo"></i> </a> <a href="https://twitter.com/intent/tweet?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009%E3%80%8DJunit%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009%E3%80%8DJunit%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%20-%20JoyDee's%20Blog&amp;u=https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=%E3%80%8CJavaSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009%E3%80%8DJunit%E3%80%81%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%20-%20JoyDee's%20Blog&amp;url=https://joydee.top/posts/Junit-%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post"> <span> <i class="fas fa-calendar-check" style="color: #f4bf75;"></i>  最近更新 / Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/%E9%A9%AC%E5%8E%9F%E5%A4%8D%E4%B9%A0/">马原复习</a></li>
+<li><a href="/posts/NetWorkSummary/">计算机网络错题汇总</a></li>
+<li><a href="/posts/Java%E6%98%93%E9%94%99%E5%BD%92%E7%BA%B3/">「JavaSE学习笔记10」Java 易错归纳</a></li>
+<li><a href="/posts/%E5%BC%82%E5%B8%B8/">「JavaSE学习笔记04」异常</a></li>
+<li><a href="/posts/LearningHTML/">HTML5知识提炼</a></li>
+</ul>
+</div>
+<div id="access-tags"> <span> <i class="fab fa-hotjar" style="color: #ff5370;"></i>  热门标签 / Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法-贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法-模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法-深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法-二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法-哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法-暴力</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="sticky pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2"> <i class="fas fa-archive" style="color: #1b86f9;"></i>  文章目录 / Contents</span><nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/%E5%BC%80%E5%8F%91%E5%89%8D%E8%A8%80%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><div class="card-body"> <span class="timeago small"> Oct 18, 2020 <i class="unloaded">2020-10-18T22:20:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记01」开发前言与环境搭建、基础语法</h3>
+<div class="text-muted small"><p> 本蒟蒻学习过C/C++的语法，故在学习Java的过程中，会关注于C++与Java的区别。开发前言部分，看了苏星河教程中的操作步骤。而后，主要阅读了《Java核心技术 卷1 基础知识》(第8版)，本篇笔记的诞生与这本书有很大的关系。<img class="emoji" title=":smile_cat:" alt=":smile_cat:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f638.png" height="20" width="20"> “程序设计语言的成功，更多地取决于其支撑系统的能力，而不是优美的语法。” Chapter 1. 开发前言 1.0 错误总结 ...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 23, 2020 <i class="unloaded">2020-10-23T22:27:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记02」对象与类</h3>
+<div class="text-muted small"><p> Chapter 4. 对象与类 4.1 面向对象程序设计概述 面向对象程序设计（简称OOP），是当今主流程序设计范型。面向对象的程序是由对象组成的，每个对象（来自于标准库或自定义的）包含对用户公开的特定功能和隐藏的实现部分。在OOP中，不必关心对象的具体实现，只要能够满足用户的需求即可。面向对象的语言中，包含了三大基本特征：封装、继承、多态。 4.1.1 类 类(class)，是构造...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/%E7%BB%A7%E6%89%BF-%E6%8E%A5%E5%8F%A3-%E5%A4%9A%E6%80%81-%E5%86%85%E9%83%A8%E7%B1%BB/"><div class="card-body"> <span class="timeago small"> Oct 25, 2020 <i class="unloaded">2020-10-25T22:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>「JavaSE学习笔记03」继承、接口、多态、内部类</h3>
+<div class="text-muted small"><p> Chapter5. 继承 继承作为面向对象的三大特征之一，它是多态的前提。它主要解决的问题是共性抽取。 Java中的继承，是单继承、多级继承的。 已存在的类，被称为超类、基类、父类(parent class)；新类，被称为子类(subclass)、派生类。 每一个子类的直接父亲是唯一的，但一个父亲可拥有多个子类。子类比父类拥有的功能更加丰富。 5.1 继承的格式 定义父类的格式（...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <a href="/posts/2021%E5%B9%B4%E6%9D%82%E8%A8%80%E7%A2%8E%E8%AF%AD/" class="btn btn-outline-primary" prompt="&lt; Older"><p>2021年的杂言碎语</p></a> <a href="/posts/JDBC/" class="btn btn-outline-primary" prompt="Newer &gt;"><p>「JavaWeb学习笔记01」JDBC 编程</p></a>
+</div>
+<div id="comments" class="pt-2 pb-4"></div>
+<script> new Valine({ av: AV, el: '#comments', visitor: true, // 阅读量统计 app_id: 'CJeb6b1PaepqmfiV6HFEgPFM-MdYXbMMI', app_key: 'pAaJnzwcML3OuaGyI4aHjfge', placeholder:'昵称填上你的QQ号能够收到邮件提醒，网址可以不填噢，评论支持markdown语法!', enableQQ: true, emojiMaps: { "tv-白眼":"https://i0.hdslb.com/bfs/emote/c1d59f439e379ee50eef488bcb5e5378e5044ea4.png", "tv-doge":"https://i0.hdslb.com/bfs/emote/6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png", "tv-坏笑":"https://i0.hdslb.com/bfs/emote/1f0b87f731a671079842116e0991c91c2c88645a.png", "tv-难过":"https://i0.hdslb.com/bfs/emote/87f46748d3f142ebc6586ff58860d0e2fc8263ba.png", "tv-生气":"https://i0.hdslb.com/bfs/emote/26702dcafdab5e8225b43ffd23c94ac1ff932654.png", "tv-委屈":"https://i0.hdslb.com/bfs/emote/d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png", "tv-斜眼笑":"https://i0.hdslb.com/bfs/emote/911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png", "tv-呆":"https://i0.hdslb.com/bfs/emote/fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png", "tv-发怒":"https://i0.hdslb.com/bfs/emote/34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png", "tv-惊吓":"https://i0.hdslb.com/bfs/emote/0d15c7e2ee58e935adc6a7193ee042388adc22af.png", "tv-呕吐":"https://i0.hdslb.com/bfs/emote/9f996894a39e282ccf5e66856af49483f81870f3.png", "tv-思考":"https://i0.hdslb.com/bfs/emote/90cf159733e558137ed20aa04d09964436f618a1.png", "tv-微笑":"https://i0.hdslb.com/bfs/emote/70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png", "tv-疑问":"https://i0.hdslb.com/bfs/emote/0793d949b18d7be716078349c202c15ff166f314.png", "tv-大哭":"https://i0.hdslb.com/bfs/emote/23269aeb35f99daee28dda129676f6e9ea87934f.png", "tv-鼓掌":"https://i0.hdslb.com/bfs/emote/1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png", "tv-抠鼻":"https://i0.hdslb.com/bfs/emote/c666f55e88d471e51bbd9fab9bb308110824a6eb.png", "tv-亲亲":"https://i0.hdslb.com/bfs/emote/a8111ad55953ef5e3be3327ef94eb4a39d535d06.png", "tv-调皮":"https://i0.hdslb.com/bfs/emote/b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png", "tv-笑哭":"https://i0.hdslb.com/bfs/emote/1abc628f6d4f4caf9d0e7800878f4697abbc8273.png", "tv-晕":"https://i0.hdslb.com/bfs/emote/5443c22b4d07fb1907ccc610c8e6db254f2461b7.png", "tv-点赞":"https://i0.hdslb.com/bfs/emote/f85c354995bd99e28fc76c869bfe42ba6438eff4.png", "tv-害羞":"https://i0.hdslb.com/bfs/emote/a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png", "tv-睡着":"https://i0.hdslb.com/bfs/emote/8b196675b53af58264f383c50ad0945048290b33.png", "tv-色":"https://i0.hdslb.com/bfs/emote/61822c7e9aae5da76475e7892534545336b23a6f.png", "tv-吐血":"https://i0.hdslb.com/bfs/emote/09dd16a7aa59b77baa1155d47484409624470c77.png", "tv-无奈":"https://i0.hdslb.com/bfs/emote/ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png", "tv-再见":"https://i0.hdslb.com/bfs/emote/180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png", "tv-流汗":"https://i0.hdslb.com/bfs/emote/cead1c351ab8d79e9f369605beb90148db0fbed3.png", "tv-偷笑":"https://i0.hdslb.com/bfs/emote/bb690d4107620f1c15cff29509db529a73aee261.png", "tv-抓狂":"https://i0.hdslb.com/bfs/emote/fe31c08edad661d63762b04e17b8d5ae3c71a757.png", "tv-黑人问号":"https://i0.hdslb.com/bfs/emote/45821a01f51bc867da9edbaa2e070410819a95b2.png", "tv-困":"https://i0.hdslb.com/bfs/emote/241ee304e44c0af029adceb294399391e4737ef2.png", "tv-打脸":"https://i0.hdslb.com/bfs/emote/56ab10b624063e966bfcb76ea5dc4794d87dfd47.png", "tv-闭嘴":"https://i0.hdslb.com/bfs/emote/c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png", "tv-鄙视":"https://i0.hdslb.com/bfs/emote/6e72339f346a692a495b123174b49e4e8e781303.png", "tv-腼腆":"https://i0.hdslb.com/bfs/emote/89712c0d4af73e67f89e35cbc518420380a7f6f4.png", "tv-馋":"https://i0.hdslb.com/bfs/emote/fc7e829b845c43c623c8b490ee3602b7f0e76a31.png", "tv-可爱":"https://i0.hdslb.com/bfs/emote/9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png", "tv-发财":"https://i0.hdslb.com/bfs/emote/34db290afd2963723c6eb3c4560667db7253a21a.png", "tv-生病":"https://i0.hdslb.com/bfs/emote/8b0ec90e6b86771092a498c54f09fc94621c1900.png", "tv-流鼻血":"https://i0.hdslb.com/bfs/emote/c32d39db2737f89b904ca32700d140a9241b0767.png", "tv-尴尬":"https://i0.hdslb.com/bfs/emote/7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png", "tv-大佬":"https://i0.hdslb.com/bfs/emote/093c1e2c490161aca397afc45573c877cdead616.png", "tv-流泪":"https://i0.hdslb.com/bfs/emote/7e71cde7858f0cd50d74b0264aa26db612a8a167.png", "tv-冷漠":"https://i0.hdslb.com/bfs/emote/b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png", "tv-皱眉":"https://i0.hdslb.com/bfs/emote/72ccad6679fea0d14cce648b4d818e09b8ffea2d.png", "tv-鬼脸":"https://i0.hdslb.com/bfs/emote/0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png", "tv-调侃":"https://i0.hdslb.com/bfs/emote/4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png", "tv-目瞪口呆":"https://i0.hdslb.com/bfs/emote/0b8cb81a68de5d5365212c99375e7ace3e7891b7.png" } }); </script>
+</div></div></div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center">
+<div class="footer-left"><p class="mb-0"> © 2021 <a href="https://music.163.com/#/user/home?id=86403312">JoyDee</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="" target="_blank" rel="noopener"></a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content">
+<div id="search-hints">
+<h4 class="text-muted mb-4">热门标签 / Trending Tags</h4>
+<a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83/">算法 贪心</a> <a class="post-tag" href="/tags/cpp/">Cpp</a> <a class="post-tag" href="/tags/javase/">JavaSE</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%A8%A1%E6%8B%9F/">算法 模拟</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%B7%B1%E6%90%9C/">算法 深搜</a> <a class="post-tag" href="/tags/javaweb/">JavaWeb</a> <a class="post-tag" href="/tags/mysql/">MySQL</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%80%9D%E6%83%B3/">算法 二分思想</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8/">算法 哈希表</a> <a class="post-tag" href="/tags/%E7%AE%97%E6%B3%95-%E6%9A%B4%E5%8A%9B/">算法 暴力</a>
+</div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://joydee.top{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>
